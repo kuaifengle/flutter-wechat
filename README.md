@@ -8,7 +8,9 @@
 <br/>
 <br/>
 
+
 ![演示1](https://github.com/kuaifengle/Flutter-WeChat/blob/master/appGif/1.gif?raw=true)
+
 <figure class="half">
   <img src="https://github.com/kuaifengle/Flutter-WeChat/blob/master/appGif/2.png?raw=true" width=300/>
   <img src="https://github.com/kuaifengle/Flutter-WeChat/blob/master/appGif/3.png?raw=true" width=300/>
