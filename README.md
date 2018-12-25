@@ -9,6 +9,6 @@
 <br>
 ## 谢谢!!!
 <br/>
-
-<img src="https://github.com/kuaifengle/Flutter-WeChat/blob/master/appGif/1.gif"/>
-<img src="https://github.com/kuaifengle/Flutter-WeChat/blob/master/appGif/2.png?raw=true" width=256 height=256 />
+![演示1](https://github.com/kuaifengle/Flutter-WeChat/blob/master/appGif/1.gif?raw=true)
+<br/>
+<img src="https://github.com/kuaifengle/Flutter-WeChat/blob/master/appGif/2.png?raw=true" width=300/>
