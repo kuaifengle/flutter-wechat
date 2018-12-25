@@ -11,9 +11,11 @@
 <br/>
 ![演示1](https://github.com/kuaifengle/Flutter-WeChat/blob/master/appGif/1.gif?raw=true)
 <br/>
-<img src="https://github.com/kuaifengle/Flutter-WeChat/blob/master/appGif/2.png?raw=true" width=300/>
-<img src="https://github.com/kuaifengle/Flutter-WeChat/blob/master/appGif/3.png?raw=true" width=300/>
-<img src="https://github.com/kuaifengle/Flutter-WeChat/blob/master/appGif/4.png?raw=true" width=300/>
+<figure class="half">
+  <img src="https://github.com/kuaifengle/Flutter-WeChat/blob/master/appGif/2.png?raw=true" width=300/>
+  <img src="https://github.com/kuaifengle/Flutter-WeChat/blob/master/appGif/3.png?raw=true" width=300/>
+  <img src="https://github.com/kuaifengle/Flutter-WeChat/blob/master/appGif/4.png?raw=true" width=300/>
+</figure >
 <img src="https://github.com/kuaifengle/Flutter-WeChat/blob/master/appGif/5.png?raw=true" width=300/>
 <img src="https://github.com/kuaifengle/Flutter-WeChat/blob/master/appGif/6.png?raw=true" width=300/>
 <img src="https://github.com/kuaifengle/Flutter-WeChat/blob/master/appGif/7.png?raw=true" width=300/>
