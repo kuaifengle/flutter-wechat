@@ -9,4 +9,22 @@
 <br>
 ## 谢谢!!!
 <br/>
-<img src="https://github.com/kuaifengle/Flutter-WeChat/blob/master/appGif/1.gif?raw=true" width=200/>
+
+<br/>
+![演示1](https://github.com/kuaifengle/Flutter-WeChat/blob/master/appGif/1.gif?raw=true)
+<br/>
+![演示2](https://github.com/kuaifengle/Flutter-WeChat/blob/master/appGif/2.png?raw=true)
+![演示3](https://github.com/kuaifengle/Flutter-WeChat/blob/master/appGif/3.png?raw=true)
+![演示2](https://github.com/kuaifengle/Flutter-WeChat/blob/master/appGif/4.png?raw=true)
+<br/>
+![演示3](https://github.com/kuaifengle/Flutter-WeChat/blob/master/appGif/5.png?raw=true)
+![演示2](https://github.com/kuaifengle/Flutter-WeChat/blob/master/appGif/6.png?raw=true)
+![演示3](https://github.com/kuaifengle/Flutter-WeChat/blob/master/appGif/7.png?raw=true)
+<br/>
+![演示2](https://github.com/kuaifengle/Flutter-WeChat/blob/master/appGif/8.png?raw=true)
+![演示3](https://github.com/kuaifengle/Flutter-WeChat/blob/master/appGif/9.png?raw=true)
+![演示2](https://github.com/kuaifengle/Flutter-WeChat/blob/master/appGif/10.png?raw=true)
+<br/>
+![演示3](https://github.com/kuaifengle/Flutter-WeChat/blob/master/appGif/11.png?raw=true)
+<br/>
+
