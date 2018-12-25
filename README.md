@@ -9,4 +9,4 @@
 <br>
 ## 谢谢!!!
 <br/>
-<img src="https://github.com/kuaifengle/Flutter-WeChat/blob/master/appGif/1.gif" width=200/>
+<img src="https://github.com/kuaifengle/Flutter-WeChat/blob/master/appGif/1.gif?raw=true" width=200/>
