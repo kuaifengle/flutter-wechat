@@ -197,3 +197,12 @@ Map<String, List<Map>> timeLineList = {
     },
   ]
 };
+
+List<String> returnTalkList = [
+  '这是自动留言,我的手机不在身边, 有事请直接Call我....',
+  '呵呵,真好笑!!!',
+  '你最近好吗?',
+  '如果我是DJ你会爱我吗?',
+  'hohohohohoho, boom!',
+  '刮风那天我试过牵着你手',
+];

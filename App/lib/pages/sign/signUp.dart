@@ -1,160 +1,184 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 
-class SignUp extends StatefulWidget{
+import '../../components/toast.dart';
+import '../../components/appBar.dart';
+
+class SignUp extends StatefulWidget {
   @override
-  _SignUpState createState() => new _SignUpState();
+  _SignUpState createState() => _SignUpState();
 }
 
-class _SignUpState extends State<SignUp>{
+class _SignUpState extends State<SignUp> {
+  var userNameController = TextEditingController();
+  var passWordController = TextEditingController();
+  var passWordController2 = TextEditingController();
 
-  var userNameController = new TextEditingController();
-  var passWordController = new TextEditingController();
-  var passWordController2 = new TextEditingController();
-
-  var fsNode1 = new FocusNode();
-  var fsNode2 = new FocusNode();
-  var fsNode3 = new FocusNode();
+  var userNameFN = FocusNode();
+  var passWordFN = FocusNode();
+  var repeatPassFN = FocusNode();
 
   @override
   void dispose() {
     super.dispose();
+    userNameController?.dispose();
+    passWordController?.dispose();
+    passWordController2?.dispose();
+    userNameFN?.dispose();
+    passWordFN?.dispose();
+    repeatPassFN?.dispose();
+  }
+
+  void changePassWord() {
+    print(userNameController.text);
+    if (userNameController.text != '' &&
+        (passWordController.text == passWordController2.text &&
+            passWordController.text != '' &&
+            passWordController2.text != '')) {
+      showDialog(
+          context: context,
+          builder: (_) => AlertDialog(
+                title: Text('提示'),
+                content: Text('WelCome To WeChat...'),
+                actions: <Widget>[
+                  FlatButton(
+                    child: Text("SignIn"),
+                    onPressed: () {
+                      Navigator.of(context).pushReplacementNamed('/signIn');
+                    },
+                  )
+                ],
+              ));
+    } else {
+      Toast.show('注册信息有误,请检查...', context);
+    }
   }
 
   @override
-  Widget build(BuildContext context){
-    return new Scaffold(
-      appBar: new AppBar(
-        backgroundColor: new Color(0xFFf9f9f9),
-        leading: new IconButton(
-          icon: new Icon(Icons.keyboard_arrow_left), color: Color(0xFF555555),
-          onPressed: (){
-            Navigator.of(context).pop();
-          },
-        ),
-        elevation: 0.0,
-        title: new Text(
-          'SignUp', 
-          style: new TextStyle(
-            color: const Color(0xFF555555)
-          ),
-        ),
-        centerTitle: true,
-      ),
-      body: new ListView(
-        children: <Widget>[
-          new Center(
-            child: new Container(
-              width: MediaQuery.of(context).size.width,
-              height: 240.0,
-              child: new Image.asset('assets/images/logo.png'),
-            ),
-          ),
-          new Container(
-            padding: new EdgeInsets.symmetric(horizontal: 30.0, vertical: 20.0),
-            child: new TextField(
-              focusNode: fsNode1,
-              controller: userNameController,
-              keyboardType: TextInputType.text,
-              decoration: new InputDecoration(
-                prefixIcon: new Icon(Icons.person_outline, size: 35.0, color: Color(0xFF393939)),
-                hintText: 'UserName'
+  Widget build(BuildContext context) {
+    return Scaffold(
+        appBar: setCustomAppBar(context, 'SignUp'),
+        body: ListView(
+          physics: NeverScrollableScrollPhysics(),
+          padding: EdgeInsets.symmetric(horizontal: ScreenUtil().setWidth(30)),
+          children: <Widget>[
+            Container(
+              margin: EdgeInsets.symmetric(
+                vertical: ScreenUtil().setHeight(120),
               ),
-              onEditingComplete: (){
-                FocusScope.of(context).requestFocus(fsNode2);
+              width: ScreenUtil().setWidth(200),
+              height: ScreenUtil().setHeight(160),
+              child: Center(
+                child: Image.asset('images/logo.png'),
+              ),
+            ),
+            Container(
+              decoration: BoxDecoration(
+                  border: Border(
+                      bottom: BorderSide(
+                          width: ScreenUtil().setHeight(2),
+                          color: Color(0xFFebebeb)))),
+              child: TextField(
+                focusNode: userNameFN,
+                controller: userNameController,
+                keyboardType: TextInputType.text,
+                decoration: InputDecoration(
+                    hintStyle: TextStyle(
+                      color: Color(0xFFc4c4c4),
+                      fontSize: ScreenUtil.getInstance().setSp(26),
+                    ),
+                    border: InputBorder.none,
+                    icon: Icon(Feather.user,
+                        size: ScreenUtil().setWidth(50),
+                        color: Color(0xFF3d3d3d)),
+                    hintText: 'UserName'),
+                onEditingComplete: () {
+                  FocusScope.of(context).requestFocus(passWordFN);
+                },
+              ),
+            ),
+            Container(
+              margin: EdgeInsets.symmetric(
+                vertical: ScreenUtil().setHeight(30),
+              ),
+              decoration: BoxDecoration(
+                  border: Border(
+                      bottom: BorderSide(
+                          width: ScreenUtil().setHeight(2),
+                          color: Color(0xFFebebeb)))),
+              child: TextField(
+                focusNode: passWordFN,
+                controller: passWordController,
+                keyboardType: TextInputType.text,
+                decoration: InputDecoration(
+                    hintStyle: TextStyle(
+                      color: Color(0xFFc4c4c4),
+                      fontSize: ScreenUtil.getInstance().setSp(26),
+                    ),
+                    border: InputBorder.none,
+                    icon: Icon(Feather.unlock,
+                        size: ScreenUtil().setWidth(50),
+                        color: Color(0xFF3d3d3d)),
+                    hintText: 'PassWord'),
+                obscureText: true,
+                onEditingComplete: () {
+                  FocusScope.of(context).requestFocus(repeatPassFN);
+                },
+              ),
+            ),
+            Container(
+              decoration: BoxDecoration(
+                  border: Border(
+                      bottom: BorderSide(
+                          width: ScreenUtil().setHeight(2),
+                          color: Color(0xFFebebeb)))),
+              child: TextField(
+                focusNode: repeatPassFN,
+                controller: passWordController2,
+                keyboardType: TextInputType.text,
+                decoration: InputDecoration(
+                    hintStyle: TextStyle(
+                      color: Color(0xFFc4c4c4),
+                      fontSize: ScreenUtil.getInstance().setSp(26),
+                    ),
+                    border: InputBorder.none,
+                    icon: Icon(Feather.lock,
+                        size: ScreenUtil().setWidth(50),
+                        color: Color(0xFF3d3d3d)),
+                    hintText: 'ReportPassWord'),
+                obscureText: true,
+                onEditingComplete: () {
+                  repeatPassFN.unfocus();
+                },
+              ),
+            ),
+            GestureDetector(
+              child: Container(
+                  width: ScreenUtil().setWidth(380),
+                  height: ScreenUtil().setHeight(100),
+                  margin: EdgeInsets.only(top: ScreenUtil().setHeight(150)),
+                  decoration: BoxDecoration(
+                      color: Color(0xFF64c223),
+                      border: Border.all(
+                          width: ScreenUtil().setHeight(2),
+                          color: Color(0xFF28b506)),
+                      borderRadius:
+                          BorderRadius.circular(ScreenUtil().setHeight(50))),
+                  child: Center(
+                    child: Text(
+                      'SIGNUP',
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.w400,
+                          fontSize: ScreenUtil.getInstance().setSp(30)),
+                    ),
+                  )),
+              onTap: () {
+                changePassWord();
               },
             ),
-          ),
-          new Container(
-            padding: new EdgeInsets.symmetric(horizontal: 30.0),
-            child: new TextField(
-              focusNode: fsNode2,
-              keyboardType: TextInputType.text,
-              controller: passWordController,
-              decoration: new InputDecoration(
-                prefixIcon: new Icon(Icons.lock_outline, size: 35.0, color: Color(0xFF393939)),
-                hintText: 'PassWord'
-              ),
-              obscureText: true,
-              onEditingComplete: (){
-                FocusScope.of(context).requestFocus(fsNode3);
-              },
-            ),
-          ),
-          new Container(
-            margin: new EdgeInsets.only(top:20.0, bottom: 50.0),
-            padding: new EdgeInsets.symmetric(horizontal: 30.0),
-            child: new TextField(
-              focusNode: fsNode3,
-              keyboardType: TextInputType.text,
-              controller: passWordController2,
-              decoration: new InputDecoration(
-                prefixIcon: new Icon(Icons.lock, size: 35.0, color: Color(0xFF393939)),
-                hintText: 'ReportPassWord'
-              ),
-              obscureText: true,
-              onEditingComplete: (){
-                fsNode3.unfocus();
-              },
-            ),
-          ),
-          new Container(
-            margin: new EdgeInsets.symmetric(horizontal: 30.0),
-            decoration: new BoxDecoration(
-              borderRadius: new BorderRadius.circular(30.0),
-            ),
-            child: new RaisedButton(
-              padding: new EdgeInsets.symmetric(vertical: 15.0),
-              color: const Color(0xFF64c223),
-              shape: RoundedRectangleBorder(
-                borderRadius: new BorderRadius.circular(30.0)
-              ),
-              child: new Text('SIGNUP', style: new TextStyle(
-                  color: Colors.white,
-                  fontSize: 16.0
-                ),
-              ),
-              onPressed: () {
-                print(userNameController.text);
-                if (userNameController.text != '' && (passWordController.text == passWordController2.text && passWordController.text != '' && passWordController2.text != '')) {
-                  showDialog(
-                    context: context,
-                    builder: (_) => new AlertDialog(
-                      title: new Text('提示'),
-                      content: new Text('WelCome To WeChat...'),
-                      actions: <Widget>[
-                        new FlatButton(
-                          child:new Text("SignIn"),
-                          onPressed: (){
-                            Navigator.of(context).pushReplacementNamed('/signIn');
-                          },
-                        )
-                      ],
-                    )
-                  );
-                } else{
-                  showDialog(
-                    context: context,
-                    builder: (BuildContext context) {
-                      return  AlertDialog(
-                        title: new Text('提示'),
-                        content: new Text('注册信息有误,请检查...'),
-                        actions: <Widget>[
-                          new FlatButton(
-                            child: new Text('back'),
-                            onPressed: (){
-                              Navigator.of(context).pop();
-                            },
-                          )
-                        ],
-                      );
-                    }
-                  );
-                }
-              },
-            ),
-          ),
-        ],
-      )
-    );
+          ],
+        ));
   }
 }

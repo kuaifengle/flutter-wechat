@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:flutter_vector_icons/flutter_vector_icons.dart';
-import './talk.dart';
-import '../../components/floatButton.dart';
+
+import '../talk/talk.dart';
+import '../../components/menuFloatButton.dart';
 import '../../components/searchPage.dart';
 import '../../dataJson/userData.dart';
 
@@ -12,9 +13,9 @@ class Contacts extends StatefulWidget {
   _ContactsState createState() => _ContactsState();
 }
 
-class _ContactsState extends State<Contacts> {
-  final SlidableController slidableController = SlidableController();
+final SlidableController slidableController = SlidableController();
 
+class _ContactsState extends State<Contacts> {
   returnUserItem(item) {
     return GestureDetector(
       child: Slidable(
@@ -132,7 +133,7 @@ class _ContactsState extends State<Contacts> {
                         Expanded(
                           child: Container(
                             margin: EdgeInsets.only(
-                                left: ScreenUtil().setWidth(20)),
+                                left: ScreenUtil().setWidth(50)),
                             child: Text('Search'),
                           ),
                         ),

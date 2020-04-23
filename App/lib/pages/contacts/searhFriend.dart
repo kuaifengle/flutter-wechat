@@ -3,7 +3,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../components/appbar.dart';
-import '../../components/searchPage.dart';
 
 class SearchFriendPage extends StatefulWidget {
   SearchFriendPage({Key key, this.pageController}) : super(key: key);

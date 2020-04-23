@@ -1,175 +1,178 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import './signUp.dart';
-import 'dart:convert';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_vector_icons/flutter_vector_icons.dart';
+import 'package:toast/toast.dart';
 
-class SignIn extends StatefulWidget{
+import './signUp.dart';
+import '../../dataJson/userData.dart';
+
+class SignIn extends StatefulWidget {
+  SignIn({Key key}) : super(key: key);
+
   @override
-  _SignInState createState() => new _SignInState();
+  _SignInState createState() => _SignInState();
 }
 
-class _SignInState extends State<SignIn> with SingleTickerProviderStateMixin{
+class _SignInState extends State<SignIn> with SingleTickerProviderStateMixin {
+  var userNameController = TextEditingController();
+  var passWordController = TextEditingController();
 
-  var userNameController = new TextEditingController();
-  var passWordController = new TextEditingController();
+  var userNameFN = FocusNode();
+  var passWordFN = FocusNode();
 
-  var fsNode1 = new FocusNode();
-  var fsNode2 = new FocusNode();
-
-  Animation animationLogo;
-  Animation animationUser;
-  Animation animationPass;
-  Animation animationBtn;
-  AnimationController controller;
-
-  @override
-    void initState() {
-      controller = new AnimationController(duration: new Duration(seconds: 1), vsync: this);
-      animationLogo = new Tween(begin: -1.0, end: 0.0).animate(new CurvedAnimation(
-        parent: controller,
-        curve: Curves.fastOutSlowIn
-      ));
-      animationUser = new Tween(begin: -1.0, end: 0.0).animate(new CurvedAnimation(
-        parent: controller,
-        curve: Interval(0.2, 1,  curve: Curves.fastOutSlowIn)
-      ));
-      animationPass = new Tween(begin: -1.0, end: 0.0).animate(new CurvedAnimation(
-        parent: controller,
-        curve: Interval(0.4, 1,  curve: Curves.fastOutSlowIn)
-      ));
-      animationBtn = new Tween(begin: -1.0, end: 0.0).animate(new CurvedAnimation(
-        parent: controller,
-        curve: Interval(0.6, 1,  curve: Curves.fastOutSlowIn)
-      ));
-
-      controller.forward();
-      super.initState();
+  void login() async {
+    String userName = userNameController.text;
+    String passWord = passWordController.text;
+    if (userName == '') {
+      Toast.show('请输入账号名', context);
+      return;
     }
 
-  @override
-    void dispose() {
-      // TODO: implement dispose
-      controller.dispose();
-      super.dispose();
+    if (passWord == '') {
+      Toast.show('请输入密码', context);
+      return;
     }
 
+    final prefs = await SharedPreferences.getInstance();
+    prefs.setString('userInfo', mySelf.toString());
+
+    Navigator.of(context).pushReplacementNamed('/home');
+  }
+
   @override
-  Widget build(BuildContext context){
-    final width = MediaQuery.of(context).size.width;
-    return  new AnimatedBuilder(
-        animation: animationLogo,
-        builder: (BuildContext context, child){
-        return new Scaffold(
-            body: new ListView(
+  void dispose() {
+    super.dispose();
+    userNameController?.dispose();
+    passWordController?.dispose();
+    userNameFN?.dispose();
+    passWordFN?.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+        body: ListView(
+      physics: NeverScrollableScrollPhysics(),
+      padding: EdgeInsets.symmetric(horizontal: ScreenUtil().setWidth(30)),
+      children: <Widget>[
+        Container(
+          margin: EdgeInsets.symmetric(
+            vertical: ScreenUtil().setHeight(140),
+          ),
+          child: Center(
+            child: Column(
               children: <Widget>[
-                new Transform(
-                  transform: Matrix4.translationValues(width * animationLogo.value, 0, 0),
-                  child: new Center(
-                    child: new Container(
-                      width: MediaQuery.of(context).size.width,
-                      height: 260.0,
-                      child: new Image.asset('assets/images/logo.png'),
-                    ),
-                  ),
+                Image.asset(
+                  'images/logo.png',
+                  width: ScreenUtil().setWidth(200),
+                  height: ScreenUtil().setHeight(160),
                 ),
-                new Transform(
-                    transform: Matrix4.translationValues(width * animationUser.value, 0, 0),
-                    child: new Container(
-                        padding: new EdgeInsets.symmetric(horizontal: 30.0, vertical: 20.0),
-                        child: new TextField(
-                          focusNode: fsNode1,
-                          keyboardType: TextInputType.text,
-                          controller: userNameController,
-                          decoration: new InputDecoration(
-                        prefixIcon: new Icon(Icons.person_outline, size: 35.0, color: Color(0xFF393939)),
-                        hintText: 'UserName'
-                      ),
-                      onEditingComplete: (){
-                        FocusScope.of(context).requestFocus(fsNode2);
-                      },
-                    ),
-                  ),
+                Text('WeChat(仿)',
+                    style: TextStyle(
+                      color: Color(0xFFc4c4c4),
+                      fontSize: ScreenUtil.getInstance().setSp(50),
+                    )),
+              ],
+            ),
+          ),
+        ),
+        Container(
+          decoration: BoxDecoration(
+              border: Border(
+                  bottom: BorderSide(
+                      width: ScreenUtil().setHeight(2),
+                      color: Color(0xFFebebeb)))),
+          child: TextField(
+            focusNode: userNameFN,
+            keyboardType: TextInputType.text,
+            controller: userNameController,
+            decoration: InputDecoration(
+                border: InputBorder.none,
+                hintStyle: TextStyle(
+                  color: Color(0xFFc4c4c4),
+                  fontSize: ScreenUtil.getInstance().setSp(26),
                 ),
-                new Transform(
-                  transform: Matrix4.translationValues(width * animationPass.value, 0, 0),
-                  child: new Container(
-                  margin: new EdgeInsets.only(bottom: 50.0),
-                  padding: new EdgeInsets.symmetric(horizontal: 30.0),
-                  child: new TextField(
-                    focusNode: fsNode2,
-                    controller: passWordController,
-                    keyboardType: TextInputType.text,
-                    decoration: new InputDecoration(
-                      prefixIcon: new Icon(Icons.lock_outline, size: 35.0, color: Color(0xFF393939)),
-                      hintText: 'PassWord'
-                    ),
-                    obscureText: true,
-                  ),
+                icon: Icon(Feather.user,
+                    size: ScreenUtil().setWidth(50), color: Color(0xFF3d3d3d)),
+                hintText: 'UserName'),
+            onEditingComplete: () {
+              FocusScope.of(context).requestFocus(passWordFN);
+            },
+          ),
+        ),
+        Container(
+          decoration: BoxDecoration(
+              border: Border(
+                  bottom: BorderSide(
+                      width: ScreenUtil().setHeight(2),
+                      color: Color(0xFFebebeb)))),
+          margin: EdgeInsets.only(
+              top: ScreenUtil().setHeight(50),
+              bottom: ScreenUtil().setHeight(120)),
+          child: TextField(
+            focusNode: passWordFN,
+            controller: passWordController,
+            keyboardType: TextInputType.text,
+            decoration: InputDecoration(
+                hintStyle: TextStyle(
+                  color: Color(0xFFc4c4c4),
+                  fontSize: ScreenUtil.getInstance().setSp(26),
                 ),
-              ),
-              new Transform(
-                transform: Matrix4.translationValues(width * animationBtn.value, 0, 0),
-                child: new Container(
-                  margin: new EdgeInsets.symmetric(horizontal: 30.0),
-                  decoration: new BoxDecoration(
-                    borderRadius: new BorderRadius.circular(30.0),
-                  ),
-                  child: new RaisedButton(
-                    padding: new EdgeInsets.symmetric(vertical: 15.0),
-                    color: const Color(0xFF64c223),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: new BorderRadius.circular(30.0)
-                    ),
-                    child: new Text('LOGIN', style: new TextStyle(
-                        color: Colors.white,
-                        fontSize: 16.0
-                      ),
-                    ),
-                    onPressed: () async{
-                      SharedPreferences prefs = await SharedPreferences.getInstance();
-                      var userInfo = {
-                        'name': 'kuaifengle',
-                        'id': 1,
-                        'checkInfo': 'https://github.com/kuaifengle',
-                        'lastTime': '20.11',
-                        'imageUrl': 'https://image.lingcb.net/goods/201812/2ad6f1b0-2b2c-4d71-8d0d-01679e298afc-150x150.png',
-                        'backgroundUrl': 'http://pic31.photophoto.cn/20140404/0005018792087823_b.jpg'
-                      };
-
-                      prefs.setString('userInfo', json.encode(userInfo));
-                      Navigator.of(context).pushReplacementNamed('/home');
-                    },
-                  ),
+                border: InputBorder.none,
+                icon: Icon(Feather.unlock,
+                    size: ScreenUtil().setWidth(50), color: Color(0xFF3d3d3d)),
+                hintText: 'PassWord'),
+            obscureText: true,
+          ),
+        ),
+        GestureDetector(
+          child: Container(
+              width: ScreenUtil().setWidth(380),
+              height: ScreenUtil().setHeight(100),
+              margin: EdgeInsets.only(bottom: ScreenUtil().setHeight(220)),
+              decoration: BoxDecoration(
+                  color: Color(0xFF65c324),
+                  border: Border.all(
+                      width: ScreenUtil().setHeight(1),
+                      color: Color(0xFF28b506)),
+                  borderRadius:
+                      BorderRadius.circular(ScreenUtil().setHeight(50))),
+              child: Center(
+                child: Text(
+                  'LOGIN',
+                  style: TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.w400,
+                      fontSize: ScreenUtil.getInstance().setSp(30)),
                 ),
-              ),
-              new Transform(
-                transform: Matrix4.translationValues(width * animationBtn.value, 0, 0),
-                child: new Container(
-                  margin: new EdgeInsets.only(left: 150.0, right:150.0, top: 80.0),
-                  child: new OutlineButton(
-                    borderSide: new BorderSide(color: Color(0xFFbcbcbc)),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: new BorderRadius.circular(30.0)
-                    ),
-                    child: new Text('SIGNUP', style: new TextStyle(
-                        color: Color(0xFFbcbcbc),
-                        fontSize: 12.0
-                      ),
-                    ),
-                    onPressed: (){
-                      Navigator.of(context).push(
-                        new MaterialPageRoute(
-                          builder: (_) => new SignUp() 
-                        )
-                      );
-                    },
-                  ),
-                )
-              )
-            ],
-          )
-        );
-      },
-    );
+              )),
+          onTap: login,
+        ),
+        Center(
+            child: GestureDetector(
+          child: Container(
+            width: ScreenUtil().setWidth(240),
+            height: ScreenUtil().setHeight(60),
+            alignment: Alignment.center,
+            decoration: BoxDecoration(
+                border: Border.all(
+                    width: ScreenUtil().setHeight(1), color: Color(0xFFbcbcbc)),
+                borderRadius:
+                    BorderRadius.circular(ScreenUtil().setHeight(30))),
+            child: Text(
+              'SIGNUP',
+              style: TextStyle(
+                  color: Color(0xFFbcbcbc),
+                  fontSize: ScreenUtil.getInstance().setSp(22)),
+            ),
+          ),
+          onTap: () {
+            Navigator.of(context)
+                .push(MaterialPageRoute(builder: (_) => SignUp()));
+          },
+        ))
+      ],
+    ));
   }
 }

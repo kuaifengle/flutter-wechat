@@ -1,38 +1,53 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import './pages/home/home.dart';
-import './pages/home/fistPage.dart';
+import 'package:flutter_wechat/common/index.dart';
+import './pages/fristPage.dart';
+import './pages/index.dart';
 import './pages/sign/signIn.dart';
 
-main(){
-  return runApp(new MyWeChat());
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  await CommonState.init();
+
+  runApp(MyApp());
 }
 
-class MyWeChat extends StatefulWidget{
+final GlobalKey<NavigatorState> navigatorKey = new GlobalKey<NavigatorState>();
+
+class MyApp extends StatelessWidget {
   @override
-
-  _MyWeChatState createState() => new _MyWeChatState();
-}
-
-class _MyWeChatState extends State<MyWeChat>{
-  @override
-
-  Widget build(BuildContext context){
-    return new MaterialApp(
-      title: 'Flutter仿微信',
-      theme: new ThemeData(
-        primaryColorBrightness: Brightness.dark,
-        primaryColor: const Color(0xFF64c223),
-        hintColor: const Color(0xFFcfcfcf),
-        iconTheme: new IconThemeData(
-          color: Colors.white
-        ),
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      navigatorKey: navigatorKey,
+      debugShowCheckedModeBanner: false,
+      title: 'Flutter Wechat',
+      theme: ThemeData(
+          backgroundColor: Colors.white,
+          appBarTheme: AppBarTheme(
+              color: Color(0xFF61ab32),
+              iconTheme: IconThemeData(color: Colors.white)),
+          primaryColor: Color(0xFF61ab32),
+          iconTheme: IconThemeData(
+            color: Color(0xFF7b7c77),
+          )),
+      home: Stack(
+        children: <Widget>[FlutterWechat()],
       ),
-      home: new FirstPage(),
-      routes: <String, WidgetBuilder>{
-        '/home': (_) => new Home(),
-        '/signIn': (_) => new SignIn()
-      }
+      routes: {
+        '/home': (_) => Index(),
+        '/signIn': (_) => SignIn(),
+      },
     );
+  }
+}
+
+class FlutterWechat extends StatelessWidget {
+  Widget build(BuildContext context) {
+    ScreenUtil.instance =
+        ScreenUtil(width: 750, height: 1334, allowFontScaling: true)
+          ..init(context);
+    return CommonState.isFristInstall ? FristPage() : Index();
   }
 }

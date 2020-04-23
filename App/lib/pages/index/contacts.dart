@@ -5,7 +5,7 @@ import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 import 'package:sticky_headers/sticky_headers.dart';
 
 import '../../components/appBar.dart';
-import './talk.dart';
+import '../talk/talk.dart';
 import '../../dataJson/userData.dart';
 import '../../components/searchPage.dart';
 
@@ -120,14 +120,6 @@ class _ContactsPageState extends State<ContactsPage> {
                                   left: ScreenUtil().setWidth(20)),
                               child: Text('Search'),
                             ),
-                          ),
-                          IconButton(
-                            padding: EdgeInsets.all(0),
-                            alignment: Alignment.centerRight,
-                            icon: Icon(Icons.keyboard_voice),
-                            onPressed: () {
-                              print('语音');
-                            },
                           )
                         ],
                       )),

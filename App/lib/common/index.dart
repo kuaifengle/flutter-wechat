@@ -10,8 +10,8 @@ class CommonState {
 
   static Future init() async {
     final prefs = await SharedPreferences.getInstance();
-    print(prefs.getBool('isFristInstall'));
-
+    
+    selectDrawerIndex = 0;
     isFristInstall = prefs.getBool('isFristInstall') ?? true;
   }
 }
