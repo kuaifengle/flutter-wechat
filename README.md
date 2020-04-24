@@ -1,4 +1,16 @@
-## Flutter-WeChat **有一天突然头脑一热,就想用Flutter模仿一个微信.** **然后在网上随便找到了张微信的[Ui设计图](https://www.zcool.com.cn/work/ZMTIxMzk3Mjg=.html).** **App主要都是静态页面与动态交互,没有请求接口.** **后续会更新页面与交互,有问题还望各位指出...** **觉得对你有帮助的话,还希望客官star一下下!** **感谢您的参观!!!** **(个人学习作品,无商业盈利目的,侵权必删)** <br/> **我没有Mac电脑所以我不能确定项目能不能再Mac上面运行!** **I don't have a Mac, so I'm not sure the project will run on a Mac!** <br/> ### flutter环境
+## Flutter-WeChat
+**有一天突然头脑一热,就想用Flutter模仿一个微信.** 
+**然后在网上随便找到了张微信的[Ui设计图](https://www.zcool.com.cn/work/ZMTIxMzk3Mjg=.html).** 
+**App主要都是静态页面与动态交互,没有请求接口.**
+**后续会更新页面与交互,有问题还望各位指出...**
+**觉得对你有帮助的话,还希望客官star一下下!**
+**感谢您的参观!!!** **(个人学习作品,无商业盈利目的,侵权必删)**
+<br/>
+**我没有Mac电脑所以我不能确定项目能不能再Mac上面运行!**
+**I don't have a Mac, so I'm not sure the project will run on a Mac!**
+<br/>
+
+### flutter环境
 ```
 > flutter --version Flutter 1.10.7 • channel beta • https://github.com/flutter/flutter.git
 Framework • revision e70236e36c (7 个月之前) • 2019-10-02 09:32:30 -0700
