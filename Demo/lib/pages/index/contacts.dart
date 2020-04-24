@@ -94,7 +94,7 @@ class _ContactsPageState extends State<ContactsPage> {
     print(val);
   }
 
-  var controller = ScrollController();
+  ScrollController controller = ScrollController();
 
   @override
   Widget build(BuildContext context) {
@@ -135,7 +135,7 @@ class _ContactsPageState extends State<ContactsPage> {
                     decoration: BoxDecoration(
                         color: Color(0xFFc1c1c3),
                         border: Border(
-                            bottom: BorderSide(
+                            top: BorderSide(
                                 width: ScreenUtil().setHeight(2),
                                 color: Colors.white))),
                     padding: EdgeInsets.symmetric(

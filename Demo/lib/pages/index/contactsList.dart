@@ -79,15 +79,16 @@ class _ContactsState extends State<Contacts> {
                   color: Colors.white, size: ScreenUtil().setSp(50)),
               foregroundColor: Colors.white,
               onTap: () {
-                Navigator.of(context).push(
-                    MaterialPageRoute(builder: (_) => Talk(detail: item)));
+                _showSnackBar('删除');
               }),
           IconSlideAction(
             caption: '删除',
             color: Color(0xFFf76767),
             iconWidget: Icon(Feather.trash_2,
                 color: Colors.white, size: ScreenUtil().setSp(50)),
-            onTap: () => _showSnackBar('删除'),
+            onTap: () {
+              _showSnackBar('删除');
+            },
           ),
         ],
       ),
@@ -109,7 +110,10 @@ class _ContactsState extends State<Contacts> {
   }
 
   _showSnackBar(val) {
-    print(val);
+    Scaffold.of(context).showSnackBar(SnackBar(
+      content: val,
+      duration: Duration(seconds: 2),
+    ));
   }
 
   @override
@@ -117,7 +121,8 @@ class _ContactsState extends State<Contacts> {
     return Scaffold(
         body: Stack(
       children: <Widget>[
-        Container(
+        OverflowBox(
+          maxWidth: MediaQuery.of(context).size.width,
           child: ListView(
             children: [
               GestureDetector(

@@ -44,8 +44,6 @@ class _TalkState extends State<Talk> with SingleTickerProviderStateMixin {
 
     setState(() {
       talkWidgetList = widgetList;
-      _scrollController.animateTo(50.0 * talkHistory.length + 100,
-          duration: Duration(seconds: 1), curve: Curves.ease);
     });
   }
 
@@ -57,7 +55,7 @@ class _TalkState extends State<Talk> with SingleTickerProviderStateMixin {
   }
 
   autoTalk(val, type) async {
-    talkHistory.add({
+    talkHistory.insert(0, {
       'name': mySelf['name'],
       'id': mySelf['id'],
       'imageUrl': mySelf['imageUrl'],
@@ -74,7 +72,7 @@ class _TalkState extends State<Talk> with SingleTickerProviderStateMixin {
         'content': returnTalkList[talkHistory.length % 5],
         'type': 'text'
       };
-      talkHistory.add(item);
+      talkHistory.insert(0, item);
       getTalkList();
     });
   }
@@ -111,7 +109,7 @@ class _TalkState extends State<Talk> with SingleTickerProviderStateMixin {
               borderRadius: BorderRadius.circular(10.0)),
           child: LimitedBox(
             maxWidth:
-                MediaQuery.of(context).size.width - ScreenUtil().setWidth(80),
+                MediaQuery.of(context).size.width - ScreenUtil().setWidth(208),
             child: returnTalkType(item['type'], item['content']),
           ))
     ];
@@ -121,6 +119,7 @@ class _TalkState extends State<Talk> with SingleTickerProviderStateMixin {
     if (!isMySelf) {
       // 非本人的信息  isMyself
       widgetList.add(CircleAvatar(
+        radius: ScreenUtil().setWidth(38),
         backgroundImage: NetworkImage('${item['imageUrl']}'),
       ));
     } else {
@@ -128,6 +127,7 @@ class _TalkState extends State<Talk> with SingleTickerProviderStateMixin {
       widgetList.insert(
           0,
           CircleAvatar(
+            radius: ScreenUtil().setWidth(38),
             backgroundImage: NetworkImage('${item['imageUrl']}'),
           ));
     }
@@ -168,83 +168,85 @@ class _TalkState extends State<Talk> with SingleTickerProviderStateMixin {
         body: Container(
             color: Colors.white,
             width: MediaQuery.of(context).size.width,
+            height: MediaQuery.of(context).size.height,
             child: Stack(
               children: <Widget>[
-                Container(
-                  width: MediaQuery.of(context).size.width,
-                  child: ListView(
-                    padding: EdgeInsets.symmetric(
-                        vertical: ScreenUtil().setHeight(20),
-                        horizontal: ScreenUtil().setWidth(20)),
-                    controller: _scrollController,
-                    children: talkWidgetList,
-                  ),
+                ListView(
+                  reverse: true,
+                  shrinkWrap: true,
+                  padding: EdgeInsets.only(
+                      right: ScreenUtil().setWidth(20),
+                      bottom: ScreenUtil().setHeight(90),
+                      left: ScreenUtil().setWidth(20)),
+                  controller: _scrollController,
+                  children: talkWidgetList,
                 ),
                 Positioned(
-                    bottom: 0,
-                    left: 0,
-                    width: MediaQuery.of(context).size.width,
-                    height: ScreenUtil().setHeight(90),
-                    child: Container(
-                        color: Color(0xFFececf4),
-                        child: Offstage(
-                          offstage: false,
-                          child: Row(children: <Widget>[
-                            GestureDetector(
-                              child: Container(
-                                color: Color(0xFFa8a8b4),
-                                width: ScreenUtil().setWidth(90),
-                                height: ScreenUtil().setHeight(90),
-                                child: Icon(Feather.mic, color: Colors.white),
-                              ),
-                              onTap: () {
-                                setState(() {
-                                  fsNode1.unfocus();
-                                });
+                  left: 0,
+                  bottom: 0,
+                  width: MediaQuery.of(context).size.width,
+                  height: ScreenUtil().setHeight(90),
+                  child: Container(
+                      color: Color(0xFFececf4),
+                      child: Offstage(
+                        offstage: false,
+                        child: Row(children: <Widget>[
+                          GestureDetector(
+                            child: Container(
+                              color: Color(0xFFa8a8b4),
+                              width: ScreenUtil().setWidth(90),
+                              height: ScreenUtil().setHeight(90),
+                              child: Icon(Feather.mic, color: Colors.white),
+                            ),
+                            onTap: () {
+                              setState(() {
+                                fsNode1.unfocus();
+                              });
+                            },
+                          ),
+                          Container(
+                            padding: EdgeInsets.symmetric(
+                                horizontal: ScreenUtil().setWidth(10)),
+                            width: MediaQuery.of(context).size.width -
+                                ScreenUtil().setWidth(250),
+                            child: TextField(
+                              focusNode: fsNode1,
+                              controller: _textInputController,
+                              decoration: InputDecoration(
+                                  border: InputBorder.none,
+                                  hintText: '输入你的信息...',
+                                  hintStyle:
+                                      TextStyle(color: Color(0xFF7c7c7e))),
+                              onSubmitted: (val) {
+                                if (val != '' && val != null) {
+                                  getTalkList();
+                                  autoTalk(val, 'text');
+                                }
+                                _textInputController.clear();
                               },
                             ),
-                            Container(
-                              padding: EdgeInsets.symmetric(
-                                  horizontal: ScreenUtil().setWidth(10)),
-                              width: MediaQuery.of(context).size.width -
-                                  ScreenUtil().setWidth(250),
-                              child: TextField(
-                                focusNode: fsNode1,
-                                controller: _textInputController,
-                                decoration: InputDecoration(
-                                    border: InputBorder.none,
-                                    hintText: '输入你的信息...',
-                                    hintStyle:
-                                        TextStyle(color: Color(0xFF7c7c7e))),
-                                onSubmitted: (val) {
-                                  if (val != '' && val != null) {
-                                    getTalkList();
-                                    autoTalk(val, 'text');
-                                  }
-                                  _textInputController.clear();
-                                },
-                              ),
+                          ),
+                          GestureDetector(
+                            child: Container(
+                              width: ScreenUtil().setWidth(70),
+                              height: ScreenUtil().setHeight(90),
+                              child:
+                                  Icon(Feather.smile, color: Color(0xFF333333)),
                             ),
-                            GestureDetector(
-                              child: Container(
-                                width: ScreenUtil().setWidth(70),
-                                height: ScreenUtil().setHeight(90),
-                                child: Icon(Feather.smile,
-                                    color: Color(0xFF333333)),
-                              ),
-                              onTap: () {},
+                            onTap: () {},
+                          ),
+                          GestureDetector(
+                            child: Container(
+                              width: ScreenUtil().setWidth(70),
+                              height: ScreenUtil().setHeight(90),
+                              child: Icon(Feather.plus_circle,
+                                  color: Color(0xFF333333)),
                             ),
-                            GestureDetector(
-                              child: Container(
-                                width: ScreenUtil().setWidth(70),
-                                height: ScreenUtil().setHeight(90),
-                                child: Icon(Feather.plus_circle,
-                                    color: Color(0xFF333333)),
-                              ),
-                              onTap: () {},
-                            )
-                          ]),
-                        )))
+                            onTap: () {},
+                          )
+                        ]),
+                      )),
+                )
               ],
             )),
       ),

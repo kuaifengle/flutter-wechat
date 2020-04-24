@@ -38,6 +38,7 @@ dependencies:
   flutter_inner_drawer: ^0.5.5
   qrscan: ^0.2.17
   easy_web_view: ^1.0.0
+  rflutter_alert: ^1.0.3
 
 
 dev_dependencies:

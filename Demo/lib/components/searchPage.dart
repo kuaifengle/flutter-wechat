@@ -11,36 +11,36 @@ class SearchPage extends StatefulWidget {
   SearchPage({Key key}) : super(key: key);
 
   @override
-  _SearchPageState createState() =>  _SearchPageState();
+  _SearchPageState createState() => _SearchPageState();
 }
 
 class _SearchPageState extends State<SearchPage> {
   Widget _searchWrap;
   String _searchVal = '';
 
-  TextEditingController _searchController =  TextEditingController();
-  FocusNode _focusNode =  FocusNode();
+  TextEditingController _searchController = TextEditingController();
+  FocusNode _focusNode = FocusNode();
 
   /// 构建搜索历史列表
   _buildSearchHistory(searchList) {
     List<Widget> widgetList = [];
     for (var i = 0; i < searchList.length; i++) {
       var text = searchList[i];
-      widgetList.add( GestureDetector(
-        child:  Container(
-            padding:  EdgeInsets.symmetric(
+      widgetList.add(GestureDetector(
+        child: Container(
+            padding: EdgeInsets.symmetric(
                 horizontal: ScreenUtil().setWidth(15),
                 vertical: ScreenUtil().setWidth(15)),
-            decoration:  BoxDecoration(
+            decoration: BoxDecoration(
                 color: Colors.black12,
-                borderRadius:  BorderRadius.circular(5.0)),
-            child:  Text(
+                borderRadius: BorderRadius.circular(5.0)),
+            child: Text(
               text,
-              style:  TextStyle(
+              style: TextStyle(
                   color: Color(0xFF333333), fontSize: ScreenUtil().setSp(26)),
             )),
         onTap: () {
-          _searchController.value =  TextEditingValue(
+          _searchController.value = TextEditingValue(
               text: text,
               selection: TextSelection.fromPosition(TextPosition(
                   affinity: TextAffinity.downstream, offset: text.length)));
@@ -53,7 +53,7 @@ class _SearchPageState extends State<SearchPage> {
     }
 
     setState(() {
-      _searchWrap =  Wrap(
+      _searchWrap = Wrap(
         spacing: 10.0, // gap between adjacent chips
         runSpacing: 6.0,
         children: widgetList,
@@ -99,15 +99,15 @@ class _SearchPageState extends State<SearchPage> {
 
   @override
   Widget build(BuildContext context) {
-    return  Scaffold(
+    return Scaffold(
         appBar: PreferredSize(
           preferredSize: Size.fromHeight(0.0),
           child: AppBar(
             elevation: 0.0,
           ),
         ),
-        body:  Container(
-            child:  ListView(
+        body: Container(
+            child: ListView(
           physics: NeverScrollableScrollPhysics(),
           children: <Widget>[
             Container(
@@ -116,7 +116,7 @@ class _SearchPageState extends State<SearchPage> {
                   padding: EdgeInsets.symmetric(
                       vertical: ScreenUtil().setHeight(15),
                       horizontal: ScreenUtil().setHeight(15)),
-                  child:  Row(
+                  child: Row(
                     mainAxisSize: MainAxisSize.max,
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -133,7 +133,7 @@ class _SearchPageState extends State<SearchPage> {
                             maxLength: 50,
                             placeholder: '请输入微信号/用户名/聊天记录...',
                             padding: EdgeInsets.symmetric(
-                                horizontal: ScreenUtil().setWidth(20),
+                                horizontal: ScreenUtil().setWidth(30),
                                 vertical: ScreenUtil().setHeight(15)),
                             decoration: BoxDecoration(
                                 color: Colors.white,
@@ -151,7 +151,8 @@ class _SearchPageState extends State<SearchPage> {
                               fontSize: ScreenUtil().setSp(22),
                             ),
                             suffix: GestureDetector(
-                              child: Icon(Icons.close, size: 20),
+                              child: Icon(Icons.close,
+                                  size: ScreenUtil().setWidth(40)),
                               onTap: () {
                                 _searchController.clear();
                                 setState(() {
@@ -177,6 +178,7 @@ class _SearchPageState extends State<SearchPage> {
                                 _writeSearchHistory(value);
                               }
                               _searchController.clear();
+                              _searchVal = '';
                             },
                           )
                         ],
@@ -206,7 +208,7 @@ class _SearchPageState extends State<SearchPage> {
                     ],
                   ),
                 )),
-             Container(
+            Container(
               padding: EdgeInsets.symmetric(
                   horizontal: ScreenUtil().setHeight(20),
                   vertical: ScreenUtil().setHeight(10)),
@@ -230,7 +232,7 @@ class _SearchPageState extends State<SearchPage> {
                 ],
               ),
             ),
-             Container(
+            Container(
                 padding: EdgeInsets.symmetric(
                     horizontal: ScreenUtil().setHeight(20)),
                 child: _searchWrap),

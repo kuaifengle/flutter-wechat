@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 
 import '../../components/appbar.dart';
 
@@ -15,6 +16,59 @@ class SearchFriendPage extends StatefulWidget {
 class _SearchFriendPageState extends State<SearchFriendPage> {
   TextEditingController _searchController = TextEditingController();
   FocusNode _focusNode = FocusNode();
+
+  List<Map<String, dynamic>> downList = [
+    {'icon': Feather.rss, 'title': '雷达添加朋友', 'subtitle': '添加身边的朋友'},
+    {'icon': Feather.phone_call, 'title': '面对面建群', 'subtitle': '与身边的朋友进入同一个群聊'},
+    {'icon': Feather.maximize, 'title': '扫一扫', 'subtitle': '扫描二维码名牌'},
+    {'icon': Feather.phone, 'title': '手机联系人', 'subtitle': '添加或邀请通讯录的朋友'},
+    {'icon': Feather.target, 'title': '公众号', 'subtitle': '获取更多资讯和服务'},
+    {'icon': Feather.sun, 'title': '企业微信联系人', 'subtitle': '通过手机号搜索企业微信用户'},
+  ];
+
+  List<Widget> returnWidgetList() {
+    List<Widget> list = [];
+    downList.forEach((item) => list.add(returnItem(item)));
+    return list;
+  }
+
+  returnItem(item) {
+    return Container(
+        decoration: BoxDecoration(
+            border: BorderDirectional(
+                bottom: BorderSide(
+                    color: Color(0xFFe1e1e1),
+                    width: ScreenUtil().setHeight(2)))),
+        child: Container(
+            padding: EdgeInsets.symmetric(
+                horizontal: ScreenUtil().setWidth(30),
+                vertical: ScreenUtil().setHeight(15)),
+            height: ScreenUtil().setHeight(120),
+            child: Row(
+              children: <Widget>[
+                Padding(
+                  padding: EdgeInsets.only(right: ScreenUtil().setWidth(20)),
+                  child: Icon(item['icon']),
+                ),
+                Expanded(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      Text(
+                        '${item['title']}',
+                        style: TextStyle(fontSize: ScreenUtil().setSp(30)),
+                      ),
+                      Text('${item['subtitle']}',
+                          style: TextStyle(
+                              color: Color(0xFF888888),
+                              fontSize: ScreenUtil().setSp(26)))
+                    ],
+                  ),
+                ),
+              ],
+            )));
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +88,8 @@ class _SearchFriendPageState extends State<SearchFriendPage> {
                 children: <Widget>[
                   Icon(Icons.search),
                   Container(
-                      width: MediaQuery.of(context).size.width - 50,
+                      width: MediaQuery.of(context).size.width -
+                          ScreenUtil().setWidth(100),
                       child: CupertinoTextField(
                         autofocus: true,
                         focusNode: _focusNode,
@@ -57,7 +112,8 @@ class _SearchFriendPageState extends State<SearchFriendPage> {
                           fontSize: ScreenUtil().setSp(22),
                         ),
                         suffix: GestureDetector(
-                          child: Icon(Icons.close, size: 20),
+                          child: Icon(Icons.close,
+                              size: ScreenUtil().setWidth(30)),
                           onTap: () {
                             _searchController.clear();
                             setState(() {});
@@ -68,49 +124,18 @@ class _SearchFriendPageState extends State<SearchFriendPage> {
                 ],
               )),
           Container(
-            height: ScreenUtil().setHeight(100),
+            height: ScreenUtil().setHeight(90),
             color: Color(0xFFededed),
             alignment: Alignment.center,
-            child: Text('我的Github链接: https://github.com/kuaifengle',
-                style: TextStyle(
-                    color: Color(0xFF555555), fontWeight: FontWeight.bold)),
+            child:
+                Text('Github链接: https://github.com/kuaifengle/Flutter-WeChat',
+                    style: TextStyle(
+                      color: Color(0xFF555555),
+                      fontWeight: FontWeight.bold,
+                      fontSize: ScreenUtil().setSp(22),
+                    )),
           ),
-          ListTile(
-            leading: Icon(Icons.wifi_tethering, size: 35.0),
-            title: Text('雷达添加朋友'),
-            subtitle: Text('添加身边的朋友'),
-          ),
-          Divider(height: 2.0, color: Color(0xFFededed)),
-          ListTile(
-            leading: Icon(Icons.people_outline, size: 35.0),
-            title: Text('面对面建群'),
-            subtitle: Text('与身边的朋友进入同一个群聊'),
-          ),
-          Divider(height: 2.0, color: Color(0xFFededed)),
-          ListTile(
-            leading: Icon(Icons.camera_alt, size: 35.0),
-            title: Text('扫一扫'),
-            subtitle: Text('扫描二维码名牌'),
-          ),
-          Divider(height: 2.0, color: Color(0xFFededed)),
-          ListTile(
-            leading: Icon(Icons.perm_contact_calendar, size: 35.0),
-            title: Text('手机联系人'),
-            subtitle: Text('添加或邀请通讯录的朋友'),
-          ),
-          Divider(height: 2.0, color: Color(0xFFededed)),
-          ListTile(
-            leading: Icon(Icons.info_outline, size: 35.0),
-            title: Text('公众号'),
-            subtitle: Text('获取更多资讯和服务'),
-          ),
-          Divider(height: 2.0, color: Color(0xFFededed)),
-          ListTile(
-            leading: Icon(Icons.group_work, size: 35.0),
-            title: Text('企业微信联系人'),
-            subtitle: Text('通过手机号搜索企业微信用户'),
-          ),
-        ],
+        ]..addAll(returnWidgetList()),
       )),
     );
   }

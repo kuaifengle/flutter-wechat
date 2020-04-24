@@ -4,7 +4,6 @@ import 'package:flutter_inner_drawer/inner_drawer.dart';
 
 import './index/leftDrawer.dart';
 import './home.dart';
-import './index/contactsList.dart';
 
 class Index extends StatefulWidget {
   Index({Key key}) : super(key: key);

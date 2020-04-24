@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:rflutter_alert/rflutter_alert.dart';
 
 import '../../components/appBar.dart';
 import '../../components/searchPage.dart';
@@ -13,6 +14,10 @@ class FriendSetting extends StatefulWidget {
 }
 
 class _FriendSettingState extends State<FriendSetting> {
+  bool switch1 = false;
+  bool switch2 = false;
+  bool switch3 = false;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -59,7 +64,13 @@ class _FriendSettingState extends State<FriendSetting> {
                 style: TextStyle(
                     fontSize: ScreenUtil().setSp(24), color: Color(0xFF333333)),
               ),
-              trailing: Switch(value: false, onChanged: null)),
+              trailing: Switch(
+                  value: switch1,
+                  onChanged: (value) {
+                    setState(() {
+                      switch1 = value;
+                    });
+                  })),
           ListTile(
               contentPadding:
                   EdgeInsets.symmetric(horizontal: ScreenUtil().setWidth(30)),
@@ -68,7 +79,13 @@ class _FriendSettingState extends State<FriendSetting> {
                 style: TextStyle(
                     fontSize: ScreenUtil().setSp(24), color: Color(0xFF333333)),
               ),
-              trailing: Switch(value: false, onChanged: null)),
+              trailing: Switch(
+                  value: switch2,
+                  onChanged: (value) {
+                    setState(() {
+                      switch2 = value;
+                    });
+                  })),
           ListTile(
               contentPadding:
                   EdgeInsets.symmetric(horizontal: ScreenUtil().setWidth(30)),
@@ -77,7 +94,13 @@ class _FriendSettingState extends State<FriendSetting> {
                 style: TextStyle(
                     fontSize: ScreenUtil().setSp(24), color: Color(0xFF333333)),
               ),
-              trailing: Switch(value: false, onChanged: null)),
+              trailing: Switch(
+                  value: switch3,
+                  onChanged: (value) {
+                    setState(() {
+                      switch3 = value;
+                    });
+                  })),
           Container(
               height: ScreenUtil().setHeight(20), color: Color(0xFFededed)),
           ListTile(
@@ -107,7 +130,36 @@ class _FriendSettingState extends State<FriendSetting> {
                 Icons.keyboard_arrow_right,
                 color: Color(0xFF333333),
                 size: ScreenUtil().setWidth(40),
-              )),
+              ),
+              onTap: () {
+                Alert(
+                  context: context,
+                  style: AlertStyle(
+                      titleStyle: TextStyle(fontSize: ScreenUtil().setSp(30))),
+                  title: "确定要清空聊天记录吗?",
+                  buttons: [
+                    DialogButton(
+                      child: Text(
+                        "取消",
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontSize: ScreenUtil().setSp(30)),
+                      ),
+                      onPressed: () => Navigator.pop(context),
+                      color: Color(0xFFcccccc),
+                    ),
+                    DialogButton(
+                        child: Text(
+                          "确定",
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontSize: ScreenUtil().setSp(30)),
+                        ),
+                        onPressed: () => Navigator.pop(context),
+                        color: Color(0xFF61ab32))
+                  ],
+                ).show();
+              }),
           Container(
               height: ScreenUtil().setHeight(20), color: Color(0xFFededed)),
           GestureDetector(

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_vector_icons/flutter_vector_icons.dart';
+import 'package:flutter_wechat/components/appbar.dart';
 
 import '../talk/talk.dart';
 import '../dynamic/timeLine.dart';
@@ -21,7 +22,7 @@ class _DetailedState extends State<Detailed> {
         (MediaQuery.of(context).size.width - ScreenUtil().setWidth(350)) / 4;
 
     return Scaffold(
-      body: ListView(
+      body: Column(
         children: <Widget>[
           Container(
               width: MediaQuery.of(context).size.width,
@@ -39,34 +40,13 @@ class _DetailedState extends State<Detailed> {
                                 fit: BoxFit.fill)),
                       )),
                   Positioned(
-                    top: 0,
-                    child: Container(
-                      height: 40.0,
+                      left: 0,
                       width: MediaQuery.of(context).size.width,
-                      child: Row(
-                        children: <Widget>[
-                          IconButton(
-                            icon: Icon(Icons.keyboard_arrow_left,
-                                color: Colors.white, size: 30.0),
-                            onPressed: () {
-                              Navigator.of(context).pop();
-                            },
-                          ),
-                          Container(
-                              width: MediaQuery.of(context).size.width - 100,
-                              child: Text(
-                                'Ta的详情',
-                                style: TextStyle(
-                                    fontSize: ScreenUtil().setSp(32),
-                                    color: Colors.white),
-                                textAlign: TextAlign.center,
-                              ))
-                        ],
-                      ),
-                    ),
-                  ),
+                      height: ScreenUtil().setHeight(120),
+                      child: setCustomAppBar(context, 'Ta的详情',
+                          backgroundColor: Colors.transparent)),
                   Positioned(
-                      top: ScreenUtil().setHeight(70),
+                      top: ScreenUtil().setHeight(90),
                       width: MediaQuery.of(context).size.width,
                       height: ScreenUtil().setHeight(500),
                       child: Container(

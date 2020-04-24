@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_vector_icons/flutter_vector_icons.dart';
+import 'package:flutter_wechat/components/button.dart';
 import 'package:sticky_headers/sticky_headers.dart';
 
+import '../../components/button.dart';
 import '../../components/appBar.dart';
 import '../../dataJson/userData.dart';
+import './sendPhoto.dart';
 
 class TimeLine extends StatefulWidget {
   TimeLine({Key key, this.detail}) : super(key: key);
@@ -144,7 +147,17 @@ class _TimeLineState extends State<TimeLine> {
         appBar: setCustomAppBar(context, '好友动态',
             backgroundColor: Colors.transparent,
             textColor: Colors.black,
-            iconColor: Colors.black),
+            iconColor: Colors.black,
+            actions: [
+              TextButton(
+                text: '新建',
+                textColor: Color(0xFF61ab32),
+                onPressed: () {
+                  Navigator.of(context)
+                      .push(MaterialPageRoute(builder: (_) => SendPhoto()));
+                },
+              )
+            ]),
         body: ListView.builder(
             itemCount: timeLineList.keys.length,
             itemBuilder: (context, index) {

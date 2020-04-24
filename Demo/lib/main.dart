@@ -24,6 +24,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Flutter Wechat',
       theme: ThemeData(
+          platform: TargetPlatform.iOS,
           backgroundColor: Colors.white,
           appBarTheme: AppBarTheme(
               color: Color(0xFF61ab32),
