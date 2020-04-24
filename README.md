@@ -22,6 +22,7 @@
 [√] Connected device (1 available)
 ```
 
+### 预览图
 <p>
   <img src="https://github.com/kuaifengle/Flutter-WeChat/blob/master/appGif/1.png?raw=true" width=260/>
   <img src="https://github.com/kuaifengle/Flutter-WeChat/blob/master/appGif/2.png?raw=true" width=260/>
