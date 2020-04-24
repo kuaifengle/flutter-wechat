@@ -12,7 +12,12 @@
 ####  I don't have a Mac, so I'm not sure the project will run on a Mac!
 
 ```
-> flutter-version: 1.10.7
+> flutter--version
+
+Flutter 1.10.7 • channel beta • https://github.com/flutter/flutter.git
+Framework • revision e70236e36c (7 months ago) • 2019-10-02 09:32:30 -0700
+Engine • revision 9e6314d348
+Tools • Dart 2.6.0 (build 2.6.0-dev.4.0 1103600280)
 ```
 ```
 > flutter doctor
