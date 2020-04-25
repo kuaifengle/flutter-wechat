@@ -3,11 +3,11 @@ import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 import 'package:sticky_headers/sticky_headers.dart';
+import 'package:flutter/cupertino.dart';
 
 import '../../components/appBar.dart';
-import '../talk/talk.dart';
+import '../contacts/detailed.dart';
 import '../../dataJson/userData.dart';
-import '../../components/searchPage.dart';
 
 class ContactsPage extends StatefulWidget {
   @override
@@ -17,7 +17,45 @@ class ContactsPage extends StatefulWidget {
 class _ContactsPageState extends State<ContactsPage> {
   final SlidableController slidableController = SlidableController();
 
-  returnUserItem(item) {
+  TextEditingController _searchController = TextEditingController();
+  FocusNode _focusNode = FocusNode();
+  List<Map<String, dynamic>> searchList = [];
+  String _searchVal = '';
+
+  searchFriend() {
+    if (_searchVal == '') {
+      setState(() {
+        searchList = [];
+      });
+      return;
+    }
+    List<Map<String, dynamic>> list = [];
+
+    friendInfoList.keys.toList().forEach((k) {
+      List userInfoList = friendInfoList[k];
+
+      userInfoList.forEach((res) {
+        Map someRes = {
+          'name': res['name'],
+          'motto': res['motto'],
+          'checkInfo': res['checkInfo'],
+          'adress': res['adress'],
+        };
+        String allValues = someRes.values.toString();
+        if (allValues.indexOf(_searchVal) > -1) {
+          list.add(res);
+        }
+      });
+    });
+
+    setState(() {
+      searchList = list;
+    });
+  }
+
+  returnUserItem(item, index) {
+    String heroTag = index.toString() + item['id'].toString();
+
     return GestureDetector(
       child: Slidable(
         key: Key('$item.id'.toString()),
@@ -37,13 +75,16 @@ class _ContactsPageState extends State<ContactsPage> {
                 height: ScreenUtil().setHeight(120),
                 child: Row(
                   children: <Widget>[
-                    Padding(
-                      padding:
-                          EdgeInsets.only(right: ScreenUtil().setWidth(20)),
-                      child: CircleAvatar(
-                        backgroundImage: NetworkImage('${item['imageUrl']}'),
-                      ),
-                    ),
+                    Hero(
+                        tag: heroTag,
+                        child: Padding(
+                          padding:
+                              EdgeInsets.only(right: ScreenUtil().setWidth(20)),
+                          child: CircleAvatar(
+                            backgroundImage:
+                                NetworkImage('${item['imageUrl']}'),
+                          ),
+                        )),
                     Expanded(
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -63,7 +104,9 @@ class _ContactsPageState extends State<ContactsPage> {
                                       fontSize: ScreenUtil().setSp(22)))
                             ],
                           ),
-                          Text('${item['checkInfo']}',
+                          Text('${item['motto']}',
+                              overflow: TextOverflow.ellipsis,
+                              maxLines: 1,
                               style: TextStyle(
                                   color: Color(0xFF888888),
                                   fontSize: ScreenUtil().setSp(26)))
@@ -78,20 +121,20 @@ class _ContactsPageState extends State<ContactsPage> {
             color: Color(0xFFf76767),
             iconWidget: Icon(Feather.trash_2,
                 color: Colors.white, size: ScreenUtil().setSp(50)),
-            onTap: () => _showSnackBar('删除'),
+            onTap: () {
+              setState(() {
+                friendInfoList[index].remove(item);
+              });
+            },
           ),
         ],
       ),
       onTap: () {
         Navigator.of(context).push(MaterialPageRoute(builder: (_) {
-          return Talk(detail: item);
+          return Detailed(detail: item, heroTag: heroTag);
         }));
       },
     );
-  }
-
-  _showSnackBar(val) {
-    print(val);
   }
 
   ScrollController controller = ScrollController();
@@ -99,66 +142,94 @@ class _ContactsPageState extends State<ContactsPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: setCustomAppBar(context, '联系人'),
+        appBar: setCustomAppBar(context, '通讯录'),
         body: ListView.builder(
-            itemCount: a2z.length,
+            itemCount: 1 + searchList.length + a2z.length,
             itemBuilder: (context, index) {
+              Widget widget;
               if (index == 0) {
-                return GestureDetector(
-                  child: Container(
-                      padding: EdgeInsets.symmetric(
-                          horizontal: ScreenUtil().setWidth(30)),
-                      height: ScreenUtil().setHeight(80),
-                      color: Color(0xFFefeef3),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: <Widget>[
-                          Icon(Icons.search),
-                          Expanded(
-                            child: Container(
-                              margin: EdgeInsets.only(
-                                  left: ScreenUtil().setWidth(20)),
-                              child: Text('Search'),
-                            ),
-                          )
-                        ],
-                      )),
-                  onTap: () {
-                    Navigator.of(context)
-                        .push(MaterialPageRoute(builder: (_) => SearchPage()));
-                  },
-                );
-              } else {
-                return StickyHeader(
-                  header: Container(
-                    height: ScreenUtil().setHeight(50),
-                    decoration: BoxDecoration(
-                        color: Color(0xFFc1c1c3),
-                        border: Border(
-                            top: BorderSide(
-                                width: ScreenUtil().setHeight(2),
-                                color: Colors.white))),
+                widget = Container(
                     padding: EdgeInsets.symmetric(
-                        horizontal: ScreenUtil().setHeight(30)),
-                    alignment: Alignment.centerLeft,
-                    child: Text(
-                      a2z[index],
-                      style: TextStyle(
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold,
-                          fontSize: ScreenUtil().setSp(30)),
-                    ),
-                  ),
-                  content: (friendInfoList[a2z[index]] != null &&
-                          friendInfoList[a2z[index]].length > 0)
-                      ? Column(
-                          children: <Widget>[]..addAll(
-                              friendInfoList[a2z[index]]
-                                  .map((item) => returnUserItem(item))),
-                        )
-                      : Container(),
-                );
+                        horizontal: ScreenUtil().setWidth(30)),
+                    height: ScreenUtil().setHeight(80),
+                    color: Color(0xFFefeef3),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: <Widget>[
+                        Icon(Icons.search, color: Colors.black54),
+                        Expanded(
+                          child: CupertinoTextField(
+                            focusNode: _focusNode,
+                            controller: _searchController,
+                            textInputAction: TextInputAction.search,
+                            keyboardType: TextInputType.text,
+                            maxLength: 50,
+                            placeholder: '请输入微信号/手机号...',
+                            padding: EdgeInsets.symmetric(
+                                horizontal: ScreenUtil().setWidth(20),
+                                vertical: ScreenUtil().setHeight(15)),
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(60.0)),
+                            style: TextStyle(
+                              color: Color(0xFF333333),
+                              fontSize: ScreenUtil().setSp(26),
+                            ),
+                            placeholderStyle: TextStyle(
+                              color: Color(0xFFc1c1c3),
+                              fontSize: ScreenUtil().setSp(22),
+                            ),
+                            suffix: _searchVal.length > 0
+                                ? GestureDetector(
+                                    child: Icon(Icons.close,
+                                        color: Color(0xFF333333),
+                                        size: ScreenUtil().setWidth(30)),
+                                    onTap: () {
+                                      _searchController.clear();
+                                      setState(() {
+                                        searchList = [];
+                                      });
+                                    },
+                                  )
+                                : Container(),
+                            onChanged: (val) {
+                              _searchVal = val;
+                              searchFriend();
+                              setState(() {});
+                            },
+                          ),
+                        ),
+                      ],
+                    ));
+              } else if (searchList.length > 0 &&
+                  index > 0 &&
+                  index <= searchList.length) {
+                return returnUserItem(searchList[index - 1], a2z[index]);
+              } else {
+                int key = index - 1;
+                if (friendInfoList[a2z[key]] != null &&
+                    friendInfoList[a2z[key]].length > 0) {
+                  widget = StickyHeader(
+                      header: Container(
+                        height: ScreenUtil().setHeight(50),
+                        decoration: BoxDecoration(color: Colors.black38),
+                        padding: EdgeInsets.symmetric(
+                            horizontal: ScreenUtil().setHeight(30)),
+                        alignment: Alignment.centerLeft,
+                        child: Text(
+                          a2z[key],
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                              fontSize: ScreenUtil().setSp(30)),
+                        ),
+                      ),
+                      content: Column(
+                        children: <Widget>[]..addAll(friendInfoList[a2z[key]]
+                            .map((item) => returnUserItem(item, a2z[key]))),
+                      ));
+                }
               }
+              return widget;
             }));
   }
 }

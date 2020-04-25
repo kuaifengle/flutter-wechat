@@ -16,7 +16,9 @@ class Contacts extends StatefulWidget {
 final SlidableController slidableController = SlidableController();
 
 class _ContactsState extends State<Contacts> {
-  returnUserItem(item) {
+  returnUserItem(index) {
+    Map item = userInfoList[index];
+
     return GestureDetector(
       child: Slidable(
         key: Key('$item.id'),
@@ -79,7 +81,10 @@ class _ContactsState extends State<Contacts> {
                   color: Colors.white, size: ScreenUtil().setSp(50)),
               foregroundColor: Colors.white,
               onTap: () {
-                _showSnackBar('删除');
+                setState(() {
+                  userInfoList.forEach((res) => res['isTop'] = false);
+                  userInfoList[index]['isTop'] = true;
+                });
               }),
           IconSlideAction(
             caption: '删除',
@@ -87,7 +92,9 @@ class _ContactsState extends State<Contacts> {
             iconWidget: Icon(Feather.trash_2,
                 color: Colors.white, size: ScreenUtil().setSp(50)),
             onTap: () {
-              _showSnackBar('删除');
+              setState(() {
+                userInfoList.remove(userInfoList[index]);
+              });
             },
           ),
         ],
@@ -104,16 +111,13 @@ class _ContactsState extends State<Contacts> {
     List widgetList = <Widget>[];
 
     for (var i = 0; i < userInfoList.length; i++) {
-      widgetList.add(returnUserItem(userInfoList[i]));
+      if (userInfoList[i]['isTop'] == true) {
+        widgetList.insert(0, returnUserItem(i));
+      } else {
+        widgetList.add(returnUserItem(i));
+      }
     }
     return widgetList;
-  }
-
-  _showSnackBar(val) {
-    Scaffold.of(context).showSnackBar(SnackBar(
-      content: val,
-      duration: Duration(seconds: 2),
-    ));
   }
 
   @override
@@ -134,7 +138,10 @@ class _ContactsState extends State<Contacts> {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: <Widget>[
-                        Icon(Icons.search),
+                        Icon(
+                          Icons.search,
+                          color: Colors.black54,
+                        ),
                         Expanded(
                           child: Container(
                             margin: EdgeInsets.only(
@@ -145,7 +152,10 @@ class _ContactsState extends State<Contacts> {
                         IconButton(
                           padding: EdgeInsets.all(0),
                           alignment: Alignment.centerRight,
-                          icon: Icon(Icons.keyboard_voice),
+                          icon: Icon(
+                            Icons.keyboard_voice,
+                            color: Colors.black54,
+                          ),
                           onPressed: () {
                             print('语音');
                           },

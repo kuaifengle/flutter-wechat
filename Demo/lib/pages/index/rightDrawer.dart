@@ -57,15 +57,15 @@ class IndexRightDrawerState extends State<IndexRightDrawer> {
     List<Widget> widgetList = [];
 
     for (int i = 0; i < drawerList.length; i++) {
-      Color color = Colors.white;
       Map item = drawerList[i];
       widgetList.add(ListTile(
         contentPadding:
             EdgeInsets.symmetric(horizontal: ScreenUtil().setWidth(30)),
-        leading: Icon(item['icon'], color: color),
+        leading: Icon(item['icon'], color: Colors.white),
         title: Text(
           '${item['title']}',
-          style: TextStyle(fontSize: ScreenUtil().setSp(24), color: color),
+          style:
+              TextStyle(fontSize: ScreenUtil().setSp(24), color: Colors.white),
         ),
         onTap: () {
           Navigator.of(context).pop();

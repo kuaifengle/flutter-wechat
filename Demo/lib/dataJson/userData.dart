@@ -1,67 +1,85 @@
 Map<String, dynamic> mySelf = {
   'name': 'kuaifengle',
-  'id': 1,
+  'id': 9999,
+  'isTop': false,
+  'motto': '如果我是DJ你会爱我吗?',
   'checkInfo': 'https://github.com/kuaifengle',
   'lastTime': '20.11',
+  'adress': '',
   'imageUrl':
       'http://common.lingcb.net/image/Stocking/StyleManagement/20200422/3e4e3e19-06e4-4523-af53-151ce73718eb.png',
   'backgroundUrl': 'http://pic31.photophoto.cn/20140404/0005018792087823_b.jpg'
 };
 
-List<Map> userInfoList = [
+List<Map<String, dynamic>> userInfoList = [
   {
-    'name': 'kuaifengle',
+    'name': '窃格瓦拉-周某',
     'id': 1,
-    'checkInfo': 'https://github.com/kuaifengle',
+    'isTop': false,
+    'motto': '打工是不可能打工的,这辈子都不可能打工!做生意又不会做!',
+    'checkInfo': '信不信我今晚表演电瓶车消失术给你看?',
     'lastTime': '20.11',
+    'adress': '中国 - 广西 - 南宁',
     'imageUrl':
         'http://common.lingcb.net/image/Stocking/StyleManagement/20200422/3e4e3e19-06e4-4523-af53-151ce73718eb.png',
     'backgroundUrl':
         'http://pic31.photophoto.cn/20140404/0005018792087823_b.jpg'
   },
   {
-    'name': 'Only',
+    'name': '马云',
     'id': 2,
-    'checkInfo': '砖石一颗即永恒',
+    'isTop': false,
+    'motto': '我从来没碰过钱，我对钱没有兴趣，因为我最快乐的时候是一个月拿91块钱，我当老师的时候。',
+    'checkInfo': '我最大的错误是，我创办了阿里巴巴。',
     'lastTime': '16.18',
+    'adress': '中国 - 浙江 - 杭州',
     'imageUrl':
         'https://ss1.baidu.com/6ONXsjip0QIZ8tyhnq/it/u=1667994205,255365672&fm=5',
     'backgroundUrl':
         'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1544591217574&di=ccd0b58aa181af2a0ef5dfc44266fde2&imgtype=0&src=http%3A%2F%2Fimgsrc.baidu.com%2Fimage%2Fc0%253Dshijue1%252C0%252C0%252C294%252C40%2Fsign%3D0f22919fb8b7d0a26fc40cdea3861c7c%2F0df431adcbef7609e92064b224dda3cc7cd99ef0.jpg'
   },
   {
-    'name': '哈哈',
+    'name': '王健林',
     'id': 3,
-    'checkInfo': '呵呵',
+    'isTop': false,
+    'checkInfo': '5个亿,也不说小意思吧!算中等意思!',
+    'motto': '做人要先定一个能达到的小目标,比如先挣他一个亿!',
     'lastTime': '24.00',
+    'adress': '中国 - 四川 - 广元',
     'imageUrl':
         'https://ss1.baidu.com/6ONXsjip0QIZ8tyhnq/it/u=2406161785,701397900&fm=5',
     'backgroundUrl':
         'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1544591217574&di=dd17c39c2f725d8e3f4fd69a668c5d9b&imgtype=0&src=http%3A%2F%2Fimgsrc.baidu.com%2Fimage%2Fc0%253Dshijue1%252C0%252C0%252C294%252C40%2Fsign%3D93cf8a986f380cd7f213aaaec92dc741%2F902397dda144ad347a33f2afdaa20cf431ad850d.jpg'
   },
   {
-    'name': '呵呵',
+    'name': '马化腾',
     'id': 4,
-    'checkInfo': '干嘛,呵呵, 去洗澡',
+    'isTop': false,
+    'checkInfo': '我能让人人首充6块!',
+    'motto': '我们都是普通家庭,顶多是房子大一点!',
     'lastTime': '10.20',
+    'adress': '中国 - 广东 - 东方县',
     'imageUrl':
         'https://ss0.baidu.com/6ONWsjip0QIZ8tyhnq/it/u=1853832225,307688784&fm=5',
     'backgroundUrl':
         'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1544591217574&di=2189213cef3d70c482f52359d2727d15&imgtype=0&src=http%3A%2F%2Fimgsrc.baidu.com%2Fimgad%2Fpic%2Fitem%2F810a19d8bc3eb13584856f6fac1ea8d3fc1f44a0.jpg'
   },
   {
-    'name': 'Dj',
+    'name': '刘强东',
     'id': 5,
-    'checkInfo': '如果我是Dj你会爱我吗',
+    'isTop': false,
+    'checkInfo': '1东等于多少分钟?',
+    'motto': '我这个人是脸盲，就是说根本就分不清楚谁漂亮不漂亮!',
     'lastTime': '19.28',
+    'adress': '中国 - 江苏 - 宿迁',
     'imageUrl':
         'https://ss0.baidu.com/6ONWsjip0QIZ8tyhnq/it/u=2247692397,1189743173&fm=5',
-    'backgroundUrl': ''
+    'backgroundUrl':
+        'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1544591217574&di=2189213cef3d70c482f52359d2727d15&imgtype=0&src=http%3A%2F%2Fimgsrc.baidu.com%2Fimgad%2Fpic%2Fitem%2F810a19d8bc3eb13584856f6fac1ea8d3fc1f44a0.jpg'
   }
 ];
 
 List a2z = [
-  '0',
   'A',
   'B',
   'C',
@@ -91,10 +109,9 @@ List a2z = [
 ];
 
 Map<String, List<Map>> friendInfoList = {
-  '0': [],
-  'A': userInfoList,
-  'B': userInfoList,
-  'C': userInfoList
+  a2z[0]: userInfoList,
+  a2z[1]: userInfoList,
+  a2z[2]: userInfoList
 };
 
 Map<String, List<Map>> timeLineList = {

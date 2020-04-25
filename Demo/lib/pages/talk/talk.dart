@@ -166,7 +166,6 @@ class _TalkState extends State<Talk> with SingleTickerProviderStateMixin {
           ],
         ),
         body: Container(
-            color: Colors.white,
             width: MediaQuery.of(context).size.width,
             height: MediaQuery.of(context).size.height,
             child: Stack(

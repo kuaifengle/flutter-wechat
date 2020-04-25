@@ -151,7 +151,7 @@ class _TimeLineState extends State<TimeLine> {
             actions: [
               TextButton(
                 text: '新建',
-                textColor: Color(0xFF61ab32),
+                textColor: Theme.of(context).primaryColor,
                 onPressed: () {
                   Navigator.of(context)
                       .push(MaterialPageRoute(builder: (_) => SendPhoto()));

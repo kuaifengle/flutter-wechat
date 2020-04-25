@@ -156,7 +156,7 @@ class _FriendSettingState extends State<FriendSetting> {
                               fontSize: ScreenUtil().setSp(30)),
                         ),
                         onPressed: () => Navigator.pop(context),
-                        color: Color(0xFF61ab32))
+                        color: Theme.of(context).primaryColor)
                   ],
                 ).show();
               }),

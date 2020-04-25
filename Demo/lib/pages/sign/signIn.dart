@@ -135,7 +135,7 @@ class _SignInState extends State<SignIn> with SingleTickerProviderStateMixin {
                   color: Color(0xFF65c324),
                   border: Border.all(
                       width: ScreenUtil().setHeight(1),
-                      color: Color(0xFF28b506)),
+                      color: Theme.of(context).primaryColor),
                   borderRadius:
                       BorderRadius.circular(ScreenUtil().setHeight(50))),
               child: Center(

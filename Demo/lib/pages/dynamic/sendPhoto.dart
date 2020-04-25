@@ -61,7 +61,7 @@ class _SendPhotoState extends State<SendPhoto> {
                       style: TextStyle(
                           color: Color(0xFF888888),
                           fontSize: ScreenUtil().setSp(22)))),
-              Divider(height: 2.0, color: Color(0xFFededed)),
+              Divider(height: 2.0),
               ListTile(
                 leading: Icon(Feather.link, size: ScreenUtil().setWidth(40)),
                 title: Text('谁可以看',
@@ -69,14 +69,14 @@ class _SendPhotoState extends State<SendPhoto> {
                         color: Color(0xFF888888),
                         fontSize: ScreenUtil().setSp(22))),
               ),
-              Divider(height: 2.0, color: Color(0xFFededed)),
+              Divider(height: 2.0),
               ListTile(
                   leading: Icon(Feather.flag, size: ScreenUtil().setWidth(40)),
                   title: Text('提现谁看',
                       style: TextStyle(
                           color: Color(0xFF888888),
                           fontSize: ScreenUtil().setSp(22)))),
-              Divider(height: 2.0, color: Color(0xFFededed)),
+              Divider(height: 2.0),
             ],
           ),
         ));

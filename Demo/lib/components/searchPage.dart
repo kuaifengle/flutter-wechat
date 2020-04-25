@@ -152,6 +152,7 @@ class _SearchPageState extends State<SearchPage> {
                             ),
                             suffix: GestureDetector(
                               child: Icon(Icons.close,
+                                  color: Color(0xFF333333),
                                   size: ScreenUtil().setWidth(40)),
                               onTap: () {
                                 _searchController.clear();
@@ -217,7 +218,11 @@ class _SearchPageState extends State<SearchPage> {
                 children: <Widget>[
                   Text('历史搜索'),
                   IconButton(
-                    icon: Icon(Feather.trash_2),
+                    icon: Icon(
+                      Feather.trash_2,
+                      color: Color(0xFF333333),
+                      size: ScreenUtil().setWidth(40),
+                    ),
                     onPressed: () async {
                       UtilDialog.showConfirm(context, content: '确实要清空搜索历史?',
                           successFn: () async {

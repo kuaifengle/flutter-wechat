@@ -8,8 +8,9 @@ import '../dynamic/timeLine.dart';
 import './friendSetting.dart';
 
 class Detailed extends StatefulWidget {
-  Detailed({Key key, this.detail}) : super(key: key);
-  final detail;
+  Detailed({Key key, this.detail, this.heroTag = 'noTag'}) : super(key: key);
+  final Map detail;
+  final String heroTag;
 
   @override
   _DetailedState createState() => _DetailedState();
@@ -29,16 +30,19 @@ class _DetailedState extends State<Detailed> {
               height: ScreenUtil().setHeight(550),
               child: Stack(
                 children: <Widget>[
+                  Container(
+                    height: ScreenUtil().setHeight(500),
+                    decoration: BoxDecoration(
+                        image: DecorationImage(
+                            image: NetworkImage(widget.detail['backgroundUrl']),
+                            fit: BoxFit.fill)),
+                  ),
                   Opacity(
-                      opacity: 0.5,
-                      child: Container(
+                    opacity: 0.45,
+                    child: Container(
                         height: ScreenUtil().setHeight(500),
-                        decoration: BoxDecoration(
-                            image: DecorationImage(
-                                image: NetworkImage(
-                                    widget.detail['backgroundUrl']),
-                                fit: BoxFit.fill)),
-                      )),
+                        color: Color(0xFF555555)),
+                  ),
                   Positioned(
                       left: 0,
                       width: MediaQuery.of(context).size.width,
@@ -57,19 +61,21 @@ class _DetailedState extends State<Detailed> {
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: <Widget>[
-                            Container(
-                                width: ScreenUtil().setWidth(140),
-                                height: ScreenUtil().setWidth(140),
-                                decoration: BoxDecoration(
-                                    image: DecorationImage(
-                                        image: NetworkImage(
-                                            widget.detail['imageUrl']),
-                                        fit: BoxFit.fill),
-                                    border: Border.all(
-                                        width: ScreenUtil().setWidth(4),
-                                        color: Colors.white),
-                                    borderRadius: BorderRadius.circular(
-                                        ScreenUtil().setWidth(140)))),
+                            Hero(
+                                tag: widget.heroTag,
+                                child: Container(
+                                    width: ScreenUtil().setWidth(140),
+                                    height: ScreenUtil().setWidth(140),
+                                    decoration: BoxDecoration(
+                                        image: DecorationImage(
+                                            image: NetworkImage(
+                                                widget.detail['imageUrl']),
+                                            fit: BoxFit.fill),
+                                        border: Border.all(
+                                            width: ScreenUtil().setWidth(4),
+                                            color: Colors.white),
+                                        borderRadius: BorderRadius.circular(
+                                            ScreenUtil().setWidth(140))))),
                             Expanded(
                               flex: 1,
                               child: Column(
@@ -77,11 +83,11 @@ class _DetailedState extends State<Detailed> {
                                   Expanded(
                                     flex: 1,
                                     child: Text(
-                                      'kuaifengle',
+                                      '${widget.detail['name']}',
                                       style: TextStyle(
-                                          color: Colors.black,
+                                          color: Colors.white,
                                           fontWeight: FontWeight.bold,
-                                          fontSize: ScreenUtil().setSp(34),
+                                          fontSize: ScreenUtil().setSp(38),
                                           height: 2),
                                     ),
                                   ),
@@ -89,14 +95,14 @@ class _DetailedState extends State<Detailed> {
                                       flex: 2,
                                       child: Padding(
                                         padding: EdgeInsets.symmetric(
-                                            horizontal: 10),
+                                            horizontal: 20),
                                         child: Text(
-                                          '如果我是Dj你会爱我吗?如果我是Dj你会爱我吗?如果我是Dj你会爱我吗?如果我是Dj你会爱我吗?如果我是Dj你会爱我吗?',
-                                          textAlign: TextAlign.center,
+                                          '${widget.detail['motto']}',
+                                          textAlign: TextAlign.left,
                                           maxLines: 3,
                                           overflow: TextOverflow.ellipsis,
                                           style: TextStyle(
-                                            color: Color(0xFF333333),
+                                            color: Colors.white,
                                             fontSize: ScreenUtil().setSp(26),
                                           ),
                                         ),
@@ -120,7 +126,8 @@ class _DetailedState extends State<Detailed> {
                         ),
                         onPressed: () {
                           Navigator.of(context).push(MaterialPageRoute(
-                              builder: (_) => FriendSetting()));
+                              builder: (_) =>
+                                  FriendSetting(detail: widget.detail)));
                         },
                       ))
                 ],
@@ -139,7 +146,7 @@ class _DetailedState extends State<Detailed> {
                 Expanded(
                     flex: 1,
                     child: Text(
-                      '中国-广州-深圳',
+                      '${widget.detail['adress']}',
                       overflow: TextOverflow.ellipsis,
                       style: TextStyle(
                         color: Color(0xFF3d3d3d),
@@ -149,7 +156,7 @@ class _DetailedState extends State<Detailed> {
               ],
             ),
           ),
-          Divider(height: 2.0, color: Color(0xFFededed)),
+          Divider(height: 2.0),
           Container(
             padding: EdgeInsets.symmetric(
                 horizontal: ScreenUtil().setWidth(30),
@@ -164,8 +171,9 @@ class _DetailedState extends State<Detailed> {
                 Expanded(
                     flex: 1,
                     child: Text(
-                      '${widget.detail['checkInfo']}',
+                      '${widget.detail['motto']}',
                       overflow: TextOverflow.ellipsis,
+                      maxLines: 3,
                       style: TextStyle(
                         color: Color(0xFF3d3d3d),
                         fontSize: ScreenUtil().setSp(24),
@@ -174,7 +182,7 @@ class _DetailedState extends State<Detailed> {
               ],
             ),
           ),
-          Divider(height: 2.0, color: Color(0xFFededed)),
+          Divider(height: 2.0),
           GestureDetector(
             child: Container(
               padding: EdgeInsets.symmetric(
@@ -230,7 +238,7 @@ class _DetailedState extends State<Detailed> {
                   builder: (_) => TimeLine(detail: widget.detail)));
             },
           ),
-          Divider(height: 2.0, color: Color(0xFFededed)),
+          Divider(height: 2.0),
           Container(
             margin: EdgeInsets.only(
                 left: ScreenUtil().setWidth(100),

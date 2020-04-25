@@ -47,10 +47,9 @@ class MenuFloatButtonState extends State<MenuFloatButton> {
                     visible: !btnShow,
                     child: Center(
                       child: CircleAvatar(
-                        child: IconButton(
-                          icon: Icon(Icons.camera),
-                          color: Color(0xFFffffff),
-                          onPressed: () {
+                        child: GestureDetector(
+                          child: Icon(Icons.camera),
+                          onTap: () {
                             Navigator.of(context).push(
                                 MaterialPageRoute(builder: (_) => TimeLine()));
                           },
@@ -68,10 +67,9 @@ class MenuFloatButtonState extends State<MenuFloatButton> {
                     visible: !btnShow,
                     child: Center(
                       child: CircleAvatar(
-                        child: IconButton(
-                          icon: Icon(Icons.person_add),
-                          color: Color(0xFFffffff),
-                          onPressed: () {
+                        child: GestureDetector(
+                          child: Icon(Icons.person_add),
+                          onTap: () {
                             Navigator.of(context).push(MaterialPageRoute(
                                 builder: (_) => SearchFriendPage()));
                           },
@@ -89,10 +87,9 @@ class MenuFloatButtonState extends State<MenuFloatButton> {
                     visible: !btnShow,
                     child: Center(
                       child: CircleAvatar(
-                        child: IconButton(
-                          icon: Icon(Icons.photo_camera),
-                          color: Color(0xFFffffff),
-                          onPressed: () {
+                        child: GestureDetector(
+                          child: Icon(Icons.photo_camera),
+                          onTap: () {
                             Navigator.of(context).push(
                                 MaterialPageRoute(builder: (_) => SendPhoto()));
                           },

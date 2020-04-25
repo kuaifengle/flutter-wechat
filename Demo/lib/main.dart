@@ -25,14 +25,34 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Wechat',
       theme: ThemeData(
           platform: TargetPlatform.iOS,
+          primaryColorLight: Colors.white,
           backgroundColor: Colors.white,
           appBarTheme: AppBarTheme(
+              textTheme: TextTheme(title: TextStyle(color: Colors.white)),
               color: Color(0xFF61ab32),
               iconTheme: IconThemeData(color: Colors.white)),
           primaryColor: Color(0xFF61ab32),
+          accentColor: Colors.white,
+          cursorColor: Color(0xFF61ab32),
+          accentColorBrightness: Brightness.light,
           iconTheme: IconThemeData(
-            color: Color(0xFF7b7c77),
-          )),
+            color: Colors.black45,
+          ),
+          primaryIconTheme: IconThemeData(
+            color: Colors.red,
+          ),
+          accentIconTheme: IconThemeData(color: Colors.white),
+          toggleableActiveColor: Color(0xFF61ab32),
+          buttonColor: Color(0xFF61ab32),
+          buttonTheme: ButtonThemeData(
+              hoverColor: Colors.transparent,
+              highlightColor: Colors.transparent,
+              buttonColor: Color(0xFF61ab32),
+              splashColor: Colors.transparent),
+          dividerColor: Color(0xFFededed),
+          splashColor: Colors.transparent,
+          highlightColor: Colors.transparent,
+          scaffoldBackgroundColor: Colors.white),
       home: Stack(
         children: <Widget>[FlutterWechat()],
       ),
