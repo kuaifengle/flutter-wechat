@@ -23,14 +23,18 @@
 ### flutter环境
 
 ```
-> flutter --version Flutter 1.10.7 • channel beta • https://github.com/flutter/flutter.git
+> flutter --version 
+
+Flutter 1.10.7 • channel beta • https://github.com/flutter/flutter.git
 Framework • revision e70236e36c (7 个月之前) • 2019-10-02 09:32:30 -0700
 Engine • revision 9e6314d348
 Tools • Dart 2.6.0 (build 2.6.0-dev.4.0 1103600280)
 ```
 
 ```
-> flutter doctor [√] Flutter (Channel beta, v1.10.7, on Microsoft Windows [Version 10.0.16299.1481], locale zh-CN)
+> flutter doctor 
+
+[√] Flutter (Channel beta, v1.10.7, on Microsoft Windows [Version 10.0.16299.1481], locale zh-CN)
 [√] Android toolchain - develop for Android devices (Android SDK version 29.0.2)
 [√] Android Studio (version 3.2)
 [√] Connected device (1 available)
