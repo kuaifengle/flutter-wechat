@@ -80,7 +80,6 @@ List<Map<String, dynamic>> userInfoList = [
 ];
 
 List a2z = [
-  '0',
   'A',
   'B',
   'C',
@@ -106,13 +105,13 @@ List a2z = [
   'W',
   'X',
   'Y',
-  'Z',
+  'Z'
 ];
 
 Map<String, List<Map>> friendInfoList = {
-  a2z[0]: userInfoList,
-  a2z[1]: userInfoList,
-  a2z[2]: userInfoList
+  'A': userInfoList,
+  'B': userInfoList,
+  'C': userInfoList
 };
 
 Map<String, List<Map>> timeLineList = {

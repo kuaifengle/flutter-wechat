@@ -116,7 +116,7 @@ class IndexLeftDrawerState extends State<IndexLeftDrawer> {
         setState(() {
           CommonState.selectDrawerIndex = i;
         });
-        Navigator.of(context).pop();
+        // Navigator.of(context).pop();
         item['onTap'](context);
       },
     );

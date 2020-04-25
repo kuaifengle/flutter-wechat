@@ -145,10 +145,10 @@ class _ContactsPageState extends State<ContactsPage> {
         appBar: setCustomAppBar(context, '通讯录'),
         body: ListView.builder(
             itemCount: 1 + searchList.length + a2z.length,
+            shrinkWrap: true,
             itemBuilder: (context, index) {
-              Widget widget;
               if (index == 0) {
-                widget = Container(
+                return Container(
                     padding: EdgeInsets.symmetric(
                         horizontal: ScreenUtil().setWidth(30)),
                     height: ScreenUtil().setHeight(80),
@@ -206,30 +206,30 @@ class _ContactsPageState extends State<ContactsPage> {
                 return returnUserItem(searchList[index - 1], a2z[index]);
               } else {
                 int key = index - 1;
-                if (friendInfoList[a2z[key]] != null &&
-                    friendInfoList[a2z[key]].length > 0) {
-                  widget = StickyHeader(
-                      header: Container(
-                        height: ScreenUtil().setHeight(50),
-                        decoration: BoxDecoration(color: Colors.black38),
-                        padding: EdgeInsets.symmetric(
-                            horizontal: ScreenUtil().setHeight(30)),
-                        alignment: Alignment.centerLeft,
-                        child: Text(
-                          a2z[key],
-                          style: TextStyle(
-                              color: Colors.white,
-                              fontWeight: FontWeight.bold,
-                              fontSize: ScreenUtil().setSp(30)),
-                        ),
-                      ),
-                      content: Column(
-                        children: <Widget>[]..addAll(friendInfoList[a2z[key]]
-                            .map((item) => returnUserItem(item, a2z[key]))),
-                      ));
+                if (friendInfoList[a2z[key]] == null ||
+                    friendInfoList[a2z[key]].length == 0) {
+                  return Container();
                 }
+                return StickyHeader(
+                    header: Container(
+                      height: ScreenUtil().setHeight(50),
+                      decoration: BoxDecoration(color: Colors.black38),
+                      padding: EdgeInsets.symmetric(
+                          horizontal: ScreenUtil().setHeight(30)),
+                      alignment: Alignment.centerLeft,
+                      child: Text(
+                        a2z[key],
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
+                            fontSize: ScreenUtil().setSp(30)),
+                      ),
+                    ),
+                    content: Column(
+                      children: <Widget>[]..addAll(friendInfoList[a2z[key]]
+                          .map((item) => returnUserItem(item, a2z[key]))),
+                    ));
               }
-              return widget;
             }));
   }
 }
