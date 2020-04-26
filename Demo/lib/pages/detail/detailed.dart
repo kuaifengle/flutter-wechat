@@ -3,13 +3,15 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 import 'package:flutter_wechat/components/appbar.dart';
 
+import '../../dataJson/userData.dart';
 import '../talk/talk.dart';
 import '../dynamic/timeLine.dart';
 import './friendSetting.dart';
 
+@immutable
 class Detailed extends StatefulWidget {
   Detailed({Key key, this.detail, this.heroTag = 'noTag'}) : super(key: key);
-  final Map detail;
+  final Map<String, dynamic> detail;
   final String heroTag;
 
   @override
@@ -17,6 +19,14 @@ class Detailed extends StatefulWidget {
 }
 
 class _DetailedState extends State<Detailed> {
+  Map<String, dynamic> _detail;
+
+  @override
+  void initState() {
+    super.initState();
+    _detail = widget.detail == null ? mySelf : widget.detail;
+  }
+
   @override
   Widget build(BuildContext context) {
     var pohtoWith =
@@ -34,7 +44,7 @@ class _DetailedState extends State<Detailed> {
                     height: ScreenUtil().setHeight(500),
                     decoration: BoxDecoration(
                         image: DecorationImage(
-                            image: NetworkImage(widget.detail['backgroundUrl']),
+                            image: NetworkImage(_detail['backgroundUrl']),
                             fit: BoxFit.fill)),
                   ),
                   Opacity(
@@ -69,7 +79,7 @@ class _DetailedState extends State<Detailed> {
                                     decoration: BoxDecoration(
                                         image: DecorationImage(
                                             image: NetworkImage(
-                                                widget.detail['imageUrl']),
+                                                _detail['imageUrl']),
                                             fit: BoxFit.fill),
                                         border: Border.all(
                                             width: ScreenUtil().setWidth(4),
@@ -83,7 +93,7 @@ class _DetailedState extends State<Detailed> {
                                   Expanded(
                                     flex: 1,
                                     child: Text(
-                                      '${widget.detail['name']}',
+                                      '${_detail['name']}',
                                       style: TextStyle(
                                           color: Colors.white,
                                           fontWeight: FontWeight.bold,
@@ -97,7 +107,7 @@ class _DetailedState extends State<Detailed> {
                                         padding: EdgeInsets.symmetric(
                                             horizontal: 20),
                                         child: Text(
-                                          '${widget.detail['motto']}',
+                                          '${_detail['motto']}',
                                           textAlign: TextAlign.left,
                                           maxLines: 3,
                                           overflow: TextOverflow.ellipsis,
@@ -126,8 +136,7 @@ class _DetailedState extends State<Detailed> {
                         ),
                         onPressed: () {
                           Navigator.of(context).push(MaterialPageRoute(
-                              builder: (_) =>
-                                  FriendSetting(detail: widget.detail)));
+                              builder: (_) => FriendSetting(detail: _detail)));
                         },
                       ))
                 ],
@@ -146,7 +155,7 @@ class _DetailedState extends State<Detailed> {
                 Expanded(
                     flex: 1,
                     child: Text(
-                      '${widget.detail['adress']}',
+                      '${_detail['adress']}',
                       overflow: TextOverflow.ellipsis,
                       style: TextStyle(
                         color: Color(0xFF3d3d3d),
@@ -171,7 +180,7 @@ class _DetailedState extends State<Detailed> {
                 Expanded(
                     flex: 1,
                     child: Text(
-                      '${widget.detail['motto']}',
+                      '${_detail['motto']}',
                       overflow: TextOverflow.ellipsis,
                       maxLines: 3,
                       style: TextStyle(
@@ -205,19 +214,19 @@ class _DetailedState extends State<Detailed> {
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceAround,
                               children: <Widget>[
-                                Image.network(widget.detail['imageUrl'],
+                                Image.network(_detail['imageUrl'],
                                     fit: BoxFit.cover,
                                     width: pohtoWith,
                                     height: pohtoWith),
-                                Image.network(widget.detail['imageUrl'],
+                                Image.network(_detail['imageUrl'],
                                     fit: BoxFit.cover,
                                     width: pohtoWith,
                                     height: pohtoWith),
-                                Image.network(widget.detail['imageUrl'],
+                                Image.network(_detail['imageUrl'],
                                     fit: BoxFit.cover,
                                     width: pohtoWith,
                                     height: pohtoWith),
-                                Image.network(widget.detail['imageUrl'],
+                                Image.network(_detail['imageUrl'],
                                     fit: BoxFit.cover,
                                     width: pohtoWith,
                                     height: pohtoWith),
@@ -234,8 +243,8 @@ class _DetailedState extends State<Detailed> {
               ),
             ),
             onTap: () {
-              Navigator.of(context).push(MaterialPageRoute(
-                  builder: (_) => TimeLine(detail: widget.detail)));
+              Navigator.of(context).push(
+                  MaterialPageRoute(builder: (_) => TimeLine(detail: _detail)));
             },
           ),
           Divider(height: 2.0),
@@ -265,8 +274,7 @@ class _DetailedState extends State<Detailed> {
               ),
               onPressed: () async {
                 Navigator.of(context).push(MaterialPageRoute(
-                    builder: (BuildContext context) =>
-                        Talk(detail: widget.detail)));
+                    builder: (BuildContext context) => Talk(detail: _detail)));
               },
             ),
           ),
@@ -295,8 +303,7 @@ class _DetailedState extends State<Detailed> {
               ),
               onPressed: () async {
                 Navigator.of(context).push(MaterialPageRoute(
-                    builder: (BuildContext context) =>
-                        Talk(detail: widget.detail)));
+                    builder: (BuildContext context) => Talk(detail: _detail)));
               },
             ),
           ),

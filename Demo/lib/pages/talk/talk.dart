@@ -5,7 +5,7 @@ import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 
 import '../../dataJson/userData.dart';
 import '../../components/appBar.dart';
-import '../contacts/detailed.dart';
+import '../detail/detailed.dart';
 
 class Talk extends StatefulWidget {
   Talk({Key key, this.detail}) : super(key: key);

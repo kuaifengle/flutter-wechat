@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 import 'package:flutter_inner_drawer/inner_drawer.dart';
 
-import './index/contactsList.dart';
-import './index/rightDrawer.dart';
+import './contacts/contactsList.dart';
+import './drawer/rightDrawer.dart';
 import '../components/appbar.dart';
 
 class Home extends StatefulWidget {

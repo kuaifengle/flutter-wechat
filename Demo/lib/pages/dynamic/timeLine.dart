@@ -129,7 +129,7 @@ class _TimeLineState extends State<TimeLine> {
       widgetList.add(Container(
         width: ScreenUtil().setWidth(160),
         height: ScreenUtil().setWidth(160),
-        color: Colors.red,
+        color: Colors.black38,
         child: Image.network(
           list[i],
           width: ScreenUtil().setWidth(160),

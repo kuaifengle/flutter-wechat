@@ -4,8 +4,9 @@ import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../main.dart';
-import '../contacts/detailed.dart';
-import './contacts.dart';
+import '../detail/detailed.dart';
+import '../detail/qrcode.dart';
+import '../contacts/contacts.dart';
 import '../../common/index.dart';
 import '../dynamic/timeLine.dart';
 import '../contacts/setting.dart';
@@ -138,30 +139,45 @@ class IndexLeftDrawerState extends State<IndexLeftDrawer> {
                 height: ScreenUtil().setHeight(500),
                 child: Container(
                   padding: EdgeInsets.only(
-                    top: ScreenUtil().setHeight(120),
+                    top: ScreenUtil().setHeight(60),
                   ),
                   color: Colors.transparent,
                   child: Column(
                     children: <Widget>[
-                      GestureDetector(
-                        child: Container(
-                            width: ScreenUtil().setWidth(140),
-                            height: ScreenUtil().setWidth(140),
-                            decoration: BoxDecoration(
-                                image: DecorationImage(
-                                    image: AssetImage('images/header.png'),
-                                    fit: BoxFit.fill),
-                                border: Border.all(
-                                    width: ScreenUtil().setWidth(4),
-                                    color: Colors.white),
-                                borderRadius: BorderRadius.circular(
-                                    ScreenUtil().setWidth(140)))),
-                        onTap: () {
-                          Navigator.of(context)
-                              .push(MaterialPageRoute(builder: (_) {
-                            return Detailed();
-                          }));
-                        },
+                      Container(
+                        alignment: Alignment.centerRight,
+                        child: IconButton(
+                            icon:
+                                Icon(FontAwesome.qrcode, color: Colors.black54),
+                            onPressed: () {
+                              Navigator.of(context)
+                                  .push(MaterialPageRoute(builder: (_) {
+                                return QrCodePage();
+                              }));
+                            }),
+                      ),
+                      Hero(
+                        tag: 'myself',
+                        child: GestureDetector(
+                          child: Container(
+                              width: ScreenUtil().setWidth(140),
+                              height: ScreenUtil().setWidth(140),
+                              decoration: BoxDecoration(
+                                  image: DecorationImage(
+                                      image: AssetImage('images/header.png'),
+                                      fit: BoxFit.fill),
+                                  border: Border.all(
+                                      width: ScreenUtil().setWidth(4),
+                                      color: Colors.white),
+                                  borderRadius: BorderRadius.circular(
+                                      ScreenUtil().setWidth(140)))),
+                          onTap: () {
+                            Navigator.of(context)
+                                .push(MaterialPageRoute(builder: (_) {
+                              return Detailed(heroTag: 'myself');
+                            }));
+                          },
+                        ),
                       ),
                       Expanded(
                         flex: 1,

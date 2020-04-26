@@ -6,7 +6,7 @@ import 'package:sticky_headers/sticky_headers.dart';
 import 'package:flutter/cupertino.dart';
 
 import '../../components/appBar.dart';
-import '../contacts/detailed.dart';
+import '../detail/detailed.dart';
 import '../../dataJson/userData.dart';
 
 class ContactsPage extends StatefulWidget {
@@ -49,12 +49,26 @@ class _ContactsPageState extends State<ContactsPage> {
     });
 
     setState(() {
-      searchList = list;
+      searchList = list.length > 0
+          ? list
+          : [
+              {'noData': true}
+            ];
     });
   }
 
-  returnUserItem(item, index) {
+  returnUserItem(
+    item,
+    index,
+  ) {
     String heroTag = index.toString() + item['id'].toString();
+    if (item['noData'] != null && item['noData']) {
+      return Container(
+          padding: EdgeInsets.all(ScreenUtil().setWidth(30)),
+          child: Center(
+            child: Text('暂无数据...'),
+          ));
+    }
 
     return GestureDetector(
       child: Slidable(
@@ -204,7 +218,8 @@ class _ContactsPageState extends State<ContactsPage> {
                   index > 0 &&
                   index <= searchList.length) {
                 return returnUserItem(searchList[index - 1], a2z[index]);
-              } else {
+              } else if (searchList.length == 0 ||
+                  (searchList[0] != null && searchList[0]['notData'] != null)) {
                 int key = index - 1;
                 if (friendInfoList[a2z[key]] == null ||
                     friendInfoList[a2z[key]].length == 0) {

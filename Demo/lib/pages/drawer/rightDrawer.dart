@@ -26,6 +26,7 @@ class IndexRightDrawerState extends State<IndexRightDrawer> {
       'icon': Icons.center_focus_strong,
       'title': '扫一扫',
       'onTap': (context) async {
+
         String barcode = await scanner.scan();
         if (barcode != '') {
           Scaffold.of(context).showSnackBar(SnackBar(

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_inner_drawer/inner_drawer.dart';
 
-import './index/leftDrawer.dart';
+import './drawer/leftDrawer.dart';
 import './home.dart';
 
 class Index extends StatefulWidget {

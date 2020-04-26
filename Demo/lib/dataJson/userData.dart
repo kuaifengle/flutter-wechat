@@ -5,7 +5,7 @@ Map<String, dynamic> mySelf = {
   'motto': '如果我是DJ你会爱我吗?',
   'checkInfo': 'https://github.com/kuaifengle',
   'lastTime': '20.11',
-  'adress': '',
+  'adress': '中国 - 广州- 深圳',
   'imageUrl':
       'http://common.lingcb.net/image/Stocking/StyleManagement/20200422/3e4e3e19-06e4-4523-af53-151ce73718eb.png',
   'backgroundUrl': 'http://pic31.photophoto.cn/20140404/0005018792087823_b.jpg'
@@ -30,7 +30,7 @@ List<Map<String, dynamic>> userInfoList = [
     'id': 2,
     'isTop': false,
     'motto': '我从来没碰过钱，我对钱没有兴趣，因为我最快乐的时候是一个月拿91块钱，我当老师的时候。',
-    'checkInfo': '我最大的错误是，我创办了阿里巴巴。',
+    'checkInfo': '我最大的错误就是创办了阿里巴巴。',
     'lastTime': '16.18',
     'adress': '中国 - 浙江 - 杭州',
     'imageUrl':

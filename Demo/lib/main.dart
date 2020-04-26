@@ -39,7 +39,7 @@ class MyApp extends StatelessWidget {
             color: Colors.black45,
           ),
           primaryIconTheme: IconThemeData(
-            color: Colors.red,
+            color: Colors.white,
           ),
           accentIconTheme: IconThemeData(color: Colors.white),
           toggleableActiveColor: Color(0xFF61ab32),
