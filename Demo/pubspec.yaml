@@ -25,7 +25,7 @@ dependencies:
   cupertino_icons: ^0.1.2
   flutter_vector_icons: ^0.2.1
   intro_slider: ^2.2.8
-  shared_preferences: ^0.5.7
+  shared_preferences: ^0.5.4
   flutter_screenutil: ^0.6.0
   flutter_slidable: ^0.5.4
   image_picker: ^0.6.1+10
@@ -35,7 +35,9 @@ dependencies:
   qrscan: ^0.2.17
   easy_web_view: ^1.0.0
   rflutter_alert: ^1.0.3
-  qr_flutter: ^3.2.0
+  qr_flutter: ^2.1.0+55
+  bubble: ^1.1.9+1
+  w_popup_menu: ^0.3.1
 
 
 dev_dependencies:

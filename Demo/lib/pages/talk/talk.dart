@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:flutter_vector_icons/flutter_vector_icons.dart';
+import 'package:bubble/bubble.dart';
+import 'package:w_popup_menu/w_popup_menu.dart';
 
 import '../../dataJson/userData.dart';
 import '../../components/appBar.dart';
@@ -35,18 +38,6 @@ class _TalkState extends State<Talk> with SingleTickerProviderStateMixin {
     _textInputController.dispose();
   }
 
-  getTalkList() {
-    List<Widget> widgetList = [];
-
-    for (var i = 0; i < talkHistory.length; i++) {
-      widgetList.add(returnTalkItem(i, talkHistory[i]));
-    }
-
-    setState(() {
-      talkWidgetList = widgetList;
-    });
-  }
-
   void getImage() async {
     var image = await ImagePicker.pickImage(source: ImageSource.gallery);
     if (image != null) {
@@ -54,16 +45,20 @@ class _TalkState extends State<Talk> with SingleTickerProviderStateMixin {
     }
   }
 
-  autoTalk(val, type) async {
-    talkHistory.insert(0, {
-      'name': mySelf['name'],
-      'id': mySelf['id'],
-      'imageUrl': mySelf['imageUrl'],
-      'content': val,
-      'type': type
+  sendMessage(val, type) {
+    setState(() {
+      talkHistory.insert(0, {
+        'name': mySelf['name'],
+        'id': mySelf['id'],
+        'imageUrl': mySelf['imageUrl'],
+        'content': val,
+        'type': type
+      });
     });
-    getTalkList();
+    autoTalk(val, type);
+  }
 
+  autoTalk(val, type) async {
     Future.delayed(Duration(seconds: 1), () {
       var item = {
         'name': widget.detail['name'],
@@ -72,8 +67,10 @@ class _TalkState extends State<Talk> with SingleTickerProviderStateMixin {
         'content': returnTalkList[talkHistory.length % 5],
         'type': 'text'
       };
-      talkHistory.insert(0, item);
-      getTalkList();
+
+      setState(() {
+        talkHistory.insert(0, item);
+      });
     });
   }
 
@@ -92,38 +89,44 @@ class _TalkState extends State<Talk> with SingleTickerProviderStateMixin {
       case 'image':
         return Image.file(val);
         break;
-      case 'text':
-        return Text(val);
-        break;
     }
   }
 
   returnTalkItem(i, item) {
+    bool isMySelf = item['id'] == mySelf['id'];
+
     List<Widget> widgetList = [
-      Container(
-          key: Key(i.toString()),
-          margin: EdgeInsets.symmetric(horizontal: ScreenUtil().setWidth(20)),
-          padding: EdgeInsets.all(10.0),
-          decoration: BoxDecoration(
-              color: Color(0xFFebebf3),
-              borderRadius: BorderRadius.circular(10.0)),
-          child: LimitedBox(
-            maxWidth:
-                MediaQuery.of(context).size.width - ScreenUtil().setWidth(208),
-            child: returnTalkType(item['type'], item['content']),
+      LimitedBox(
+          maxWidth:
+              MediaQuery.of(context).size.width - ScreenUtil().setWidth(200),
+          child: WPopupMenu(
+            onValueChanged: (value) {
+              switchMenuValue(value, item);
+            },
+            menuHeight: ScreenUtil().setHeight(80),
+            actions: ['复制', '转发', '收藏', '删除', '翻译'],
+            child: Bubble(
+              padding: BubbleEdges.symmetric(
+                  vertical: ScreenUtil().setHeight(20),
+                  horizontal: ScreenUtil().setWidth(20)),
+              margin: isMySelf
+                  ? BubbleEdges.only(top: 10, right: 10)
+                  : BubbleEdges.only(top: 10, left: 10),
+              nip: isMySelf ? BubbleNip.rightTop : BubbleNip.leftTop,
+              color: isMySelf ? Color(0xFF9be34f) : Colors.white,
+              child: Text(item['content'], textAlign: TextAlign.left),
+            ),
           ))
     ];
 
-    bool isMySelf = widget.detail['id'] == item['id'];
-
-    if (!isMySelf) {
-      // 非本人的信息  isMyself
+    if (isMySelf) {
+      // 本人的信息  true
       widgetList.add(CircleAvatar(
         radius: ScreenUtil().setWidth(38),
         backgroundImage: NetworkImage('${item['imageUrl']}'),
       ));
     } else {
-      // 本人的信息
+      // 非本人的信息 false
       widgetList.insert(
           0,
           CircleAvatar(
@@ -133,13 +136,24 @@ class _TalkState extends State<Talk> with SingleTickerProviderStateMixin {
     }
 
     return Container(
-        width: MediaQuery.of(context).size.width - ScreenUtil().setWidth(80),
+        alignment: Alignment.centerRight,
+        width: MediaQuery.of(context).size.width,
+        color: Colors.transparent,
         margin: EdgeInsets.symmetric(vertical: ScreenUtil().setHeight(10)),
         child: Row(
             mainAxisAlignment:
-                isMySelf ? MainAxisAlignment.start : MainAxisAlignment.end,
-            crossAxisAlignment: CrossAxisAlignment.center,
+                isMySelf ? MainAxisAlignment.end : MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: []..addAll(widgetList)));
+  }
+
+  void switchMenuValue(value, item) {
+    switch (value) {
+      case 0:
+        Clipboard.setData(ClipboardData(text: item['content']));
+        break;
+      default:
+    }
   }
 
   @override
@@ -150,6 +164,7 @@ class _TalkState extends State<Talk> with SingleTickerProviderStateMixin {
         return Future(() => false);
       },
       child: Scaffold(
+        backgroundColor: Color(0xFFe7e7e7),
         key: _scaffoldKey,
         appBar: setCustomAppBar(
           context,
@@ -170,15 +185,19 @@ class _TalkState extends State<Talk> with SingleTickerProviderStateMixin {
             height: MediaQuery.of(context).size.height,
             child: Stack(
               children: <Widget>[
-                ListView(
+                ListView.builder(
+                  physics: ClampingScrollPhysics(),
+                  itemCount: talkHistory.length,
                   reverse: true,
                   shrinkWrap: true,
                   padding: EdgeInsets.only(
                       right: ScreenUtil().setWidth(20),
-                      bottom: ScreenUtil().setHeight(90),
+                      bottom: ScreenUtil().setHeight(100),
                       left: ScreenUtil().setWidth(20)),
                   controller: _scrollController,
-                  children: talkWidgetList,
+                  itemBuilder: (context, index) {
+                    return returnTalkItem(index, talkHistory[index]);
+                  },
                 ),
                 Positioned(
                   left: 0,
@@ -218,8 +237,7 @@ class _TalkState extends State<Talk> with SingleTickerProviderStateMixin {
                                       TextStyle(color: Color(0xFF7c7c7e))),
                               onSubmitted: (val) {
                                 if (val != '' && val != null) {
-                                  getTalkList();
-                                  autoTalk(val, 'text');
+                                  sendMessage(val, 'text');
                                 }
                                 _textInputController.clear();
                               },

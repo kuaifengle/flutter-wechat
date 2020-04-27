@@ -43,7 +43,7 @@ class _QrCodePageState extends State<QrCodePage> {
                 child: QrImage(
                   padding: EdgeInsets.all(20),
                   data: "https://u.wechat.com/EEmu7ly3pHxjAFHHL5up2fM",
-                  version: QrVersions.auto,
+                  // version: QrVersions.auto,
                   size: ScreenUtil().setWidth(500),
                 ),
               ),
