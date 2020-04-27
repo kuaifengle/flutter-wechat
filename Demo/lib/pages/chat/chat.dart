@@ -18,7 +18,8 @@ class ChatPage extends StatefulWidget {
   _ChatPageState createState() => _ChatPageState();
 }
 
-class _ChatPageState extends State<ChatPage> with SingleTickerProviderStateMixin {
+class _ChatPageState extends State<ChatPage>
+    with SingleTickerProviderStateMixin {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey();
   var fsNode1 = FocusNode();
   var _textInputController = TextEditingController();
@@ -96,15 +97,15 @@ class _ChatPageState extends State<ChatPage> with SingleTickerProviderStateMixin
     bool isMySelf = item['id'] == mySelf['id'];
 
     List<Widget> widgetList = [
-      LimitedBox(
-          maxWidth:
-              MediaQuery.of(context).size.width - ScreenUtil().setWidth(200),
-          child: WPopupMenu(
-            onValueChanged: (value) {
-              switchMenuValue(value, item);
-            },
-            menuHeight: ScreenUtil().setHeight(80),
-            actions: ['复制', '转发', '收藏', '删除', '翻译'],
+      WPopupMenu(
+          onValueChanged: (value) {
+            switchMenuValue(value, item);
+          },
+          menuHeight: ScreenUtil().setHeight(80),
+          actions: ['复制', '转发', '收藏', '删除', '翻译'],
+          child: LimitedBox(
+            maxWidth:
+                MediaQuery.of(context).size.width - ScreenUtil().setWidth(200),
             child: Bubble(
               padding: BubbleEdges.symmetric(
                   vertical: ScreenUtil().setHeight(20),

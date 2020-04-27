@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 
+import '../../dataJson/userData.dart';
 import '../../components/appBar.dart';
 import '../../components/searchPage.dart';
 
@@ -80,10 +81,13 @@ class _FriendSettingsState extends State<FriendSettings> {
                     fontSize: ScreenUtil().setSp(24), color: Color(0xFF333333)),
               ),
               trailing: Switch(
-                  value: switch2,
+                  value: widget.detail['isTop'],
                   onChanged: (value) {
+                    userInfoList.forEach((res) => res['isTop'] = false);
+                    userInfoList[userInfoList.indexOf(widget.detail)]['isTop'] =
+                        value;
                     setState(() {
-                      switch2 = value;
+                      widget.detail['isTop'] = value;
                     });
                   })),
           ListTile(
@@ -184,7 +188,40 @@ class _FriendSettingsState extends State<FriendSettings> {
                         fontSize: ScreenUtil.getInstance().setSp(30)),
                   ),
                 )),
-            onTap: () {},
+            onTap: () {
+              Alert(
+                context: context,
+                style: AlertStyle(
+                    titleStyle: TextStyle(fontSize: ScreenUtil().setSp(30))),
+                title: "确定要删除Ta吗?",
+                buttons: [
+                  DialogButton(
+                    child: Text(
+                      "取消",
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontSize: ScreenUtil().setSp(30)),
+                    ),
+                    onPressed: () => Navigator.pop(context),
+                    color: Color(0xFFcccccc),
+                  ),
+                  DialogButton(
+                      child: Text(
+                        "确定",
+                        style: TextStyle(
+                            color: Color(0xFFf56c6c),
+                            fontSize: ScreenUtil().setSp(30)),
+                      ),
+                      onPressed: () {
+                        Navigator.pop(context);
+                        userInfoList.remove(widget.detail);
+                        Navigator.of(context)
+                            .pushNamedAndRemoveUntil('/home', (_) => false);
+                      },
+                      color: Theme.of(context).primaryColor)
+                ],
+              ).show();
+            },
           ),
         ],
       ),
