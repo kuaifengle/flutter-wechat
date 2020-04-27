@@ -5,15 +5,15 @@ import 'package:rflutter_alert/rflutter_alert.dart';
 import '../../components/appBar.dart';
 import '../../components/searchPage.dart';
 
-class FriendSetting extends StatefulWidget {
-  FriendSetting({Key key, this.detail}) : super(key: key);
+class FriendSettings extends StatefulWidget {
+  FriendSettings({Key key, this.detail}) : super(key: key);
   final detail;
 
   @override
-  _FriendSettingState createState() => _FriendSettingState();
+  _FriendSettingsState createState() => _FriendSettingsState();
 }
 
-class _FriendSettingState extends State<FriendSetting> {
+class _FriendSettingsState extends State<FriendSettings> {
   bool switch1 = false;
   bool switch2 = false;
   bool switch3 = false;

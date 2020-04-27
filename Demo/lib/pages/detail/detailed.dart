@@ -4,9 +4,9 @@ import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 import 'package:flutter_wechat/components/appbar.dart';
 
 import '../../dataJson/userData.dart';
-import '../talk/talk.dart';
+import '../chat/chat.dart';
 import '../dynamic/timeLine.dart';
-import './friendSetting.dart';
+import './friendSettings.dart';
 
 @immutable
 class Detailed extends StatefulWidget {
@@ -136,7 +136,7 @@ class _DetailedState extends State<Detailed> {
                         ),
                         onPressed: () {
                           Navigator.of(context).push(MaterialPageRoute(
-                              builder: (_) => FriendSetting(detail: _detail)));
+                              builder: (_) => FriendSettings(detail: _detail)));
                         },
                       ))
                 ],
@@ -274,7 +274,8 @@ class _DetailedState extends State<Detailed> {
               ),
               onPressed: () async {
                 Navigator.of(context).push(MaterialPageRoute(
-                    builder: (BuildContext context) => Talk(detail: _detail)));
+                    builder: (BuildContext context) =>
+                        ChatPage(detail: _detail)));
               },
             ),
           ),
@@ -303,7 +304,8 @@ class _DetailedState extends State<Detailed> {
               ),
               onPressed: () async {
                 Navigator.of(context).push(MaterialPageRoute(
-                    builder: (BuildContext context) => Talk(detail: _detail)));
+                    builder: (BuildContext context) =>
+                        ChatPage(detail: _detail)));
               },
             ),
           ),

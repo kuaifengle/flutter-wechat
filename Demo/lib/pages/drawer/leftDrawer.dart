@@ -9,7 +9,7 @@ import '../detail/qrcode.dart';
 import '../contacts/contacts.dart';
 import '../../common/index.dart';
 import '../dynamic/timeLine.dart';
-import '../contacts/setting.dart';
+import '../detail/userSetting.dart';
 
 class IndexLeftDrawer extends StatefulWidget {
   IndexLeftDrawer({Key key}) : super(key: key);
@@ -49,7 +49,7 @@ class IndexLeftDrawerState extends State<IndexLeftDrawer> {
       'title': '设置',
       'onTap': (context) {
         Navigator.of(context).push(MaterialPageRoute(builder: (_) {
-          return Setting();
+          return UserSetting();
         })).then((oldValue) {
           CommonState.selectDrawerIndex = 0;
         });

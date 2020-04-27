@@ -6,15 +6,15 @@ import '../../main.dart';
 import '../../components/appBar.dart';
 import '../../components/searchPage.dart';
 
-class Setting extends StatefulWidget {
-  Setting({Key key, this.detail}) : super(key: key);
+class UserSetting extends StatefulWidget {
+  UserSetting({Key key, this.detail}) : super(key: key);
   final detail;
 
   @override
-  _SettingState createState() => _SettingState();
+  _UserSettingState createState() => _UserSettingState();
 }
 
-class _SettingState extends State<Setting> {
+class _UserSettingState extends State<UserSetting> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

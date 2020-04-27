@@ -3,7 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 
-import '../talk/talk.dart';
+import '../chat/chat.dart';
 import '../../components/menuFloatButton.dart';
 import '../../components/searchPage.dart';
 import '../../dataJson/userData.dart';
@@ -101,7 +101,7 @@ class _ContactsState extends State<Contacts> {
       ),
       onTap: () {
         Navigator.of(context).push(MaterialPageRoute(builder: (_) {
-          return Talk(detail: item);
+          return ChatPage(detail: item);
         }));
       },
     );

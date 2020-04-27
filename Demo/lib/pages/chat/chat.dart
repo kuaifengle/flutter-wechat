@@ -10,15 +10,15 @@ import '../../dataJson/userData.dart';
 import '../../components/appBar.dart';
 import '../detail/detailed.dart';
 
-class Talk extends StatefulWidget {
-  Talk({Key key, this.detail}) : super(key: key);
+class ChatPage extends StatefulWidget {
+  ChatPage({Key key, this.detail}) : super(key: key);
   final detail;
 
   @override
-  _TalkState createState() => _TalkState();
+  _ChatPageState createState() => _ChatPageState();
 }
 
-class _TalkState extends State<Talk> with SingleTickerProviderStateMixin {
+class _ChatPageState extends State<ChatPage> with SingleTickerProviderStateMixin {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey();
   var fsNode1 = FocusNode();
   var _textInputController = TextEditingController();
