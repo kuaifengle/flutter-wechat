@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -17,6 +18,8 @@ class ContactsPage extends StatefulWidget {
 class _ContactsPageState extends State<ContactsPage> {
   final SlidableController _slidableController = SlidableController();
 
+  final ScrollController _scrollController = ScrollController();
+
   /// 搜索框控制器
   final TextEditingController _searchController = TextEditingController();
 
@@ -26,8 +29,31 @@ class _ContactsPageState extends State<ContactsPage> {
   /// 所有搜索列表
   List<Map<String, dynamic>> _searchList = [];
 
+  GlobalKey _columnKey = GlobalKey();
+
+  /// 显示提示框
+  bool _showTip = true;
+
+  String _tipText = '';
+
   /// 搜索内容
   String _searchVal = '';
+
+  double dragDouble = 0.0;
+
+  /// 侧滑栏距离屏幕顶部的距离
+  double _columnOffsetTop = 0;
+
+  Timer _timer;
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      RenderBox key = _columnKey.currentContext.findRenderObject();
+      _columnOffsetTop = key.localToGlobal(Offset.zero).dy;
+    });
+  }
 
   searchFriend() {
     if (_searchVal == '') {
@@ -91,7 +117,7 @@ class _ContactsPageState extends State<ContactsPage> {
                         width: ScreenUtil().setHeight(2)))),
             child: Container(
                 padding: EdgeInsets.symmetric(
-                    horizontal: ScreenUtil().setWidth(30),
+                    horizontal: ScreenUtil().setWidth(35),
                     vertical: ScreenUtil().setHeight(15)),
                 height: ScreenUtil().setHeight(120),
                 child: Row(
@@ -111,19 +137,9 @@ class _ContactsPageState extends State<ContactsPage> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: <Widget>[
-                              Text(
-                                '${item['name']}',
-                                style:
-                                    TextStyle(fontSize: ScreenUtil().setSp(30)),
-                              ),
-                              Text('${item['lastTime']}',
-                                  style: TextStyle(
-                                      color: Color(0xFF888888),
-                                      fontSize: ScreenUtil().setSp(22)))
-                            ],
+                          Text(
+                            '${item['name']}',
+                            style: TextStyle(fontSize: ScreenUtil().setSp(30)),
                           ),
                           Text('${item['motto']}',
                               overflow: TextOverflow.ellipsis,
@@ -158,101 +174,216 @@ class _ContactsPageState extends State<ContactsPage> {
     );
   }
 
-  ScrollController controller = ScrollController();
+  /// 计算滑动距离
+  _calcScrollerChange(dy) {
+    dragDouble = dy - _columnOffsetTop;
+    if (dragDouble <= 0) {
+      return;
+    } else {
+      int length = 0;
+      int pos = (dragDouble / ScreenUtil().setHeight(35)).floor();
+      for (int i = 0; i < pos; i++) {
+        length +=
+            friendInfoList[a2z[i]] != null ? friendInfoList[a2z[i]].length : 0;
+      }
+      dragDouble = 0;
+      _timer?.cancel();
+
+      setState(() {
+        _showTip = false;
+        _tipText = a2z[pos];
+      });
+      _scrollController.jumpTo(length * ScreenUtil().setHeight(122) +
+          pos * ScreenUtil().setHeight(50) +
+          (pos > 0 ? ScreenUtil().setHeight(81) : 0));
+
+      _timer = Timer.periodic(Duration(seconds: 1), (Timer timer) {
+        setState(() {
+          _showTip = true;
+          _timer?.cancel();
+        });
+      });
+    }
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    _scrollController.dispose();
+    _searchController.dispose();
+    _focusNode.dispose();
+    _timer?.cancel();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: setCustomAppBar(context, '通讯录'),
-        body: ListView.builder(
-            itemCount: 1 + _searchList.length + a2z.length,
-            shrinkWrap: true,
-            itemBuilder: (context, index) {
-              if (index == 0) {
-                return Container(
-                    padding: EdgeInsets.symmetric(
-                        horizontal: ScreenUtil().setWidth(30)),
-                    height: ScreenUtil().setHeight(80),
-                    color: Color(0xFFefeef3),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: <Widget>[
-                        Icon(Icons.search, color: Colors.black54),
-                        Expanded(
-                          child: CupertinoTextField(
-                            focusNode: _focusNode,
-                            controller: _searchController,
-                            textInputAction: TextInputAction.search,
-                            keyboardType: TextInputType.text,
-                            maxLength: 50,
-                            placeholder: '请输入微信号/手机号...',
-                            padding: EdgeInsets.symmetric(
-                                horizontal: ScreenUtil().setWidth(20),
-                                vertical: ScreenUtil().setHeight(15)),
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(60.0)),
+        body: Stack(
+          children: <Widget>[
+            ListView.builder(
+                itemCount: 1 + _searchList.length + a2z.length,
+                shrinkWrap: true,
+                controller: _scrollController,
+                itemBuilder: (context, index) {
+                  if (index == 0) {
+                    return Container(
+                        padding: EdgeInsets.symmetric(
+                            horizontal: ScreenUtil().setWidth(30)),
+                        height: ScreenUtil().setHeight(80),
+                        color: Color(0xFFefeef3),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: <Widget>[
+                            Icon(Icons.search, color: Colors.black54),
+                            Expanded(
+                              child: CupertinoTextField(
+                                focusNode: _focusNode,
+                                controller: _searchController,
+                                textInputAction: TextInputAction.search,
+                                keyboardType: TextInputType.text,
+                                maxLength: 50,
+                                placeholder: '请输入微信号/手机号...',
+                                padding: EdgeInsets.symmetric(
+                                    horizontal: ScreenUtil().setWidth(20),
+                                    vertical: ScreenUtil().setHeight(15)),
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(60.0)),
+                                style: TextStyle(
+                                  color: Color(0xFF333333),
+                                  fontSize: ScreenUtil().setSp(26),
+                                ),
+                                placeholderStyle: TextStyle(
+                                  color: Color(0xFFc1c1c3),
+                                  fontSize: ScreenUtil().setSp(22),
+                                ),
+                                suffix: _searchVal.length > 0
+                                    ? GestureDetector(
+                                        child: Icon(Icons.close,
+                                            color: Color(0xFF333333),
+                                            size: ScreenUtil().setWidth(30)),
+                                        onTap: () {
+                                          _searchController.clear();
+                                          setState(() {
+                                            _searchList = [];
+                                          });
+                                        },
+                                      )
+                                    : Container(),
+                                onChanged: (val) {
+                                  _searchVal = val;
+                                  searchFriend();
+                                  setState(() {});
+                                },
+                              ),
+                            ),
+                          ],
+                        ));
+                  } else if (_searchList.length > 0 &&
+                      index > 0 &&
+                      index <= _searchList.length) {
+                    return returnUserItem(_searchList[index - 1], a2z[index]);
+                  } else if (_searchList.length == 0 ||
+                      (_searchList[0] != null &&
+                          _searchList[0]['notData'] != null)) {
+                    int key = index - 1;
+                    // if (friendInfoList[a2z[key]] == null ||
+                    //     friendInfoList[a2z[key]].length == 0) {
+                    //   return Container();
+                    // }
+                    return StickyHeader(
+                        key: Key('header' + key.toString()),
+                        header: Container(
+                          height: ScreenUtil().setHeight(50),
+                          decoration: BoxDecoration(color: Colors.black38),
+                          padding: EdgeInsets.symmetric(
+                              horizontal: ScreenUtil().setHeight(30)),
+                          alignment: Alignment.centerLeft,
+                          child: Text(
+                            a2z[key],
                             style: TextStyle(
-                              color: Color(0xFF333333),
-                              fontSize: ScreenUtil().setSp(26),
-                            ),
-                            placeholderStyle: TextStyle(
-                              color: Color(0xFFc1c1c3),
-                              fontSize: ScreenUtil().setSp(22),
-                            ),
-                            suffix: _searchVal.length > 0
-                                ? GestureDetector(
-                                    child: Icon(Icons.close,
-                                        color: Color(0xFF333333),
-                                        size: ScreenUtil().setWidth(30)),
-                                    onTap: () {
-                                      _searchController.clear();
-                                      setState(() {
-                                        _searchList = [];
-                                      });
-                                    },
-                                  )
-                                : Container(),
-                            onChanged: (val) {
-                              _searchVal = val;
-                              searchFriend();
-                              setState(() {});
-                            },
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold,
+                                fontSize: ScreenUtil().setSp(30)),
                           ),
                         ),
-                      ],
-                    ));
-              } else if (_searchList.length > 0 &&
-                  index > 0 &&
-                  index <= _searchList.length) {
-                return returnUserItem(_searchList[index - 1], a2z[index]);
-              } else if (_searchList.length == 0 ||
-                  (_searchList[0] != null &&
-                      _searchList[0]['notData'] != null)) {
-                int key = index - 1;
-                if (friendInfoList[a2z[key]] == null ||
-                    friendInfoList[a2z[key]].length == 0) {
-                  return Container();
-                }
-                return StickyHeader(
-                    header: Container(
-                      height: ScreenUtil().setHeight(50),
-                      decoration: BoxDecoration(color: Colors.black38),
-                      padding: EdgeInsets.symmetric(
-                          horizontal: ScreenUtil().setHeight(30)),
-                      alignment: Alignment.centerLeft,
-                      child: Text(
-                        a2z[key],
-                        style: TextStyle(
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold,
-                            fontSize: ScreenUtil().setSp(30)),
-                      ),
+                        content: !(friendInfoList[a2z[key]] == null ||
+                                friendInfoList[a2z[key]].length == 0)
+                            ? Column(
+                                children: <Widget>[]..addAll(
+                                    friendInfoList[a2z[key]].map((item) =>
+                                        returnUserItem(item, a2z[key]))),
+                              )
+                            : Container());
+                  }
+                }),
+            _searchVal.length > 0
+                ? Positioned(
+                    child: Container(),
+                  )
+                : Positioned(
+                    top: 0,
+                    right: 0,
+                    width: ScreenUtil().setWidth(50),
+                    height: MediaQuery.of(context).size.height -
+                        ScreenUtil().setHeight(140),
+                    child: Container(
+                      color: Colors.transparent,
+                      child: GestureDetector(
+                          onPanStart: (detail) {
+                            dragDouble = detail.globalPosition.dy;
+                          },
+                          onPanUpdate: (detail) {
+                            _calcScrollerChange(detail.globalPosition.dy);
+                          },
+                          onPanEnd: (detail) {
+                            _calcScrollerChange(dragDouble);
+                          },
+                          child: Column(
+                              mainAxisSize: MainAxisSize.min,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: <Widget>[SizedBox(key: _columnKey)]
+                                ..addAll(a2z.map((res) {
+                                  return SizedBox(
+                                    width: ScreenUtil().setWidth(50),
+                                    height: ScreenUtil().setHeight(35),
+                                    child: Text(
+                                      res,
+                                      textAlign: TextAlign.center,
+                                      style: TextStyle(
+                                          color: Color(0xFF333333),
+                                          fontSize: ScreenUtil().setSp(30)),
+                                    ),
+                                  );
+                                })))),
                     ),
-                    content: Column(
-                      children: <Widget>[]..addAll(friendInfoList[a2z[key]]
-                          .map((item) => returnUserItem(item, a2z[key]))),
-                    ));
-              }
-            }));
+                  ),
+            Positioned(
+              top: (MediaQuery.of(context).size.height -
+                      ScreenUtil().setWidth(450)) /
+                  2,
+              left: (MediaQuery.of(context).size.width -
+                      ScreenUtil().setWidth(200)) /
+                  2,
+              width: ScreenUtil().setWidth(200),
+              height: ScreenUtil().setWidth(200),
+              child: Offstage(
+                offstage: _showTip,
+                child: Container(
+                  alignment: Alignment.center,
+                  decoration: BoxDecoration(
+                      color: Colors.black45,
+                      borderRadius: BorderRadius.all(
+                          Radius.circular(ScreenUtil().setWidth(20)))),
+                  child: Text(
+                    _tipText,
+                    style: TextStyle(
+                        color: Colors.white, fontSize: ScreenUtil().setSp(50)),
+                  ),
+                ),
+              ),
+            ),
+          ],
+        ));
   }
 }

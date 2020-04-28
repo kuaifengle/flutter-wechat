@@ -111,7 +111,18 @@ List a2z = [
 Map<String, List<Map>> friendInfoList = {
   'A': userInfoList,
   'B': userInfoList,
-  'C': userInfoList
+  'C': userInfoList,
+  'D': userInfoList,
+  'E': userInfoList,
+  'F': userInfoList,
+  'G': userInfoList,
+  'H': userInfoList,
+  'I': userInfoList,
+  'G': userInfoList,
+  'K': userInfoList,
+  'L': userInfoList,
+  'M': userInfoList,
+  'N': userInfoList
 };
 
 Map<String, List<Map>> timeLineList = {

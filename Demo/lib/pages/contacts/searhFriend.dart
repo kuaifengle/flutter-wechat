@@ -18,7 +18,7 @@ class _SearchFriendPageState extends State<SearchFriendPage> {
   FocusNode _focusNode = FocusNode();
 
   /// 列表数据
-  List<Map<String, dynamic>> downList = [
+  List<Map<String, dynamic>> _downList = [
     {'icon': Feather.rss, 'title': '雷达添加朋友', 'subtitle': '添加身边的朋友'},
     {'icon': Feather.phone_call, 'title': '面对面建群', 'subtitle': '与身边的朋友进入同一个群聊'},
     {'icon': Feather.maximize, 'title': '扫一扫', 'subtitle': '扫描二维码名牌'},
@@ -30,7 +30,7 @@ class _SearchFriendPageState extends State<SearchFriendPage> {
   /// 返回widget列表
   List<Widget> _returnWidgetList() {
     List<Widget> list = [];
-    downList.forEach((item) => list.add(_returnItem(item)));
+    _downList.forEach((item) => list.add(_returnItem(item)));
     return list;
   }
 

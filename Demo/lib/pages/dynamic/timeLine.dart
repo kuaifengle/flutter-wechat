@@ -23,6 +23,7 @@ class _TimeLineState extends State<TimeLine> {
   /// 返回朋友圈一年的Item
   Widget _returnTimeLineItem(key) {
     return StickyHeader(
+      overlapHeaders: true,
       header: Container(
           alignment: Alignment.center,
           padding: EdgeInsets.symmetric(vertical: ScreenUtil().setWidth(10)),
@@ -40,7 +41,8 @@ class _TimeLineState extends State<TimeLine> {
                 color: Color(0xFFcccccc), fontSize: ScreenUtil().setSp(35)),
           )),
       content: Container(
-        margin: EdgeInsets.only(left: ScreenUtil().setWidth(140)),
+        margin: EdgeInsets.only(
+            top: ScreenUtil().setWidth(65), left: ScreenUtil().setWidth(140)),
         width: MediaQuery.of(context).size.width - ScreenUtil().setWidth(140),
         decoration: BoxDecoration(
             color: Color(0xFFf1f1f1),
