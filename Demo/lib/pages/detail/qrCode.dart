@@ -6,7 +6,7 @@ import '../../components/appBar.dart';
 
 class QrCodePage extends StatefulWidget {
   QrCodePage({Key key, this.detail}) : super(key: key);
-  final detail;
+  final Map detail;
 
   @override
   _QrCodePageState createState() => _QrCodePageState();

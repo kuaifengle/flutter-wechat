@@ -12,7 +12,6 @@ class Index extends StatefulWidget {
 }
 
 class IndexState extends State<Index> with SingleTickerProviderStateMixin {
-  bool isLeft = true;
   final GlobalKey<InnerDrawerState> innerDrawerKey =
       GlobalKey<InnerDrawerState>();
 
@@ -20,9 +19,10 @@ class IndexState extends State<Index> with SingleTickerProviderStateMixin {
   void initState() {
     super.initState();
 
+    // 强制竖屏
     SystemChrome.setPreferredOrientations(
         [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
-
+    // 任务栏透明
     SystemChrome.setSystemUIOverlayStyle(
         SystemUiOverlayStyle(statusBarColor: Colors.transparent));
   }

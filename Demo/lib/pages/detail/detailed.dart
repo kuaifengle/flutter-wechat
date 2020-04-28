@@ -19,6 +19,7 @@ class Detailed extends StatefulWidget {
 }
 
 class _DetailedState extends State<Detailed> {
+  /// 用户详情
   Map<String, dynamic> _detail;
 
   @override

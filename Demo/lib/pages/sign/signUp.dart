@@ -11,31 +11,30 @@ class SignUp extends StatefulWidget {
 }
 
 class _SignUpState extends State<SignUp> {
-  var userNameController = TextEditingController();
-  var passWordController = TextEditingController();
-  var passWordController2 = TextEditingController();
+  var _userNameController = TextEditingController();
+  var _passWordController = TextEditingController();
+  var _passWordController2 = TextEditingController();
 
-  var userNameFN = FocusNode();
-  var passWordFN = FocusNode();
-  var repeatPassFN = FocusNode();
+  var _userNameFN = FocusNode();
+  var _passWordFN = FocusNode();
+  var _repeatPassFN = FocusNode();
 
   @override
   void dispose() {
     super.dispose();
-    userNameController?.dispose();
-    passWordController?.dispose();
-    passWordController2?.dispose();
-    userNameFN?.dispose();
-    passWordFN?.dispose();
-    repeatPassFN?.dispose();
+    _userNameController?.dispose();
+    _passWordController?.dispose();
+    _passWordController2?.dispose();
+    _userNameFN?.dispose();
+    _passWordFN?.dispose();
+    _repeatPassFN?.dispose();
   }
 
-  void changePassWord() {
-    print(userNameController.text);
-    if (userNameController.text != '' &&
-        (passWordController.text == passWordController2.text &&
-            passWordController.text != '' &&
-            passWordController2.text != '')) {
+  void _signUp() {
+    if (_userNameController.text != '' &&
+        (_passWordController.text == _passWordController2.text &&
+            _passWordController.text != '' &&
+            _passWordController2.text != '')) {
       showDialog(
           context: context,
           builder: (_) => AlertDialog(
@@ -80,8 +79,8 @@ class _SignUpState extends State<SignUp> {
                           width: ScreenUtil().setHeight(2),
                           color: Color(0xFFebebeb)))),
               child: TextField(
-                focusNode: userNameFN,
-                controller: userNameController,
+                focusNode: _userNameFN,
+                controller: _userNameController,
                 keyboardType: TextInputType.text,
                 decoration: InputDecoration(
                     hintStyle: TextStyle(
@@ -94,7 +93,7 @@ class _SignUpState extends State<SignUp> {
                         color: Color(0xFF3d3d3d)),
                     hintText: 'UserName'),
                 onEditingComplete: () {
-                  FocusScope.of(context).requestFocus(passWordFN);
+                  FocusScope.of(context).requestFocus(_passWordFN);
                 },
               ),
             ),
@@ -108,8 +107,8 @@ class _SignUpState extends State<SignUp> {
                           width: ScreenUtil().setHeight(2),
                           color: Color(0xFFebebeb)))),
               child: TextField(
-                focusNode: passWordFN,
-                controller: passWordController,
+                focusNode: _passWordFN,
+                controller: _passWordController,
                 keyboardType: TextInputType.text,
                 decoration: InputDecoration(
                     hintStyle: TextStyle(
@@ -123,7 +122,7 @@ class _SignUpState extends State<SignUp> {
                     hintText: 'PassWord'),
                 obscureText: true,
                 onEditingComplete: () {
-                  FocusScope.of(context).requestFocus(repeatPassFN);
+                  FocusScope.of(context).requestFocus(_repeatPassFN);
                 },
               ),
             ),
@@ -134,8 +133,8 @@ class _SignUpState extends State<SignUp> {
                           width: ScreenUtil().setHeight(2),
                           color: Color(0xFFebebeb)))),
               child: TextField(
-                focusNode: repeatPassFN,
-                controller: passWordController2,
+                focusNode: _repeatPassFN,
+                controller: _passWordController2,
                 keyboardType: TextInputType.text,
                 decoration: InputDecoration(
                     hintStyle: TextStyle(
@@ -149,7 +148,7 @@ class _SignUpState extends State<SignUp> {
                     hintText: 'ReportPassWord'),
                 obscureText: true,
                 onEditingComplete: () {
-                  repeatPassFN.unfocus();
+                  _repeatPassFN.unfocus();
                 },
               ),
             ),
@@ -175,7 +174,7 @@ class _SignUpState extends State<SignUp> {
                     ),
                   )),
               onTap: () {
-                changePassWord();
+                _signUp();
               },
             ),
           ],

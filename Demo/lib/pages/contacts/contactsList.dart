@@ -16,7 +16,8 @@ class Contacts extends StatefulWidget {
 final SlidableController slidableController = SlidableController();
 
 class _ContactsState extends State<Contacts> {
-  returnUserItem(index) {
+  /// 返回单个的用户
+  _returnUserItem(index) {
     Map item = userInfoList[index];
 
     return GestureDetector(
@@ -107,14 +108,15 @@ class _ContactsState extends State<Contacts> {
     );
   }
 
-  getContactsList() {
+  /// 返回所有联系人列表
+  _returnContactsList() {
     List widgetList = <Widget>[];
 
     for (var i = 0; i < userInfoList.length; i++) {
       if (userInfoList[i]['isTop'] == true) {
-        widgetList.insert(0, returnUserItem(i));
+        widgetList.insert(0, _returnUserItem(i));
       } else {
-        widgetList.add(returnUserItem(i));
+        widgetList.add(_returnUserItem(i));
       }
     }
     return widgetList;
@@ -167,7 +169,7 @@ class _ContactsState extends State<Contacts> {
                       .push(MaterialPageRoute(builder: (_) => SearchPage()));
                 },
               )
-            ]..addAll(getContactsList()),
+            ]..addAll(_returnContactsList()),
           ),
         ),
         MenuFloatButton()

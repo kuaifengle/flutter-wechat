@@ -11,7 +11,8 @@ class FristPage extends StatefulWidget {
 }
 
 class FristPageState extends State<FristPage> {
-  List<Slide> slides = [
+  /// 欢迎页列表
+  List<Slide> _slides = [
     Slide(
       title: "杨宗纬 - 空白格",
       styleTitle: TextStyle(color: Color(0xFF333333)),
@@ -38,7 +39,7 @@ class FristPageState extends State<FristPage> {
     ),
   ];
 
-  void onDonePress() async {
+  void _onDonePress() async {
     // 完成并引导页  跳转登录
     final prefs = await SharedPreferences.getInstance();
     prefs.setBool('isFristInstall', false);
@@ -49,11 +50,11 @@ class FristPageState extends State<FristPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: IntroSlider(
-        slides: this.slides,
+        slides: this._slides,
         styleNameSkipBtn: TextStyle(color: Color(0xFF333333)),
         styleNameDoneBtn: TextStyle(color: Color(0xFF333333)),
         styleNamePrevBtn: TextStyle(color: Color(0xFF333333)),
-        onDonePress: this.onDonePress,
+        onDonePress: this._onDonePress,
       ),
     );
   }

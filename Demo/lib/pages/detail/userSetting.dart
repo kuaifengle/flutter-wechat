@@ -8,7 +8,7 @@ import '../../components/searchPage.dart';
 
 class UserSetting extends StatefulWidget {
   UserSetting({Key key, this.detail}) : super(key: key);
-  final detail;
+  final Map detail;
 
   @override
   _UserSettingState createState() => _UserSettingState();

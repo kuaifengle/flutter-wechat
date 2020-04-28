@@ -64,6 +64,7 @@ class MyApp extends StatelessWidget {
   }
 }
 
+/// 判断是第一次安装还是跳转home
 class FlutterWechat extends StatelessWidget {
   Widget build(BuildContext context) {
     ScreenUtil.instance =

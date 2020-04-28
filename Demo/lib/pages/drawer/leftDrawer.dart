@@ -19,7 +19,8 @@ class IndexLeftDrawer extends StatefulWidget {
 }
 
 class IndexLeftDrawerState extends State<IndexLeftDrawer> {
-  List<Map<String, dynamic>> drawerList = [
+  /// leftDrawer 菜单列表
+  List<Map<String, dynamic>> _drawerList = [
     {'icon': Feather.message_circle, 'title': 'WeChat', 'onTap': (context) {}},
     {
       'icon': Feather.star,
@@ -57,6 +58,7 @@ class IndexLeftDrawerState extends State<IndexLeftDrawer> {
     }
   ];
 
+  ///  退出登录Item
   Map logOut = {
     'icon': Feather.x_octagon,
     'title': '退出登录',
@@ -87,19 +89,21 @@ class IndexLeftDrawerState extends State<IndexLeftDrawer> {
     }
   };
 
-  List<Widget> returnDrawerList() {
+  /// 返回所有list
+  List<Widget> _returnDrawerList() {
     List<Widget> widgetList = [];
 
-    for (int i = 0; i < drawerList.length; i++) {
+    for (int i = 0; i < _drawerList.length; i++) {
       Color color =
           CommonState.selectDrawerIndex == i ? Color(0xFF66c627) : Colors.white;
-      Map item = drawerList[i];
-      widgetList.add(returnDrawerListItem(item, color, i));
+      Map item = _drawerList[i];
+      widgetList.add(_returnDrawerListItem(item, color, i));
     }
     return widgetList;
   }
 
-  Widget returnDrawerListItem(item, color, i) {
+  /// 返回单个Item
+  Widget _returnDrawerListItem(item, color, i) {
     return ListTile(
       contentPadding:
           EdgeInsets.symmetric(horizontal: ScreenUtil().setWidth(30)),
@@ -220,7 +224,7 @@ class IndexLeftDrawerState extends State<IndexLeftDrawer> {
                 child: Container(
                   color: Color(0xFF242329),
                   child: Column(
-                    children: <Widget>[]..addAll(returnDrawerList()),
+                    children: <Widget>[]..addAll(_returnDrawerList()),
                   ),
                 ))
           ],
@@ -230,7 +234,7 @@ class IndexLeftDrawerState extends State<IndexLeftDrawer> {
           bottom: 0,
           left: 0,
           width: MediaQuery.of(context).size.width,
-          child: returnDrawerListItem(logOut, Colors.white, 0))
+          child: _returnDrawerListItem(logOut, Colors.white, 0))
     ]));
   }
 }

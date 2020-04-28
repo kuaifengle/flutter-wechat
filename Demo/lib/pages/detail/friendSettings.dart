@@ -8,7 +8,7 @@ import '../../components/searchPage.dart';
 
 class FriendSettings extends StatefulWidget {
   FriendSettings({Key key, this.detail}) : super(key: key);
-  final detail;
+  final Map detail;
 
   @override
   _FriendSettingsState createState() => _FriendSettingsState();

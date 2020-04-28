@@ -11,14 +11,17 @@ import './sendPhoto.dart';
 
 class TimeLine extends StatefulWidget {
   TimeLine({Key key, this.detail}) : super(key: key);
-  final detail;
+
+  /// 用户详情
+  final Map detail;
 
   @override
   _TimeLineState createState() => _TimeLineState();
 }
 
 class _TimeLineState extends State<TimeLine> {
-  Widget returnTimeLineItem(key) {
+  /// 返回朋友圈一年的Item
+  Widget _returnTimeLineItem(key) {
     return StickyHeader(
       header: Container(
           alignment: Alignment.center,
@@ -48,13 +51,14 @@ class _TimeLineState extends State<TimeLine> {
         child: Column(
           mainAxisSize: MainAxisSize.max,
           children: <Widget>[]
-            ..addAll(timeLineList[key].map((res) => returnPostList(res))),
+            ..addAll(timeLineList[key].map((res) => _returnPostList(res))),
         ),
       ),
     );
   }
 
-  Widget returnPostList(item) {
+  /// 返回朋友圈单个的item
+  Widget _returnPostList(item) {
     return Container(
         padding: EdgeInsets.only(
             left: ScreenUtil().setWidth(30),
@@ -101,7 +105,7 @@ class _TimeLineState extends State<TimeLine> {
               spacing: ScreenUtil().setWidth(10),
               runSpacing: ScreenUtil().setWidth(10),
               children: <Widget>[]
-                ..addAll(returnImageList(item['imageUrlList'])),
+                ..addAll(_returnImageList(item['imageUrlList'])),
             ),
           ),
           GestureDetector(
@@ -123,7 +127,8 @@ class _TimeLineState extends State<TimeLine> {
         ]));
   }
 
-  List<Widget> returnImageList(list) {
+  /// 返回图片九宫格
+  List<Widget> _returnImageList(list) {
     List<Widget> widgetList = [];
     for (int i = 0; i < list.length; i++) {
       widgetList.add(Container(
@@ -162,7 +167,7 @@ class _TimeLineState extends State<TimeLine> {
             itemCount: timeLineList.keys.length,
             itemBuilder: (context, index) {
               List<String> keys = timeLineList.keys.toList();
-              return returnTimeLineItem(keys[index]);
+              return _returnTimeLineItem(keys[index]);
             }));
   }
 }

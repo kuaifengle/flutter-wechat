@@ -12,8 +12,8 @@ class SendPhoto extends StatefulWidget {
 }
 
 class _SendPhotoState extends State<SendPhoto> {
-  var textController = TextEditingController();
-  var fsNode = FocusNode();
+  var _textController = TextEditingController();
+  var _fsNode = FocusNode();
 
   @override
   Widget build(BuildContext context) {
@@ -42,14 +42,14 @@ class _SendPhotoState extends State<SendPhoto> {
                 margin: EdgeInsets.all(10.0),
                 width: MediaQuery.of(context).size.width,
                 child: TextField(
-                  focusNode: fsNode,
-                  controller: textController,
+                  focusNode: _fsNode,
+                  controller: _textController,
                   decoration: InputDecoration(
                       hintText: '这一刻的想法...', border: InputBorder.none),
                   keyboardType: TextInputType.text,
                   maxLines: 6,
                   onSubmitted: (value) {
-                    fsNode.unfocus();
+                    _fsNode.unfocus();
                   },
                 ),
               ),

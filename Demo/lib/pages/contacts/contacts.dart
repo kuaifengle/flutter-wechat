@@ -15,17 +15,24 @@ class ContactsPage extends StatefulWidget {
 }
 
 class _ContactsPageState extends State<ContactsPage> {
-  final SlidableController slidableController = SlidableController();
+  final SlidableController _slidableController = SlidableController();
 
-  TextEditingController _searchController = TextEditingController();
+  /// 搜索框控制器
+  final TextEditingController _searchController = TextEditingController();
+
+  /// 搜索框焦点
   FocusNode _focusNode = FocusNode();
-  List<Map<String, dynamic>> searchList = [];
+
+  /// 所有搜索列表
+  List<Map<String, dynamic>> _searchList = [];
+
+  /// 搜索内容
   String _searchVal = '';
 
   searchFriend() {
     if (_searchVal == '') {
       setState(() {
-        searchList = [];
+        _searchList = [];
       });
       return;
     }
@@ -49,7 +56,7 @@ class _ContactsPageState extends State<ContactsPage> {
     });
 
     setState(() {
-      searchList = list.length > 0
+      _searchList = list.length > 0
           ? list
           : [
               {'noData': true}
@@ -74,7 +81,7 @@ class _ContactsPageState extends State<ContactsPage> {
       child: Slidable(
         key: Key('$item.id'.toString()),
         actionPane: SlidableScrollActionPane(),
-        controller: slidableController,
+        controller: _slidableController,
         actionExtentRatio: 0.2,
         child: Container(
             decoration: BoxDecoration(
@@ -158,7 +165,7 @@ class _ContactsPageState extends State<ContactsPage> {
     return Scaffold(
         appBar: setCustomAppBar(context, '通讯录'),
         body: ListView.builder(
-            itemCount: 1 + searchList.length + a2z.length,
+            itemCount: 1 + _searchList.length + a2z.length,
             shrinkWrap: true,
             itemBuilder: (context, index) {
               if (index == 0) {
@@ -200,7 +207,7 @@ class _ContactsPageState extends State<ContactsPage> {
                                     onTap: () {
                                       _searchController.clear();
                                       setState(() {
-                                        searchList = [];
+                                        _searchList = [];
                                       });
                                     },
                                   )
@@ -214,12 +221,13 @@ class _ContactsPageState extends State<ContactsPage> {
                         ),
                       ],
                     ));
-              } else if (searchList.length > 0 &&
+              } else if (_searchList.length > 0 &&
                   index > 0 &&
-                  index <= searchList.length) {
-                return returnUserItem(searchList[index - 1], a2z[index]);
-              } else if (searchList.length == 0 ||
-                  (searchList[0] != null && searchList[0]['notData'] != null)) {
+                  index <= _searchList.length) {
+                return returnUserItem(_searchList[index - 1], a2z[index]);
+              } else if (_searchList.length == 0 ||
+                  (_searchList[0] != null &&
+                      _searchList[0]['notData'] != null)) {
                 int key = index - 1;
                 if (friendInfoList[a2z[key]] == null ||
                     friendInfoList[a2z[key]].length == 0) {

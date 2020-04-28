@@ -15,15 +15,22 @@ class SignIn extends StatefulWidget {
 }
 
 class _SignInState extends State<SignIn> with SingleTickerProviderStateMixin {
-  var userNameController = TextEditingController();
-  var passWordController = TextEditingController();
+  /// 用户名输入框控制器
+  var _userNameController = TextEditingController();
 
-  var userNameFN = FocusNode();
-  var passWordFN = FocusNode();
+  /// 密码输入框控制器
+  var _passWordController = TextEditingController();
 
+  ///用户名框焦点
+  var _userNameFN = FocusNode();
+
+  /// 密码框焦点
+  var _passWordFN = FocusNode();
+
+  /// 点击登录
   void login() async {
-    String userName = userNameController.text;
-    String passWord = passWordController.text;
+    String userName = _userNameController.text;
+    String passWord = _passWordController.text;
     if (userName == '') {
       Toast.show('请输入账号名', context);
       return;
@@ -43,10 +50,10 @@ class _SignInState extends State<SignIn> with SingleTickerProviderStateMixin {
   @override
   void dispose() {
     super.dispose();
-    userNameController?.dispose();
-    passWordController?.dispose();
-    userNameFN?.dispose();
-    passWordFN?.dispose();
+    _userNameController?.dispose();
+    _passWordController?.dispose();
+    _userNameFN?.dispose();
+    _passWordFN?.dispose();
   }
 
   @override
@@ -84,9 +91,9 @@ class _SignInState extends State<SignIn> with SingleTickerProviderStateMixin {
                       width: ScreenUtil().setHeight(2),
                       color: Color(0xFFebebeb)))),
           child: TextField(
-            focusNode: userNameFN,
+            focusNode: _userNameFN,
             keyboardType: TextInputType.text,
-            controller: userNameController,
+            controller: _userNameController,
             decoration: InputDecoration(
                 border: InputBorder.none,
                 hintStyle: TextStyle(
@@ -97,7 +104,7 @@ class _SignInState extends State<SignIn> with SingleTickerProviderStateMixin {
                     size: ScreenUtil().setWidth(50), color: Color(0xFF3d3d3d)),
                 hintText: 'UserName'),
             onEditingComplete: () {
-              FocusScope.of(context).requestFocus(passWordFN);
+              FocusScope.of(context).requestFocus(_passWordFN);
             },
           ),
         ),
@@ -111,8 +118,8 @@ class _SignInState extends State<SignIn> with SingleTickerProviderStateMixin {
               top: ScreenUtil().setHeight(50),
               bottom: ScreenUtil().setHeight(120)),
           child: TextField(
-            focusNode: passWordFN,
-            controller: passWordController,
+            focusNode: _passWordFN,
+            controller: _passWordController,
             keyboardType: TextInputType.text,
             decoration: InputDecoration(
                 hintStyle: TextStyle(

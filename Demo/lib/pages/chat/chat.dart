@@ -21,11 +21,15 @@ class ChatPage extends StatefulWidget {
 class _ChatPageState extends State<ChatPage>
     with SingleTickerProviderStateMixin {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey();
+
+  /// 信息输入框焦点
   var fsNode1 = FocusNode();
+
+  /// 信息输入框
   var _textInputController = TextEditingController();
-  var _scrollController = ScrollController();
-  List<Widget> talkWidgetList = <Widget>[];
-  List<Map> talkHistory = [];
+
+  /// 聊天历史
+  List<Map> _chatHistory = [];
 
   @override
   void initState() {
@@ -42,13 +46,14 @@ class _ChatPageState extends State<ChatPage>
   void getImage() async {
     var image = await ImagePicker.pickImage(source: ImageSource.gallery);
     if (image != null) {
-      autoTalk(image, 'image');
+      _autoTalk(image, 'image');
     }
   }
 
-  sendMessage(val, type) {
+  /// 发送消息
+  _sendMessage(val, type) {
     setState(() {
-      talkHistory.insert(0, {
+      _chatHistory.insert(0, {
         'name': mySelf['name'],
         'id': mySelf['id'],
         'imageUrl': mySelf['imageUrl'],
@@ -56,25 +61,27 @@ class _ChatPageState extends State<ChatPage>
         'type': type
       });
     });
-    autoTalk(val, type);
+    _autoTalk(val, type);
   }
 
-  autoTalk(val, type) async {
+  /// 自动回复
+  _autoTalk(val, type) async {
     Future.delayed(Duration(seconds: 1), () {
       var item = {
         'name': widget.detail['name'],
         'id': widget.detail['id'],
         'imageUrl': widget.detail['imageUrl'],
-        'content': returnTalkList[talkHistory.length % 5],
+        'content': returnTalkList[_chatHistory.length % 5],
         'type': 'text'
       };
 
       setState(() {
-        talkHistory.insert(0, item);
+        _chatHistory.insert(0, item);
       });
     });
   }
 
+  /// 返回聊天类型
   returnTalkType(type, val) {
     switch (type) {
       case 'text':
@@ -93,13 +100,14 @@ class _ChatPageState extends State<ChatPage>
     }
   }
 
-  returnTalkItem(i, item) {
+  /// 返回聊天Item
+  _returnChatItem(i, item) {
     bool isMySelf = item['id'] == mySelf['id'];
 
     List<Widget> widgetList = [
       WPopupMenu(
           onValueChanged: (value) {
-            switchMenuValue(value, item);
+            _switchMenuValue(value, item);
           },
           menuHeight: ScreenUtil().setHeight(80),
           actions: ['复制', '转发', '收藏', '删除', '翻译'],
@@ -148,7 +156,8 @@ class _ChatPageState extends State<ChatPage>
             children: []..addAll(widgetList)));
   }
 
-  void switchMenuValue(value, item) {
+  /// 筛选长按聊天Item的事件
+  void _switchMenuValue(value, item) {
     switch (value) {
       case 0:
         Clipboard.setData(ClipboardData(text: item['content']));
@@ -188,16 +197,15 @@ class _ChatPageState extends State<ChatPage>
               children: <Widget>[
                 ListView.builder(
                   physics: ClampingScrollPhysics(),
-                  itemCount: talkHistory.length,
+                  itemCount: _chatHistory.length,
                   reverse: true,
                   shrinkWrap: true,
                   padding: EdgeInsets.only(
                       right: ScreenUtil().setWidth(20),
                       bottom: ScreenUtil().setHeight(100),
                       left: ScreenUtil().setWidth(20)),
-                  controller: _scrollController,
                   itemBuilder: (context, index) {
-                    return returnTalkItem(index, talkHistory[index]);
+                    return _returnChatItem(index, _chatHistory[index]);
                   },
                 ),
                 Positioned(
@@ -238,7 +246,7 @@ class _ChatPageState extends State<ChatPage>
                                       TextStyle(color: Color(0xFF7c7c7e))),
                               onSubmitted: (val) {
                                 if (val != '' && val != null) {
-                                  sendMessage(val, 'text');
+                                  _sendMessage(val, 'text');
                                 }
                                 _textInputController.clear();
                               },

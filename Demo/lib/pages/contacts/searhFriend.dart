@@ -17,6 +17,7 @@ class _SearchFriendPageState extends State<SearchFriendPage> {
   TextEditingController _searchController = TextEditingController();
   FocusNode _focusNode = FocusNode();
 
+  /// 列表数据
   List<Map<String, dynamic>> downList = [
     {'icon': Feather.rss, 'title': '雷达添加朋友', 'subtitle': '添加身边的朋友'},
     {'icon': Feather.phone_call, 'title': '面对面建群', 'subtitle': '与身边的朋友进入同一个群聊'},
@@ -26,13 +27,15 @@ class _SearchFriendPageState extends State<SearchFriendPage> {
     {'icon': Feather.sun, 'title': '企业微信联系人', 'subtitle': '通过手机号搜索企业微信用户'},
   ];
 
-  List<Widget> returnWidgetList() {
+  /// 返回widget列表
+  List<Widget> _returnWidgetList() {
     List<Widget> list = [];
-    downList.forEach((item) => list.add(returnItem(item)));
+    downList.forEach((item) => list.add(_returnItem(item)));
     return list;
   }
 
-  returnItem(item) {
+  /// 返回单个Item
+  _returnItem(item) {
     return Container(
         decoration: BoxDecoration(
             border: BorderDirectional(
@@ -135,7 +138,7 @@ class _SearchFriendPageState extends State<SearchFriendPage> {
                       fontSize: ScreenUtil().setSp(22),
                     )),
           ),
-        ]..addAll(returnWidgetList()),
+        ]..addAll(_returnWidgetList()),
       )),
     );
   }

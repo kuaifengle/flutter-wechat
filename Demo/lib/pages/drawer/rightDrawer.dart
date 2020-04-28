@@ -13,6 +13,7 @@ class IndexRightDrawer extends StatefulWidget {
 }
 
 class IndexRightDrawerState extends State<IndexRightDrawer> {
+  /// rightDrewer菜单数据
   List<Map<String, dynamic>> drawerList = [
     {
       'icon': Feather.users,
@@ -26,7 +27,6 @@ class IndexRightDrawerState extends State<IndexRightDrawer> {
       'icon': Icons.center_focus_strong,
       'title': '扫一扫',
       'onTap': (context) async {
-
         String barcode = await scanner.scan();
         if (barcode != '') {
           Scaffold.of(context).showSnackBar(SnackBar(
@@ -54,7 +54,8 @@ class IndexRightDrawerState extends State<IndexRightDrawer> {
     },
   ];
 
-  List<Widget> returnDrawerList() {
+  /// 返回所有的List
+  List<Widget> _returnDrawerList() {
     List<Widget> widgetList = [];
 
     for (int i = 0; i < drawerList.length; i++) {
@@ -86,7 +87,7 @@ class IndexRightDrawerState extends State<IndexRightDrawer> {
           child: Column(
             mainAxisSize: MainAxisSize.min,
             mainAxisAlignment: MainAxisAlignment.center,
-            children: returnDrawerList(),
+            children: _returnDrawerList(),
           ),
         ));
   }
