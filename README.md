@@ -44,22 +44,22 @@ Tools • Dart 2.6.0 (build 2.6.0-dev.4.0 1103600280)
 ### 预览图
 
 <p>
-<img src="https://github.com/kuaifengle/Flutter-WeChat/blob/master/appGif/app.gif?raw=true" width="32%"/>
-<img src="https://github.com/kuaifengle/Flutter-WeChat/blob/master/appGif/3.png?raw=true" width="32%"/>
-<img src="https://github.com/kuaifengle/Flutter-WeChat/blob/master/appGif/1.png?raw=true" width="32%"/>
+<img src="https://github.com/kuaifengle/Flutter-WeChat/blob/master/appGif/app1.gif?raw=true" width="32%"/>
+<img src="https://github.com/kuaifengle/Flutter-WeChat/blob/master/appGif/app2.gif?raw=true" width="32%"/>
+<img src="https://github.com/kuaifengle/Flutter-WeChat/blob/master/appGif/app3.gif?raw=true" width="32%"/>
 </p >
 <p>
+<img src="https://github.com/kuaifengle/Flutter-WeChat/blob/master/appGif/app4.gif?raw=true" width="32%"/>
+<img src="https://github.com/kuaifengle/Flutter-WeChat/blob/master/appGif/app5.gif?raw=true" width="32%"/>
+<img src="https://github.com/kuaifengle/Flutter-WeChat/blob/master/appGif/app6.gif?raw=true" width="32%"/>
+</p >
+<p>
+<img src="https://github.com/kuaifengle/Flutter-WeChat/blob/master/appGif/1.png?raw=true" width="32%"/>
 <img src="https://github.com/kuaifengle/Flutter-WeChat/blob/master/appGif/4.png?raw=true" width="32%"/>
-<img src="https://github.com/kuaifengle/Flutter-WeChat/blob/master/appGif/5.png?raw=true" width="32%"/>
 <img src="https://github.com/kuaifengle/Flutter-WeChat/blob/master/appGif/6.png?raw=true" width="32%"/>
 </p >
 <p>
 <img src="https://github.com/kuaifengle/Flutter-WeChat/blob/master/appGif/2.png?raw=true" width="32%"/>
-<img src="https://github.com/kuaifengle/Flutter-WeChat/blob/master/appGif/8.png?raw=true" width="32%"/>
-<img src="https://github.com/kuaifengle/Flutter-WeChat/blob/master/appGif/7.png?raw=true" width="32%"/>
-</p >
-<p>
-<img src="https://github.com/kuaifengle/Flutter-WeChat/blob/master/appGif/10.png?raw=true" width="32%"/>
 <img src="https://github.com/kuaifengle/Flutter-WeChat/blob/master/appGif/9.png?raw=true" width="32%"/>
 <img src="https://github.com/kuaifengle/Flutter-WeChat/blob/master/appGif/12.png?raw=true" width="32%"/>
 </p>

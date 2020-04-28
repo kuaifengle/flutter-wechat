@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 import 'package:qrscan/qrscan.dart' as scanner;
 
+import '../../main.dart';
 import '../other/help.dart';
 
 class IndexRightDrawer extends StatefulWidget {
@@ -21,6 +22,7 @@ class IndexRightDrawerState extends State<IndexRightDrawer> {
       'onTap': (context) {
         Scaffold.of(context).showSnackBar(SnackBar(
             duration: Duration(seconds: 1), content: Text('功能还未开放...')));
+        Navigator.of(context).pop();
       }
     },
     {
@@ -28,10 +30,10 @@ class IndexRightDrawerState extends State<IndexRightDrawer> {
       'title': '扫一扫',
       'onTap': (context) async {
         String barcode = await scanner.scan();
+        Navigator.of(context).pop();
         if (barcode != '') {
-          Scaffold.of(context).showSnackBar(SnackBar(
-            content: Text(barcode),
-          ));
+          Scaffold.of(context).showSnackBar(
+              SnackBar(duration: Duration(seconds: 1), content: Text(barcode)));
         }
       }
     },
@@ -41,12 +43,14 @@ class IndexRightDrawerState extends State<IndexRightDrawer> {
       'onTap': (context) {
         Scaffold.of(context).showSnackBar(SnackBar(
             duration: Duration(seconds: 1), content: Text('功能还未开放...')));
+        Navigator.of(context).pop();
       }
     },
     {
       'icon': Feather.help_circle,
       'title': '帮助与反馈',
       'onTap': (context) {
+        Navigator.of(context).pop();
         Navigator.of(context).push(MaterialPageRoute(builder: (_) {
           return HelpPage();
         }));
@@ -55,7 +59,7 @@ class IndexRightDrawerState extends State<IndexRightDrawer> {
   ];
 
   /// 返回所有的List
-  List<Widget> _returnDrawerList() {
+  List<Widget> _returnDrawerList(context) {
     List<Widget> widgetList = [];
 
     for (int i = 0; i < drawerList.length; i++) {
@@ -70,7 +74,6 @@ class IndexRightDrawerState extends State<IndexRightDrawer> {
               TextStyle(fontSize: ScreenUtil().setSp(24), color: Colors.white),
         ),
         onTap: () {
-          Navigator.of(context).pop();
           item['onTap'](context);
         },
       ));
@@ -87,7 +90,7 @@ class IndexRightDrawerState extends State<IndexRightDrawer> {
           child: Column(
             mainAxisSize: MainAxisSize.min,
             mainAxisAlignment: MainAxisAlignment.center,
-            children: _returnDrawerList(),
+            children: _returnDrawerList(context),
           ),
         ));
   }
