@@ -54,10 +54,30 @@ class _ContactsState extends State<Contacts> {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: <Widget>[
-                              Text(
-                                '${item['name']}',
-                                style:
-                                    TextStyle(fontSize: ScreenUtil().setSp(30)),
+                              Row(
+                                children: <Widget>[
+                                  Padding(
+                                      padding: EdgeInsets.only(
+                                          right: ScreenUtil().setWidth(10)),
+                                      child: Text(
+                                        '${item['name']}',
+                                        style: TextStyle(
+                                            fontSize: ScreenUtil().setSp(30)),
+                                      )),
+                                  item['hasStrongTip']
+                                      ? Icon(
+                                          Icons.star,
+                                          color: Color(0xFFfadb14),
+                                          size: ScreenUtil().setWidth(30),
+                                        )
+                                      : item['dontDisturb']
+                                          ? Icon(
+                                              Icons.do_not_disturb_off,
+                                              color: Color(0xFFcccccc),
+                                              size: ScreenUtil().setWidth(30),
+                                            )
+                                          : Container()
+                                ],
                               ),
                               Text('${item['lastTime']}',
                                   style: TextStyle(

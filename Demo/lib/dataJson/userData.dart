@@ -1,7 +1,9 @@
 Map<String, dynamic> mySelf = {
   'name': 'kuaifengle',
+  'nickname': '',
   'id': 9999,
   'isTop': false,
+  'hasStrongTip': false,
   'motto': '如果我是DJ你会爱我吗?',
   'checkInfo': 'https://github.com/kuaifengle',
   'lastTime': '20.11',
@@ -14,8 +16,11 @@ Map<String, dynamic> mySelf = {
 List<Map<String, dynamic>> userInfoList = [
   {
     'name': '窃格瓦拉-周某',
+    'nickname': '',
     'id': 1,
-    'isTop': false,
+    'isTop': true,
+    'hasStrongTip': true,
+    'dontDisturb': false,
     'motto': '打工是不可能打工的,这辈子都不可能打工!做生意又不会做!',
     'checkInfo': '信不信我今晚表演电瓶车消失术给你看?',
     'lastTime': '20.11',
@@ -27,8 +32,11 @@ List<Map<String, dynamic>> userInfoList = [
   },
   {
     'name': '马云',
+    'nickname': '',
     'id': 2,
     'isTop': false,
+    'hasStrongTip': false,
+    'dontDisturb': true,
     'motto': '我从来没碰过钱，我对钱没有兴趣，因为我最快乐的时候是一个月拿91块钱，我当老师的时候。',
     'checkInfo': '我最大的错误就是创办了阿里巴巴。',
     'lastTime': '16.18',
@@ -40,8 +48,11 @@ List<Map<String, dynamic>> userInfoList = [
   },
   {
     'name': '王健林',
+    'nickname': '',
     'id': 3,
     'isTop': false,
+    'hasStrongTip': false,
+    'dontDisturb': false,
     'checkInfo': '5个亿,也不说小意思吧!算中等意思!',
     'motto': '做人要先定一个能达到的小目标,比如先挣他一个亿!',
     'lastTime': '24.00',
@@ -53,8 +64,11 @@ List<Map<String, dynamic>> userInfoList = [
   },
   {
     'name': '马化腾',
+    'nickname': '',
     'id': 4,
     'isTop': false,
+    'hasStrongTip': false,
+    'dontDisturb': false,
     'checkInfo': '我能让人人首充6块!',
     'motto': '我们都是普通家庭,顶多是房子大一点!',
     'lastTime': '10.20',
@@ -66,8 +80,11 @@ List<Map<String, dynamic>> userInfoList = [
   },
   {
     'name': '刘强东',
+    'nickname': '',
     'id': 5,
     'isTop': false,
+    'hasStrongTip': false,
+    'dontDisturb': false,
     'checkInfo': '1东等于多少分钟?',
     'motto': '我这个人是脸盲，就是说根本就分不清楚谁漂亮不漂亮!',
     'lastTime': '19.28',
@@ -109,20 +126,20 @@ List a2z = [
 ];
 
 Map<String, List<Map>> friendInfoList = {
-  'A': userInfoList,
-  'B': userInfoList,
-  'C': userInfoList,
-  'D': userInfoList,
-  'E': userInfoList,
-  'F': userInfoList,
-  'G': userInfoList,
-  'H': userInfoList,
-  'I': userInfoList,
-  'G': userInfoList,
-  'K': userInfoList,
-  'L': userInfoList,
-  'M': userInfoList,
-  'N': userInfoList
+  'A': List.from(userInfoList),
+  'B': List.from(userInfoList),
+  'C': List.from(userInfoList),
+  'D': List.from(userInfoList),
+  'E': List.from(userInfoList),
+  'F': List.from(userInfoList),
+  'G': List.from(userInfoList),
+  'H': List.from(userInfoList),
+  'I': List.from(userInfoList),
+  'G': List.from(userInfoList),
+  'K': List.from(userInfoList),
+  'L': List.from(userInfoList),
+  'M': List.from(userInfoList),
+  'N': List.from(userInfoList)
 };
 
 Map<String, List<Map>> timeLineList = {

@@ -41,8 +41,8 @@ class FristPageState extends State<FristPage> {
 
   void _onDonePress() async {
     // 完成并引导页  跳转登录
-    // final prefs = await SharedPreferences.getInstance();
-    // prefs.setBool('isFristInstall', false);
+    final prefs = await SharedPreferences.getInstance();
+    prefs.setBool('isFristInstall', false);
     Navigator.pushReplacementNamed(context, '/signIn');
   }
 

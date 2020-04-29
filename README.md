@@ -14,9 +14,9 @@
 
 <br/>
 
-**我没有Mac电脑所以我不能确定项目能不能再Mac上面运行!**
+**我没有Mac电脑所以我不能确定项目能不能在Mac上面运行!**
 
-**I don't have a Mac, so I'm not sure the project will run on a Mac!**
+**I don't have a Mac, so I'm not sure the project will work on a Mac!**
 
 <br/>
 

@@ -8,7 +8,6 @@ import '../chat/chat.dart';
 import '../dynamic/timeLine.dart';
 import './friendSettings.dart';
 
-@immutable
 class Detailed extends StatefulWidget {
   Detailed({Key key, this.detail, this.heroTag = 'noTag'}) : super(key: key);
   final Map<String, dynamic> detail;

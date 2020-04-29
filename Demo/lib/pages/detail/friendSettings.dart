@@ -4,6 +4,7 @@ import 'package:rflutter_alert/rflutter_alert.dart';
 
 import '../../dataJson/userData.dart';
 import '../../components/appBar.dart';
+import './setNickname.dart';
 import '../../components/searchPage.dart';
 
 class FriendSettings extends StatefulWidget {
@@ -16,8 +17,6 @@ class FriendSettings extends StatefulWidget {
 
 class _FriendSettingsState extends State<FriendSettings> {
   bool switch1 = false;
-  bool switch2 = false;
-  bool switch3 = false;
 
   @override
   Widget build(BuildContext context) {
@@ -54,7 +53,11 @@ class _FriendSettingsState extends State<FriendSettings> {
                 Icons.keyboard_arrow_right,
                 color: Color(0xFF333333),
                 size: ScreenUtil().setWidth(40),
-              )),
+              ),
+              onTap: () {
+                Navigator.of(context)
+                    .push(MaterialPageRoute(builder: (_) => SetNickNamePage()));
+              }),
           Container(
               height: ScreenUtil().setHeight(20), color: Color(0xFFededed)),
           ListTile(
@@ -66,10 +69,15 @@ class _FriendSettingsState extends State<FriendSettings> {
                     fontSize: ScreenUtil().setSp(24), color: Color(0xFF333333)),
               ),
               trailing: Switch(
-                  value: switch1,
+                  value: widget.detail['dontDisturb'],
                   onChanged: (value) {
                     setState(() {
-                      switch1 = value;
+                      userInfoList[userInfoList.indexOf(widget.detail)]
+                          ['dontDisturb'] = value;
+                      setState(() {
+                        print(value);
+                        widget.detail['dontDisturb'] = value;
+                      });
                     });
                   })),
           ListTile(
@@ -99,10 +107,15 @@ class _FriendSettingsState extends State<FriendSettings> {
                     fontSize: ScreenUtil().setSp(24), color: Color(0xFF333333)),
               ),
               trailing: Switch(
-                  value: switch3,
+                  value: widget.detail['hasStrongTip'],
                   onChanged: (value) {
                     setState(() {
-                      switch3 = value;
+                      userInfoList[userInfoList.indexOf(widget.detail)]
+                          ['hasStrongTip'] = value;
+                      setState(() {
+                        print(value);
+                        widget.detail['hasStrongTip'] = value;
+                      });
                     });
                   })),
           Container(
