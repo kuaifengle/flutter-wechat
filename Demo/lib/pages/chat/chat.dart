@@ -9,6 +9,7 @@ import 'package:w_popup_menu/w_popup_menu.dart';
 import '../../dataJson/userData.dart';
 import '../../components/appBar.dart';
 import '../detail/detailed.dart';
+import '../../components/statusView.dart';
 
 class ChatPage extends StatefulWidget {
   ChatPage({Key key, this.detail}) : super(key: key);
@@ -130,18 +131,17 @@ class _ChatPageState extends State<ChatPage>
 
     if (isMySelf) {
       // 本人的信息  true
-      widgetList.add(CircleAvatar(
-        radius: ScreenUtil().setWidth(38),
-        backgroundImage: NetworkImage('${item['imageUrl']}'),
-      ));
+      widgetList.add(
+        StatusHeaderImage(
+            imageSrc: item['imageUrl'], width: 80, height: 80, radius: 40),
+      );
     } else {
       // 非本人的信息 false
       widgetList.insert(
-          0,
-          CircleAvatar(
-            radius: ScreenUtil().setWidth(38),
-            backgroundImage: NetworkImage('${item['imageUrl']}'),
-          ));
+        0,
+        StatusHeaderImage(
+            imageSrc: item['imageUrl'], width: 80, height: 80, radius: 40),
+      );
     }
 
     return Container(

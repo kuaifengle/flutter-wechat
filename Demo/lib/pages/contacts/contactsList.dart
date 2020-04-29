@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 
+import '../../components/statusView.dart';
 import '../chat/chat.dart';
 import '../../components/menuFloatButton.dart';
 import '../../components/searchPage.dart';
@@ -42,9 +43,11 @@ class _ContactsState extends State<Contacts> {
                     Padding(
                       padding:
                           EdgeInsets.only(right: ScreenUtil().setWidth(20)),
-                      child: CircleAvatar(
-                        backgroundImage: NetworkImage('${item['imageUrl']}'),
-                      ),
+                      child: StatusHeaderImage(
+                          imageSrc: item['imageUrl'],
+                          width: 80,
+                          height: 80,
+                          radius: 40),
                     ),
                     Expanded(
                       child: Column(

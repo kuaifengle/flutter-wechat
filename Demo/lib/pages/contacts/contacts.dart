@@ -9,6 +9,7 @@ import 'package:flutter/cupertino.dart';
 import '../../components/appBar.dart';
 import '../detail/detailed.dart';
 import '../../dataJson/userData.dart';
+import '../../components/statusView.dart';
 
 class ContactsPage extends StatefulWidget {
   @override
@@ -127,10 +128,11 @@ class _ContactsPageState extends State<ContactsPage> {
                         child: Padding(
                           padding:
                               EdgeInsets.only(right: ScreenUtil().setWidth(20)),
-                          child: CircleAvatar(
-                            backgroundImage:
-                                NetworkImage('${item['imageUrl']}'),
-                          ),
+                          child: StatusHeaderImage(
+                              imageSrc: item['imageUrl'],
+                              width: 80,
+                              height: 80,
+                              radius: 40),
                         )),
                     Expanded(
                       child: Column(

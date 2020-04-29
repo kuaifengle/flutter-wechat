@@ -7,6 +7,7 @@ import '../../dataJson/userData.dart';
 import '../chat/chat.dart';
 import '../dynamic/timeLine.dart';
 import './friendSettings.dart';
+import '../../components/statusView.dart';
 
 class Detailed extends StatefulWidget {
   Detailed({Key key, this.detail, this.heroTag = 'noTag'}) : super(key: key);
@@ -72,20 +73,14 @@ class _DetailedState extends State<Detailed> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: <Widget>[
                             Hero(
-                                tag: widget.heroTag,
-                                child: Container(
-                                    width: ScreenUtil().setWidth(140),
-                                    height: ScreenUtil().setWidth(140),
-                                    decoration: BoxDecoration(
-                                        image: DecorationImage(
-                                            image: NetworkImage(
-                                                _detail['imageUrl']),
-                                            fit: BoxFit.fill),
-                                        border: Border.all(
-                                            width: ScreenUtil().setWidth(4),
-                                            color: Colors.white),
-                                        borderRadius: BorderRadius.circular(
-                                            ScreenUtil().setWidth(140))))),
+                              tag: widget.heroTag,
+                              child: StatusHeaderImage(
+                                  imageSrc: _detail['imageUrl'],
+                                  width: 140,
+                                  height: 140,
+                                  radius: 70,
+                                  needBorder: true),
+                            ),
                             Expanded(
                               flex: 1,
                               child: Column(

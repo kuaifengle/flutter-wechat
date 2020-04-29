@@ -8,6 +8,8 @@ import '../../components/button.dart';
 import '../../components/appBar.dart';
 import '../../dataJson/userData.dart';
 import './sendPhoto.dart';
+import './photoViewManager.dart';
+import '../../components/statusView.dart';
 
 class TimeLine extends StatefulWidget {
   TimeLine({Key key, this.detail}) : super(key: key);
@@ -74,10 +76,12 @@ class _TimeLineState extends State<TimeLine> {
                 padding: EdgeInsets.only(right: ScreenUtil().setWidth(20)),
                 child: Row(
                   children: <Widget>[
-                    CircleAvatar(
-                      radius: ScreenUtil().setWidth(30),
-                      backgroundImage: NetworkImage(item['avatar']),
-                    ),
+                    StatusHeaderImage(
+                        imageSrc: item['avatar'],
+                        width: 66,
+                        height: 66,
+                        radius: 33,
+                        needBorder: true),
                     Text('  ${item['name']}',
                         style: TextStyle(
                             color: Color(0xFF9e9d9d),
@@ -133,16 +137,16 @@ class _TimeLineState extends State<TimeLine> {
   List<Widget> _returnImageList(list) {
     List<Widget> widgetList = [];
     for (int i = 0; i < list.length; i++) {
-      widgetList.add(Container(
-        width: ScreenUtil().setWidth(160),
-        height: ScreenUtil().setWidth(160),
-        color: Colors.black38,
-        child: Image.network(
-          list[i],
-          width: ScreenUtil().setWidth(160),
-          height: ScreenUtil().setWidth(160),
-          fit: BoxFit.cover,
-        ),
+      widgetList.add(GestureDetector(
+        child: Container(
+            width: ScreenUtil().setWidth(160),
+            height: ScreenUtil().setWidth(160),
+            color: Colors.black38,
+            child: StatusImage(imageSrc: list[i], width: 160, height: 160)),
+        onTap: () {
+          Navigator.of(context).push(MaterialPageRoute(
+              builder: (BuildContext context) => PhotoViewer(url: list[i])));
+        },
       ));
     }
     return widgetList;

@@ -38,6 +38,8 @@ dependencies:
   qr_flutter: ^2.1.0+55
   bubble: ^1.1.9+1
   w_popup_menu: ^0.3.1
+  photo_view: ^0.4.2
+  cached_network_image: ^0.8.0
 
 
 dev_dependencies:
@@ -65,7 +67,11 @@ flutter:
    - images/zjl.jpg
    - images/background.jpg
    - images/header.png
+   - images/failed_image.png
+   - images/user_sex_unknow.png
 
+
+   
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
 

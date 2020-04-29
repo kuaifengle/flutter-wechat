@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 import 'package:flutter_wechat/components/appbar.dart';
 import 'package:flutter_wechat/components/button.dart';
 
@@ -18,8 +17,18 @@ class SetNickNamePage extends StatefulWidget {
 }
 
 class _SetNickNamePageState extends State<SetNickNamePage> {
-  TextEditingController _searchController = TextEditingController();
-  FocusNode _focusNode = FocusNode();
+  
+  TextEditingController _searchController1 = TextEditingController();
+  FocusNode _focusNode1 = FocusNode();
+  
+  TextEditingController _searchController2 = TextEditingController();
+  FocusNode _focusNode2 = FocusNode();
+  
+  TextEditingController _searchController3 = TextEditingController();
+  FocusNode _focusNode3 = FocusNode();
+  
+  TextEditingController _searchController4 = TextEditingController();
+  FocusNode _focusNode4 = FocusNode();
 
   /// 用户详情
   Map<String, dynamic> _detail;
@@ -48,13 +57,13 @@ class _SetNickNamePageState extends State<SetNickNamePage> {
                 padding:
                     EdgeInsets.symmetric(horizontal: ScreenUtil().setWidth(20)),
                 child: CupertinoTextField(
-                  focusNode: _focusNode,
-                  controller: _searchController,
+                  focusNode: _focusNode1,
+                  controller: _searchController1,
                   textInputAction: TextInputAction.search,
                   keyboardType: TextInputType.text,
                   maxLength: 50,
                   prefix: Container(
-                    width: ScreenUtil().setWidth(150),
+                    width: ScreenUtil().setWidth(130),
                     alignment: Alignment.centerRight,
                     child: Text('备注名:',
                         style: TextStyle(
@@ -79,7 +88,7 @@ class _SetNickNamePageState extends State<SetNickNamePage> {
                   suffix: GestureDetector(
                     child: Icon(Icons.close, size: ScreenUtil().setWidth(30)),
                     onTap: () {
-                      _searchController.clear();
+                      _searchController1.clear();
                       setState(() {});
                     },
                   ),
@@ -93,13 +102,13 @@ class _SetNickNamePageState extends State<SetNickNamePage> {
                 padding:
                     EdgeInsets.symmetric(horizontal: ScreenUtil().setWidth(20)),
                 child: CupertinoTextField(
-                  focusNode: _focusNode,
-                  controller: _searchController,
+                  focusNode: _focusNode2,
+                  controller: _searchController2,
                   textInputAction: TextInputAction.search,
                   keyboardType: TextInputType.text,
                   maxLength: 50,
                   prefix: Container(
-                    width: ScreenUtil().setWidth(150),
+                    width: ScreenUtil().setWidth(130),
                     alignment: Alignment.centerRight,
                     child: Text('标签:',
                         style: TextStyle(
@@ -124,7 +133,7 @@ class _SetNickNamePageState extends State<SetNickNamePage> {
                   suffix: GestureDetector(
                     child: Icon(Icons.close, size: ScreenUtil().setWidth(30)),
                     onTap: () {
-                      _searchController.clear();
+                      _searchController2.clear();
                       setState(() {});
                     },
                   ),
@@ -138,13 +147,13 @@ class _SetNickNamePageState extends State<SetNickNamePage> {
                 padding:
                     EdgeInsets.symmetric(horizontal: ScreenUtil().setWidth(20)),
                 child: CupertinoTextField(
-                  focusNode: _focusNode,
-                  controller: _searchController,
+                  focusNode: _focusNode3,
+                  controller: _searchController3,
                   textInputAction: TextInputAction.search,
                   keyboardType: TextInputType.text,
                   maxLength: 50,
                   prefix: Container(
-                    width: ScreenUtil().setWidth(150),
+                    width: ScreenUtil().setWidth(130),
                     alignment: Alignment.centerRight,
                     child: Text('电话号码:',
                         style: TextStyle(
@@ -169,7 +178,7 @@ class _SetNickNamePageState extends State<SetNickNamePage> {
                   suffix: GestureDetector(
                     child: Icon(Icons.close, size: ScreenUtil().setWidth(30)),
                     onTap: () {
-                      _searchController.clear();
+                      _searchController3.clear();
                       setState(() {});
                     },
                   ),
@@ -186,7 +195,7 @@ class _SetNickNamePageState extends State<SetNickNamePage> {
                 Container(
                   padding: EdgeInsets.symmetric(
                       horizontal: ScreenUtil().setWidth(20)),
-                  width: ScreenUtil().setWidth(190),
+                  width: ScreenUtil().setWidth(170),
                   alignment: Alignment.centerRight,
                   child: Text('描述:',
                       style: TextStyle(
@@ -198,8 +207,8 @@ class _SetNickNamePageState extends State<SetNickNamePage> {
                 Expanded(
                     flex: 1,
                     child: CupertinoTextField(
-                      focusNode: _focusNode,
-                      controller: _searchController,
+                      focusNode: _focusNode4,
+                      controller: _searchController4,
                       textInputAction: TextInputAction.search,
                       keyboardType: TextInputType.text,
                       maxLength: 50,
@@ -223,7 +232,7 @@ class _SetNickNamePageState extends State<SetNickNamePage> {
                         child:
                             Icon(Icons.close, size: ScreenUtil().setWidth(30)),
                         onTap: () {
-                          _searchController.clear();
+                          _searchController4.clear();
                           setState(() {});
                         },
                       ),

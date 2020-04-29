@@ -3,7 +3,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 import 'package:qrscan/qrscan.dart' as scanner;
 
-import '../../main.dart';
 import '../other/help.dart';
 
 class IndexRightDrawer extends StatefulWidget {
