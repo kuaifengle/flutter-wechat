@@ -17,16 +17,15 @@ class SetNickNamePage extends StatefulWidget {
 }
 
 class _SetNickNamePageState extends State<SetNickNamePage> {
-  
   TextEditingController _searchController1 = TextEditingController();
   FocusNode _focusNode1 = FocusNode();
-  
+
   TextEditingController _searchController2 = TextEditingController();
   FocusNode _focusNode2 = FocusNode();
-  
+
   TextEditingController _searchController3 = TextEditingController();
   FocusNode _focusNode3 = FocusNode();
-  
+
   TextEditingController _searchController4 = TextEditingController();
   FocusNode _focusNode4 = FocusNode();
 
@@ -36,7 +35,8 @@ class _SetNickNamePageState extends State<SetNickNamePage> {
   @override
   void initState() {
     super.initState();
-    _detail = widget.detail == null ? mySelf : widget.detail;
+    _detail =
+        widget.detail == null ? Map.from(mySelf) : Map.from(widget.detail);
   }
 
   @override
