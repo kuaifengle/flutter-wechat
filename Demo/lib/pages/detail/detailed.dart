@@ -6,7 +6,7 @@ import 'package:flutter_wechat/components/appbar.dart';
 import '../../dataJson/userData.dart';
 import '../chat/chat.dart';
 import '../dynamic/timeLine.dart';
-import './friendSettings.dart';
+import '../setting/friendSettings.dart';
 import '../../components/statusView.dart';
 
 class Detailed extends StatefulWidget {

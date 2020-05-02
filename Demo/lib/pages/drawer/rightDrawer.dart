@@ -3,7 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 import 'package:qrscan/qrscan.dart' as scanner;
 
-import '../other/help.dart';
+import '../other/webView.dart';
 
 class IndexRightDrawer extends StatefulWidget {
   IndexRightDrawer({Key key}) : super(key: key);
@@ -51,7 +51,10 @@ class IndexRightDrawerState extends State<IndexRightDrawer> {
       'onTap': (context) {
         Navigator.of(context).pop();
         Navigator.of(context).push(MaterialPageRoute(builder: (_) {
-          return HelpPage();
+          return WebViewPage(
+              title: '帮助与反馈',
+              webUrl:
+                  'https://kf.qq.com/touch/product/wechat_app.html?scene_id=kf338');
         }));
       }
     },

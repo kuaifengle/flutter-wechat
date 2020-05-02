@@ -9,7 +9,8 @@ import '../detail/qrcode.dart';
 import '../contacts/contacts.dart';
 import '../../common/index.dart';
 import '../dynamic/timeLine.dart';
-import '../detail/userSetting.dart';
+import '../other/collection.dart';
+import '../setting/userSetting.dart';
 
 class IndexLeftDrawer extends StatefulWidget {
   IndexLeftDrawer({Key key}) : super(key: key);
@@ -44,7 +45,17 @@ class IndexLeftDrawerState extends State<IndexLeftDrawer> {
         });
       }
     },
-    {'icon': Feather.tag, 'title': '收藏'},
+    {
+      'icon': Feather.tag,
+      'title': '收藏',
+      'onTap': (context) {
+        Navigator.of(context).push(MaterialPageRoute(builder: (_) {
+          return Collection();
+        })).then((oldValue) {
+          CommonState.selectDrawerIndex = 0;
+        });
+      }
+    },
     {
       'icon': Feather.settings,
       'title': '设置',

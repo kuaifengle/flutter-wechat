@@ -25,19 +25,23 @@
 ```
 > flutter --version 
 
-Flutter 1.10.7 • channel beta • https://github.com/flutter/flutter.git
-Framework • revision e70236e36c (7 个月之前) • 2019-10-02 09:32:30 -0700
-Engine • revision 9e6314d348
-Tools • Dart 2.6.0 (build 2.6.0-dev.4.0 1103600280)
+Flutter 1.12.13+hotfix.9 • channel stable • https://github.com/flutter/flutter.git
+Framework • revision f139b11009 (5 weeks ago) • 2020-03-30 13:57:30 -0700
+Engine • revision af51afceb8
+Tools • Dart 2.7.2
+
 ```
 
 ```
 > flutter doctor 
 
-[√] Flutter (Channel beta, v1.10.7, on Microsoft Windows [Version 10.0.16299.1481], locale zh-CN)
+[√] Flutter (Channel stable, v1.12.13+hotfix.9, on Microsoft Windows [Version 10.0.18363.778], locale zh-CN)     
+
 [√] Android toolchain - develop for Android devices (Android SDK version 29.0.2)
-[√] Android Studio (version 3.2)
+[√] Android Studio (version 3.5)
 [√] Connected device (1 available)
+
+• No issues found!
 
 ```
 

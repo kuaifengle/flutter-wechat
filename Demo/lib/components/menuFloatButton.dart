@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../pages/dynamic/sendPhoto.dart';
 import '../pages/dynamic/timeLine.dart';
-import '../pages/contacts/searhFriend.dart';
+import '../pages/other/searhFriend.dart';
 
 class MenuFloatButton extends StatefulWidget {
   @override
