@@ -4,6 +4,7 @@ import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 import 'package:qrscan/qrscan.dart' as scanner;
 
 import '../other/webView.dart';
+import '../pay/payment.dart';
 
 class IndexRightDrawer extends StatefulWidget {
   IndexRightDrawer({Key key}) : super(key: key);
@@ -40,9 +41,10 @@ class IndexRightDrawerState extends State<IndexRightDrawer> {
       'icon': Icons.payment,
       'title': '收付款',
       'onTap': (context) {
-        Scaffold.of(context).showSnackBar(SnackBar(
-            duration: Duration(seconds: 1), content: Text('功能还未开放...')));
         Navigator.of(context).pop();
+        Navigator.of(context).push(MaterialPageRoute(builder: (_) {
+          return PaymentPage();
+        }));
       }
     },
     {
