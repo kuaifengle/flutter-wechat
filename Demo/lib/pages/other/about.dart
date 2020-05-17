@@ -29,7 +29,7 @@ class _AboutPageState extends State<AboutPage> {
                 child: Column(
                   children: <Widget>[
                     Image.asset(
-                      'images/logo.png',
+                      'assets/images/logo.png',
                       width: ScreenUtil().setWidth(200),
                       height: ScreenUtil().setHeight(160),
                     ),

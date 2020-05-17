@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:flutter_translate/flutter_translate.dart';
 
 import '../../main.dart';
 import '../detail/detailed.dart';
@@ -22,10 +23,14 @@ class IndexLeftDrawer extends StatefulWidget {
 class IndexLeftDrawerState extends State<IndexLeftDrawer> {
   /// leftDrawer 菜单列表
   List<Map<String, dynamic>> _drawerList = [
-    {'icon': Feather.message_circle, 'title': 'WeChat', 'onTap': (context) {}},
+    {
+      'icon': Feather.message_circle,
+      'title': translate('leftDrawer.chat'),
+      'onTap': (context) {}
+    },
     {
       'icon': Feather.star,
-      'title': '联系人',
+      'title': translate('leftDrawer.contacts'),
       'onTap': (context) {
         Navigator.of(context).push(MaterialPageRoute(builder: (_) {
           return ContactsPage();
@@ -36,7 +41,7 @@ class IndexLeftDrawerState extends State<IndexLeftDrawer> {
     },
     {
       'icon': Feather.smile,
-      'title': '朋友圈',
+      'title': translate('leftDrawer.friend'),
       'onTap': (context) {
         Navigator.of(context).push(MaterialPageRoute(builder: (_) {
           return TimeLine();
@@ -47,7 +52,7 @@ class IndexLeftDrawerState extends State<IndexLeftDrawer> {
     },
     {
       'icon': Feather.tag,
-      'title': '收藏',
+      'title': translate('leftDrawer.collect'),
       'onTap': (context) {
         Navigator.of(context).push(MaterialPageRoute(builder: (_) {
           return Collection();
@@ -58,7 +63,7 @@ class IndexLeftDrawerState extends State<IndexLeftDrawer> {
     },
     {
       'icon': Feather.settings,
-      'title': '设置',
+      'title': translate('leftDrawer.setting'),
       'onTap': (context) {
         Navigator.of(context).push(MaterialPageRoute(builder: (_) {
           return UserSetting();
@@ -72,7 +77,7 @@ class IndexLeftDrawerState extends State<IndexLeftDrawer> {
   ///  退出登录Item
   Map logOut = {
     'icon': Feather.x_octagon,
-    'title': '退出登录',
+    'title': translate('leftDrawer.loginOut'),
     'onTap': (context) {
       showDialog(
           context: context,
@@ -146,7 +151,7 @@ class IndexLeftDrawerState extends State<IndexLeftDrawer> {
         decoration: BoxDecoration(
             image: DecorationImage(
                 alignment: Alignment.topCenter,
-                image: AssetImage('images/background.jpg'),
+                image: AssetImage('assets/images/background.jpg'),
                 fit: BoxFit.fitWidth)),
         child: Column(
           children: <Widget>[
@@ -179,7 +184,8 @@ class IndexLeftDrawerState extends State<IndexLeftDrawer> {
                               height: ScreenUtil().setWidth(140),
                               decoration: BoxDecoration(
                                   image: DecorationImage(
-                                      image: AssetImage('images/header.png'),
+                                      image: AssetImage(
+                                          'assets/images/header.png'),
                                       fit: BoxFit.fill),
                                   border: Border.all(
                                       width: ScreenUtil().setWidth(4),

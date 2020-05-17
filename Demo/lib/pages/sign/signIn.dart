@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_vector_icons/flutter_vector_icons.dart';
+import 'package:flutter_translate/flutter_translate.dart';
 import 'package:toast/toast.dart';
 
+import '../../common/index.dart';
 import './signUp.dart';
 import '../../dataJson/userData.dart';
 
@@ -47,6 +49,13 @@ class _SignInState extends State<SignIn> with SingleTickerProviderStateMixin {
     Navigator.of(context).pushReplacementNamed('/home');
   }
 
+  void _changeAppLang() {
+    setState(() {
+      CommonState.lang = CommonState.lang == 'en' ? 'zh' : 'en';
+      changeLocale(context, CommonState.lang);
+    });
+  }
+
   @override
   void dispose() {
     super.dispose();
@@ -63,26 +72,67 @@ class _SignInState extends State<SignIn> with SingleTickerProviderStateMixin {
       physics: NeverScrollableScrollPhysics(),
       padding: EdgeInsets.symmetric(horizontal: ScreenUtil().setWidth(30)),
       children: <Widget>[
-        Container(
-          margin: EdgeInsets.symmetric(
-            vertical: ScreenUtil().setHeight(140),
-          ),
-          child: Center(
-            child: Column(
-              children: <Widget>[
-                Image.asset(
-                  'images/logo.png',
-                  width: ScreenUtil().setWidth(200),
-                  height: ScreenUtil().setHeight(160),
+        Stack(
+          children: <Widget>[
+            Container(
+              margin: EdgeInsets.symmetric(
+                vertical: ScreenUtil().setHeight(140),
+              ),
+              child: Center(
+                child: Column(
+                  children: <Widget>[
+                    Image.asset(
+                      'assets/images/logo.png',
+                      width: ScreenUtil().setWidth(200),
+                      height: ScreenUtil().setHeight(160),
+                    ),
+                    Text(translate('title.wechat'),
+                        style: TextStyle(
+                          color: Color(0xFFc4c4c4),
+                          fontSize: ScreenUtil.getInstance().setSp(50),
+                        )),
+                  ],
                 ),
-                Text('WeChat(仿)',
-                    style: TextStyle(
-                      color: Color(0xFFc4c4c4),
-                      fontSize: ScreenUtil.getInstance().setSp(50),
-                    )),
-              ],
+              ),
             ),
-          ),
+            Positioned(
+                top: 40,
+                right: 10,
+                child: GestureDetector(
+                  onTap: () {
+                    _changeAppLang();
+                  },
+                  child: Container(
+                      alignment: Alignment.center,
+                      width: 60,
+                      height: 30,
+                      decoration: BoxDecoration(
+                          color: Color(0xFFf5f5f5),
+                          border: Border.all(color: Color(0xFFcccccc)),
+                          borderRadius: BorderRadius.all(
+                            Radius.circular(15),
+                          )),
+                      child: RichText(
+                        text: TextSpan(children: [
+                          TextSpan(
+                              text: 'en',
+                              style: TextStyle(
+                                  color: CommonState.lang == 'en'
+                                      ? Theme.of(context).primaryColor
+                                      : Color(0xFFcccccc))),
+                          TextSpan(
+                              text: ' / ',
+                              style: TextStyle(color: Colors.black45)),
+                          TextSpan(
+                              text: 'zh',
+                              style: TextStyle(
+                                  color: CommonState.lang == 'zh'
+                                      ? Theme.of(context).primaryColor
+                                      : Color(0xFFcccccc))),
+                        ]),
+                      )),
+                ))
+          ],
         ),
         Container(
           decoration: BoxDecoration(
@@ -102,7 +152,7 @@ class _SignInState extends State<SignIn> with SingleTickerProviderStateMixin {
                 ),
                 icon: Icon(Feather.user,
                     size: ScreenUtil().setWidth(50), color: Color(0xFF3d3d3d)),
-                hintText: 'UserName'),
+                hintText: translate('login.userName')),
             onEditingComplete: () {
               FocusScope.of(context).requestFocus(_passWordFN);
             },
@@ -129,7 +179,7 @@ class _SignInState extends State<SignIn> with SingleTickerProviderStateMixin {
                 border: InputBorder.none,
                 icon: Icon(Feather.unlock,
                     size: ScreenUtil().setWidth(50), color: Color(0xFF3d3d3d)),
-                hintText: 'PassWord'),
+                hintText: translate('login.password')),
             obscureText: true,
           ),
         ),
@@ -147,7 +197,7 @@ class _SignInState extends State<SignIn> with SingleTickerProviderStateMixin {
                       BorderRadius.circular(ScreenUtil().setHeight(50))),
               child: Center(
                 child: Text(
-                  'LOGIN',
+                  translate('login.login'),
                   style: TextStyle(
                       color: Colors.white,
                       fontWeight: FontWeight.w400,
@@ -168,7 +218,7 @@ class _SignInState extends State<SignIn> with SingleTickerProviderStateMixin {
                 borderRadius:
                     BorderRadius.circular(ScreenUtil().setHeight(30))),
             child: Text(
-              'SIGNUP',
+              translate('login.signup'),
               style: TextStyle(
                   color: Color(0xFFbcbcbc),
                   fontSize: ScreenUtil.getInstance().setSp(22)),

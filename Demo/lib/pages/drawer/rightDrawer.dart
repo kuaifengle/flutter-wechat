@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 import 'package:qrscan/qrscan.dart' as scanner;
+import 'package:flutter_translate/flutter_translate.dart';
 
 import '../other/webView.dart';
 import '../pay/payment.dart';
@@ -18,7 +19,7 @@ class IndexRightDrawerState extends State<IndexRightDrawer> {
   List<Map<String, dynamic>> drawerList = [
     {
       'icon': Feather.users,
-      'title': '发起群聊',
+      'title': translate('rightDrawer.groupChat'),
       'onTap': (context) {
         Scaffold.of(context).showSnackBar(SnackBar(
             duration: Duration(seconds: 1), content: Text('功能还未开放...')));
@@ -27,7 +28,7 @@ class IndexRightDrawerState extends State<IndexRightDrawer> {
     },
     {
       'icon': Icons.center_focus_strong,
-      'title': '扫一扫',
+      'title': translate('rightDrawer.scan'),
       'onTap': (context) async {
         String barcode = await scanner.scan();
         Navigator.of(context).pop();
@@ -39,7 +40,7 @@ class IndexRightDrawerState extends State<IndexRightDrawer> {
     },
     {
       'icon': Icons.payment,
-      'title': '收付款',
+      'title': translate('rightDrawer.payment'),
       'onTap': (context) {
         Navigator.of(context).pop();
         Navigator.of(context).push(MaterialPageRoute(builder: (_) {
@@ -49,7 +50,7 @@ class IndexRightDrawerState extends State<IndexRightDrawer> {
     },
     {
       'icon': Feather.help_circle,
-      'title': '帮助与反馈',
+      'title': translate('rightDrawer.help'),
       'onTap': (context) {
         Navigator.of(context).pop();
         Navigator.of(context).push(MaterialPageRoute(builder: (_) {

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_vector_icons/flutter_vector_icons.dart';
+import 'package:flutter_translate/flutter_translate.dart';
 
 import '../../components/toast.dart';
 import '../../components/appBar.dart';
@@ -57,7 +58,7 @@ class _SignUpState extends State<SignUp> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: setCustomAppBar(context, 'SignUp'),
+        appBar: setCustomAppBar(context, translate('login.signup')),
         body: ListView(
           physics: NeverScrollableScrollPhysics(),
           padding: EdgeInsets.symmetric(horizontal: ScreenUtil().setWidth(30)),
@@ -69,7 +70,7 @@ class _SignUpState extends State<SignUp> {
               width: ScreenUtil().setWidth(200),
               height: ScreenUtil().setHeight(160),
               child: Center(
-                child: Image.asset('images/logo.png'),
+                child: Image.asset('assets/images/logo.png'),
               ),
             ),
             Container(
@@ -91,7 +92,7 @@ class _SignUpState extends State<SignUp> {
                     icon: Icon(Feather.user,
                         size: ScreenUtil().setWidth(50),
                         color: Color(0xFF3d3d3d)),
-                    hintText: 'UserName'),
+                    hintText: translate('login.userName')),
                 onEditingComplete: () {
                   FocusScope.of(context).requestFocus(_passWordFN);
                 },
@@ -119,7 +120,7 @@ class _SignUpState extends State<SignUp> {
                     icon: Icon(Feather.unlock,
                         size: ScreenUtil().setWidth(50),
                         color: Color(0xFF3d3d3d)),
-                    hintText: 'PassWord'),
+                    hintText: translate('login.password')),
                 obscureText: true,
                 onEditingComplete: () {
                   FocusScope.of(context).requestFocus(_repeatPassFN);
@@ -145,7 +146,7 @@ class _SignUpState extends State<SignUp> {
                     icon: Icon(Feather.lock,
                         size: ScreenUtil().setWidth(50),
                         color: Color(0xFF3d3d3d)),
-                    hintText: 'ReportPassWord'),
+                    hintText: translate('login.reportPassword')),
                 obscureText: true,
                 onEditingComplete: () {
                   _repeatPassFN.unfocus();
@@ -166,7 +167,7 @@ class _SignUpState extends State<SignUp> {
                           BorderRadius.circular(ScreenUtil().setHeight(50))),
                   child: Center(
                     child: Text(
-                      'SIGNUP',
+                      translate('login.clickSignup'),
                       style: TextStyle(
                           color: Colors.white,
                           fontWeight: FontWeight.w400,

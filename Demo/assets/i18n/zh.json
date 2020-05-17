@@ -1,0 +1,49 @@
+{
+  "title": {
+    "wechat": "微信",
+    "contacts": "通讯录",
+    "collection": "我的收藏",
+    "dynamic": "好友动态"
+  },
+  "search": {
+    "search": "搜索",
+    "contacts": "请输入微信号/手机号..."
+  },
+  "login": {
+    "userName": "用户名",
+    "password": "密码",
+    "login": "登陆",
+    "signup": "注册",
+    "clickSignup": "点击注册",
+    "reportPassword": "重复密码"
+  },
+  "leftDrawer": {
+    "chat": "聊天列表",
+    "contacts": "联系人",
+    "friend": "朋友圈",
+    "collect": "收藏",
+    "setting": "设置",
+    "loginOut": "退出登陆"
+  },
+  "rightDrawer": {
+    "groupChat": "发起群聊",
+    "scan": "扫一扫",
+    "payment": "收付款",
+    "help": "帮助与反馈"
+  },
+  "collection": {
+    "photo": "图片与视频",
+    "Link": "链接",
+    "file": "文件",
+    "music": "文件",
+    "chatHistory": "聊天记录",
+    "voice": "语音",
+    "text": "笔记",
+    "adress": "位置"
+  },
+  "dynamic": {
+    "send": "发表",
+    "create": "新建",
+    "sendPlaceholder": "这一刻的想法..."
+  }
+}

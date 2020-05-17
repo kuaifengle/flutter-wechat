@@ -46,9 +46,9 @@ class StatusHeaderImage extends StatelessWidget {
                 width: ScreenUtil().setWidth(this.width),
                 height: ScreenUtil().setWidth(this.height),
                 fit: BoxFit.cover,
-                error: Image.asset('images/user_sex_unknow.png'))
+                error: Image.asset('assets/images/user_sex_unknow.png'))
             : Image.asset(
-                'images/user_sex_unknow.png',
+                'assets/images/user_sex_unknow.png',
                 width: ScreenUtil().setWidth(this.width),
                 height: ScreenUtil().setWidth(this.height),
                 fit: BoxFit.cover,

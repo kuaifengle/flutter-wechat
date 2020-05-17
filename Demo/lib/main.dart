@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_translate/flutter_translate.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 
 import 'package:flutter_wechat/common/index.dart';
+import 'package:flutter_wechat/utils/translatePreferences.dart';
 import './pages/fristPage.dart';
 import './pages/index.dart';
 import './pages/sign/signIn.dart';
@@ -9,9 +12,17 @@ import './pages/sign/signIn.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
+  /// 数据初始化
   await CommonState.init();
+  print(CommonState.lang);
 
-  runApp(MyApp());
+  /// i18n初始化
+  var delegate = await LocalizationDelegate.create(
+      fallbackLocale: CommonState.lang,
+      preferences: TranslatePreferences(),
+      supportedLocales: ['en', 'zh']);
+
+  runApp(LocalizedApp(delegate, MyApp()));
 }
 
 final GlobalKey<NavigatorState> navigatorKey = new GlobalKey<NavigatorState>();
@@ -19,47 +30,30 @@ final GlobalKey<NavigatorState> navigatorKey = new GlobalKey<NavigatorState>();
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      navigatorKey: navigatorKey,
-      debugShowCheckedModeBanner: false,
-      title: 'Flutter Wechat',
-      theme: ThemeData(
-          platform: TargetPlatform.iOS,
-          primaryColorLight: Colors.white,
-          backgroundColor: Colors.white,
-          appBarTheme: AppBarTheme(
-              textTheme: TextTheme(title: TextStyle(color: Colors.white)),
-              color: Color(0xFF61ab32),
-              iconTheme: IconThemeData(color: Colors.white)),
-          primaryColor: Color(0xFF61ab32),
-          accentColor: Colors.white,
-          cursorColor: Color(0xFF61ab32),
-          accentColorBrightness: Brightness.light,
-          iconTheme: IconThemeData(
-            color: Colors.black45,
-          ),
-          primaryIconTheme: IconThemeData(
-            color: Colors.white,
-          ),
-          accentIconTheme: IconThemeData(color: Colors.white),
-          toggleableActiveColor: Color(0xFF61ab32),
-          buttonColor: Color(0xFF61ab32),
-          buttonTheme: ButtonThemeData(
-              hoverColor: Colors.transparent,
-              highlightColor: Colors.transparent,
-              buttonColor: Color(0xFF61ab32),
-              splashColor: Colors.transparent),
-          dividerColor: Color(0xFFededed),
-          splashColor: Colors.transparent,
-          highlightColor: Colors.transparent,
-          scaffoldBackgroundColor: Colors.white),
-      home: Stack(
-        children: <Widget>[FlutterWechat()],
+    var localizationDelegate = LocalizedApp.of(context).delegate;
+
+    return LocalizationProvider(
+      state: LocalizationProvider.of(context).state,
+      child: MaterialApp(
+        title: 'Flutter Wechat',
+        localizationsDelegates: [
+          GlobalMaterialLocalizations.delegate,
+          GlobalWidgetsLocalizations.delegate,
+          localizationDelegate
+        ],
+        supportedLocales: localizationDelegate.supportedLocales,
+        locale: localizationDelegate.currentLocale,
+        navigatorKey: navigatorKey,
+        debugShowCheckedModeBanner: false,
+        theme: CommonState.themedata,
+        home: Stack(
+          children: <Widget>[FlutterWechat()],
+        ),
+        routes: {
+          '/home': (_) => Index(),
+          '/signIn': (_) => SignIn(),
+        },
       ),
-      routes: {
-        '/home': (_) => Index(),
-        '/signIn': (_) => SignIn(),
-      },
     );
   }
 }

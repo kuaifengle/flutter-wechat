@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_vector_icons/flutter_vector_icons.dart';
+import 'package:flutter_translate/flutter_translate.dart';
 
 import '../../components/button.dart';
 import '../../components/appbar.dart';
@@ -23,7 +24,7 @@ class _SendPhotoState extends State<SendPhoto> {
           '',
           actions: <Widget>[
             TextButton(
-              text: '发表',
+              text: translate('dynamic.create'),
               onPressed: () {
                 print('发表文字');
               },
@@ -45,7 +46,9 @@ class _SendPhotoState extends State<SendPhoto> {
                   focusNode: _fsNode,
                   controller: _textController,
                   decoration: InputDecoration(
-                      hintText: '这一刻的想法...', border: InputBorder.none),
+                      hintStyle: TextStyle(fontSize: ScreenUtil().setSp(30)),
+                      hintText: translate('dynamic.sendPlaceholder'),
+                      border: InputBorder.none),
                   keyboardType: TextInputType.text,
                   maxLines: 6,
                   onSubmitted: (value) {

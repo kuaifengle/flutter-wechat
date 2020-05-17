@@ -1,0 +1,49 @@
+{
+  "title": {
+    "wechat": "Wechat",
+    "contacts": "Contacts",
+    "collection": "My collection",
+    "dynamic": "News feed"
+  },
+  "search": {
+    "search": "Search",
+    "contacts": "Please input the username / mobile..."
+  },
+  "login": {
+    "userName": "username",
+    "password": "password",
+    "login": "Login",
+    "signup": "Signup",
+    "clickSignup": "tap to signup",
+    "reportPassword": "report password"
+  },
+  "leftDrawer": {
+    "chat": "Chat list",
+    "contacts": "Contacts",
+    "friend": "News feed",
+    "collect": "Collect",
+    "setting": "Setting",
+    "loginOut": "Login out"
+  },
+  "rightDrawer": {
+    "groupChat": "Group chat",
+    "scan": "Scan",
+    "payment": "Payment",
+    "help": "Help"
+  },
+  "collection": {
+    "photo": "photo",
+    "Link": "link",
+    "file": "file",
+    "music": "music",
+    "chatHistory": "chat history",
+    "voice": "voice",
+    "text": "text",
+    "adress": "adress"
+  },
+  "dynamic": {
+    "send": "Send",
+    "create": "Create",
+    "sendPlaceholder": "What's on your mind?"
+  }
+}

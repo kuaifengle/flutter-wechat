@@ -8,7 +8,7 @@ class PhotoViewer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return StatusImage(
-      error: Image.asset('images/failed_image.png'),
+      error: Image.asset('assets/images/failed_image.png'),
       imageSrc: url,
       imageBuilder: (BuildContext context, ImageProvider imageProvider) {
         return PhotoView(

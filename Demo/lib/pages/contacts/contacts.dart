@@ -5,6 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 import 'package:sticky_headers/sticky_headers.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_translate/flutter_translate.dart';
 
 import '../../components/appBar.dart';
 import '../detail/detailed.dart';
@@ -220,7 +221,7 @@ class _ContactsPageState extends State<ContactsPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: setCustomAppBar(context, '通讯录'),
+        appBar: setCustomAppBar(context, translate("title.contacts")),
         body: Stack(
           children: <Widget>[
             ListView.builder(
@@ -245,7 +246,7 @@ class _ContactsPageState extends State<ContactsPage> {
                                 textInputAction: TextInputAction.search,
                                 keyboardType: TextInputType.text,
                                 maxLength: 50,
-                                placeholder: '请输入微信号/手机号...',
+                                placeholder: translate("search.contacts"),
                                 padding: EdgeInsets.symmetric(
                                     horizontal: ScreenUtil().setWidth(20),
                                     vertical: ScreenUtil().setHeight(15)),

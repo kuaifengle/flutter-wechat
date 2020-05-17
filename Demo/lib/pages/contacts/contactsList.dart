@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:flutter_vector_icons/flutter_vector_icons.dart';
+import 'package:flutter_translate/flutter_translate.dart';
 
 import '../../components/statusView.dart';
 import '../chat/chat.dart';
@@ -171,7 +172,7 @@ class _ContactsState extends State<Contacts> {
                           child: Container(
                             margin: EdgeInsets.only(
                                 left: ScreenUtil().setWidth(50)),
-                            child: Text('Search'),
+                            child: Text(translate("search.search")),
                           ),
                         ),
                         IconButton(

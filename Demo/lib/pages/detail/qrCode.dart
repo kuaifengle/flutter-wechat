@@ -32,7 +32,7 @@ class _QrCodePageState extends State<QrCodePage> {
                   height: ScreenUtil().setWidth(140),
                   decoration: BoxDecoration(
                       image: DecorationImage(
-                          image: AssetImage('images/header.png'),
+                          image: AssetImage('assets/images/header.png'),
                           fit: BoxFit.fill),
                       border: Border.all(
                           width: ScreenUtil().setWidth(4),

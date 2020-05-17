@@ -18,7 +18,7 @@ class FristPageState extends State<FristPage> {
       styleTitle: TextStyle(color: Color(0xFF333333)),
       description: "“其实很简单 其实很自然”",
       styleDescription: TextStyle(color: Color(0xFF333333)),
-      pathImage: "images/yzw.jpg",
+      pathImage: "assets/images/yzw.jpg",
       backgroundColor: Color(0xffF5F6FA),
     ),
     Slide(
@@ -26,7 +26,7 @@ class FristPageState extends State<FristPage> {
       styleTitle: TextStyle(color: Color(0xFF333333)),
       description: "“只要你敢不懦弱 凭什么我们要错过”",
       styleDescription: TextStyle(color: Color(0xFF333333)),
-      pathImage: "images/tfz.jpg",
+      pathImage: "assets/images/tfz.jpg",
       backgroundColor: Color(0xffF5F6FA),
     ),
     Slide(
@@ -34,7 +34,7 @@ class FristPageState extends State<FristPage> {
       styleTitle: TextStyle(color: Color(0xFF333333)),
       description: "“从前从前有个人爱你很久 但偏偏雨渐渐把距离吹得好远”",
       styleDescription: TextStyle(color: Color(0xFF333333)),
-      pathImage: "images/zjl.jpg",
+      pathImage: "assets/images/zjl.jpg",
       backgroundColor: Color(0xffF5F6FA),
     ),
   ];

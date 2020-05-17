@@ -111,6 +111,13 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "1.2.2"
+  flutter_device_locale:
+    dependency: transitive
+    description:
+      name: flutter_device_locale
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "0.4.0"
   flutter_inner_drawer:
     dependency: "direct main"
     description:
@@ -118,6 +125,11 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "0.5.5"
+  flutter_localizations:
+    dependency: "direct main"
+    description: flutter
+    source: sdk
+    version: "0.0.0"
   flutter_screenutil:
     dependency: "direct main"
     description:
@@ -137,6 +149,13 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  flutter_translate:
+    dependency: "direct main"
+    description:
+      name: flutter_translate
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "1.6.0"
   flutter_vector_icons:
     dependency: "direct main"
     description:
@@ -144,6 +163,11 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "0.2.1"
+  flutter_web_plugins:
+    dependency: transitive
+    description: flutter
+    source: sdk
+    version: "0.0.0"
   http:
     dependency: transitive
     description:
@@ -178,7 +202,7 @@ packages:
       name: intl
       url: "https://pub.flutter-io.cn"
     source: hosted
-    version: "0.16.1"
+    version: "0.16.0"
   intro_slider:
     dependency: "direct main"
     description:

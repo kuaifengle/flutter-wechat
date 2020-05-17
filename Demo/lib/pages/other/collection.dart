@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_translate/flutter_translate.dart';
 
 import '../../components/appbar.dart';
 
@@ -36,14 +37,14 @@ Map<CollectionEnums, String> collectionTextMap = {
 
 class _CollectionState extends State<Collection> {
   List<Map<String, dynamic>> _collectMenuList = [
-    {"title": "图片与视频"},
-    {"title": "链接"},
-    {"title": "文件"},
-    {"title": "音乐"},
-    {"title": "聊天记录"},
-    {"title": "语音"},
-    {"title": "笔记"},
-    {"title": "位置"}
+    {"title": translate('collection.photo')},
+    {"title": translate('collection.Link')},
+    {"title": translate('collection.file')},
+    {"title": translate('collection.music')},
+    {"title": translate('collection.chatHistory')},
+    {"title": translate('collection.voice')},
+    {"title": translate('collection.text')},
+    {"title": translate('collection.adress')}
   ];
 
   List<Map<String, dynamic>> _collectDataList = [
@@ -119,7 +120,8 @@ class _CollectionState extends State<Collection> {
     double itemWidth =
         (MediaQuery.of(context).size.width - ScreenUtil().setWidth(80)) / 4;
     return Scaffold(
-        appBar: setCustomAppBar(context, '我的收藏', actions: [
+        appBar:
+            setCustomAppBar(context, translate("title.collection"), actions: [
           // IconButton(
           //   icon: Icon(Icons.search),
           //   onPressed: () {},

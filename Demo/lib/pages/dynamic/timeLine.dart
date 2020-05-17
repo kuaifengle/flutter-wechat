@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 import 'package:flutter_wechat/components/button.dart';
 import 'package:sticky_headers/sticky_headers.dart';
+import 'package:flutter_translate/flutter_translate.dart';
 
 import '../../components/button.dart';
 import '../../components/appBar.dart';
@@ -155,13 +156,13 @@ class _TimeLineState extends State<TimeLine> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: setCustomAppBar(context, '好友动态',
+        appBar: setCustomAppBar(context, translate('title.dynamic'),
             backgroundColor: Colors.transparent,
             textColor: Colors.black,
             iconColor: Colors.black,
             actions: [
               TextButton(
-                text: '新建',
+                text: translate('dynamic.create'),
                 textColor: Theme.of(context).primaryColor,
                 onPressed: () {
                   Navigator.of(context)

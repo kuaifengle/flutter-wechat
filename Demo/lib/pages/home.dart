@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 import 'package:flutter_inner_drawer/inner_drawer.dart';
+import 'package:flutter_translate/flutter_translate.dart';
 
 import './contacts/contactsList.dart';
 import './drawer/rightDrawer.dart';
@@ -16,11 +17,11 @@ class Home extends StatefulWidget {
 
 class HomeState extends State<Home> {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey();
-  
+
   Widget build(BuildContext context) {
     return Scaffold(
       key: _scaffoldKey,
-      appBar: setCustomAppBar(context, 'WeChat',
+      appBar: setCustomAppBar(context, translate('title.wechat'),
           actions: <Widget>[
             IconButton(
               icon: Icon(Feather.plus),

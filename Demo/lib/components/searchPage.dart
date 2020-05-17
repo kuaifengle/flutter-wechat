@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:flutter_translate/flutter_translate.dart';
 
 import './button.dart';
 import './dialog.dart';
@@ -131,7 +132,7 @@ class _SearchPageState extends State<SearchPage> {
                             textInputAction: TextInputAction.search,
                             keyboardType: TextInputType.text,
                             maxLength: 50,
-                            placeholder: '请输入微信号/用户名/聊天记录...',
+                            placeholder: translate('search.contacts'),
                             padding: EdgeInsets.symmetric(
                                 horizontal: ScreenUtil().setWidth(30),
                                 vertical: ScreenUtil().setHeight(15)),
