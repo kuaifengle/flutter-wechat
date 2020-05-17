@@ -1,4 +1,10 @@
 {
+  "alert": "Alert",
+  "copy": "Copy",
+  "paste": "Paste",
+  "cut": "Cut",
+  "selectAll": "Select all",
+  "today": "today",
   "title": {
     "wechat": "Wechat",
     "contacts": "Contacts",

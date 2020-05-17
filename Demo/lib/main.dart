@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_translate/flutter_translate.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
+import './utils/delegate.dart';
 import 'package:flutter_wechat/common/index.dart';
 import 'package:flutter_wechat/utils/translatePreferences.dart';
 import './pages/fristPage.dart';
@@ -20,7 +21,7 @@ void main() async {
   var delegate = await LocalizationDelegate.create(
       fallbackLocale: CommonState.lang,
       preferences: TranslatePreferences(),
-      supportedLocales: ['en', 'zh']);
+      supportedLocales: ['en_US', 'zh_CN']);
 
   runApp(LocalizedApp(delegate, MyApp()));
 }
@@ -39,6 +40,7 @@ class MyApp extends StatelessWidget {
         localizationsDelegates: [
           GlobalMaterialLocalizations.delegate,
           GlobalWidgetsLocalizations.delegate,
+          CupertinoLocalizationsDelegate(),
           localizationDelegate
         ],
         supportedLocales: localizationDelegate.supportedLocales,

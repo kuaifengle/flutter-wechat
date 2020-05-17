@@ -40,7 +40,7 @@ class CommonState {
       highlightColor: Colors.transparent,
       scaffoldBackgroundColor: Colors.white);
 
-  static String lang = 'zh';
+  static String lang = 'zh_CN';
 
   static Future init() async {
     final prefs = await SharedPreferences.getInstance();

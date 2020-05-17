@@ -51,7 +51,7 @@ class _SignInState extends State<SignIn> with SingleTickerProviderStateMixin {
 
   void _changeAppLang() {
     setState(() {
-      CommonState.lang = CommonState.lang == 'en' ? 'zh' : 'en';
+      CommonState.lang = CommonState.lang == 'en_US' ? 'zh_CN' : 'en_US';
       changeLocale(context, CommonState.lang);
     });
   }
@@ -115,18 +115,18 @@ class _SignInState extends State<SignIn> with SingleTickerProviderStateMixin {
                       child: RichText(
                         text: TextSpan(children: [
                           TextSpan(
-                              text: 'en',
+                              text: 'En',
                               style: TextStyle(
-                                  color: CommonState.lang == 'en'
+                                  color: CommonState.lang == 'en_US'
                                       ? Theme.of(context).primaryColor
                                       : Color(0xFFcccccc))),
                           TextSpan(
                               text: ' / ',
                               style: TextStyle(color: Colors.black45)),
                           TextSpan(
-                              text: 'zh',
+                              text: 'Zh',
                               style: TextStyle(
-                                  color: CommonState.lang == 'zh'
+                                  color: CommonState.lang == 'zh_CN'
                                       ? Theme.of(context).primaryColor
                                       : Color(0xFFcccccc))),
                         ]),

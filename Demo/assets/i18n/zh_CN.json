@@ -1,4 +1,10 @@
 {
+  "alert": "警告",
+  "copy": "复制",
+  "paste": "粘贴",
+  "cut": "剪切",
+  "selectAll": "选择全部",
+  "today": "今天",
   "title": {
     "wechat": "微信",
     "contacts": "通讯录",
