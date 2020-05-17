@@ -55,10 +55,10 @@ Tools • Dart 2.7.2
 <p>
 <img src="https://github.com/kuaifengle/Flutter-WeChat/blob/master/appGif/app4.gif?raw=true" width="32%"/>
 <img src="https://github.com/kuaifengle/Flutter-WeChat/blob/master/appGif/app5.gif?raw=true" width="32%"/>
-<img src="https://github.com/kuaifengle/Flutter-WeChat/blob/master/appGif/app6.gif?raw=true" width="32%"/>
+<img src="https://github.com/kuaifengle/Flutter-WeChat/blob/master/appGif/app7.gif?raw=true" width="32%"/>
 </p >
 <p>
-<img src="https://github.com/kuaifengle/Flutter-WeChat/blob/master/appGif/1.png?raw=true" width="32%"/>
+<img src="https://github.com/kuaifengle/Flutter-WeChat/blob/master/appGif/app6.gif?raw=true" width="32%"/>
 <img src="https://github.com/kuaifengle/Flutter-WeChat/blob/master/appGif/4.png?raw=true" width="32%"/>
 <img src="https://github.com/kuaifengle/Flutter-WeChat/blob/master/appGif/6.png?raw=true" width="32%"/>
 </p >
